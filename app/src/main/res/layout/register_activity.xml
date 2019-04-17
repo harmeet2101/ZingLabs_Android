@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="bottom"
+    android:background="@drawable/splash_bg"
+    android:gravity="bottom"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/default_margin_50"
+        android:layout_marginRight="@dimen/default_margin_50"
+        android:drawablePadding="@dimen/default_margin_large"
+        android:drawableTop="@drawable/ic_information"
+        android:gravity="center"
+        android:padding="@dimen/default_margin_large"
+        android:text="@string/click_the_link_in_your_invite_message_nor_create_a_new_account_belw"
+        android:textColor="@color/black"
+        android:textSize="@dimen/normal_text" />
+
+    <Button
+        android:id="@+id/create_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_margin_50"
+        android:layout_marginRight="@dimen/default_margin_50"
+        android:layout_marginTop="@dimen/default_margin_30"
+        android:background="@drawable/blue_button"
+        android:elevation="@dimen/default_margin"
+        android:padding="@dimen/default_margin_large"
+        android:shadowColor="@color/blue"
+        android:text="@string/create_account"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/normal_text_minus" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin_extra_large"
+        android:gravity="center"
+        android:paddingBottom="@dimen/default_margin_25"
+        android:paddingLeft="@dimen/default_margin"
+        android:paddingRight="@dimen/default_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/already_have_an_account"
+            android:textColor="@color/black"
+            android:textSize="@dimen/normal_text_minus" />
+
+        <TextView
+            android:id="@+id/tvLogIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/log_in"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/normal_text_minus" />
+
+    </LinearLayout>
+
+</LinearLayout>

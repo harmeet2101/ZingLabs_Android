@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/default_margin_40"
+        android:layout_marginRight="@dimen/default_margin_40"
+        android:layout_marginTop="@dimen/default_margin_25"
+        android:layout_weight=".8"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvWelcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin_25"
+            android:alpha=".5"
+            android:text="@string/welcome"
+            android:textColor="@color/dark_grey"
+            android:textSize="@dimen/text_19" />
+
+        <TextView
+            android:id="@+id/tvLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvWelcome"
+            android:layout_marginTop="@dimen/default_margin_neg"
+            android:text="@string/log_in"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/text_32" />
+
+        <TextView
+            android:id="@+id/tvMobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvLogin"
+            android:layout_marginTop="@dimen/default_margin_35"
+            android:text="@string/mobile_number"
+            android:textSize="@dimen/normal_text" />
+
+        <EditText
+            android:id="@+id/etMobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvMobile"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:background="@null"
+            android:imeOptions="actionNext"
+            android:letterSpacing="0.2"
+            android:inputType="phone"
+            android:singleLine="true"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/normal_text" />
+
+        <View
+            android:id="@+id/viewMobile"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_margin_2"
+            android:layout_below="@+id/etMobile"
+            android:layout_marginTop="@dimen/default_margin_half"
+            android:background="@color/blue" />
+
+        <TextView
+            android:id="@+id/tvMobileErrorDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewMobile"
+            android:textColor="@color/red"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/default_margin"
+            android:textSize="@dimen/normal_text_minus" />
+
+        <TextView
+            android:id="@+id/tvPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvMobileErrorDetail"
+            android:layout_marginTop="@dimen/default_margin_25"
+            android:text="@string/password"
+            android:textSize="@dimen/normal_text" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvPassword"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:background="@null"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:letterSpacing="0.2"
+            android:singleLine="true"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/normal_text" />
+
+        <View
+            android:id="@+id/viewPassword"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_margin_2"
+            android:layout_below="@+id/etPassword"
+            android:layout_marginTop="@dimen/default_margin_half"
+            android:background="@color/blue" />
+
+        <TextView
+            android:id="@+id/tvPasswordErrorDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewPassword"
+            android:textColor="@color/red"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/default_margin"
+            android:textSize="@dimen/normal_text_minus" />
+
+        <LinearLayout
+            android:id="@+id/llForgotPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvPasswordErrorDetail"
+            android:layout_marginTop="@dimen/default_margin_extra_large"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvForgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/forgot_password"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/normal_text_minus" />
+
+            <TextView
+                android:id="@+id/tvClickHere"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/click_here"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/normal_text_minus" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/default_margin_40"
+        android:layout_marginRight="@dimen/default_margin_40"
+        android:orientation="vertical"
+        android:layout_weight=".3">
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_button"
+            android:elevation="@dimen/default_margin"
+            android:padding="@dimen/default_margin_large"
+            android:text="@string/log_in"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/normal_text_minus" />
+
+
+        <TextView
+            android:id="@+id/tvBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="@dimen/default_margin_large"
+            android:text="@string/back"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/normal_text_minus" />
+
+    </LinearLayout>
+
+</LinearLayout>

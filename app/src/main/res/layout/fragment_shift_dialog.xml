@@ -1,0 +1,291 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/default_margin_25"
+    android:clickable="true"
+    android:paddingRight="@dimen/default_margin_25"
+    android:paddingTop="@dimen/default_margin">
+
+    <RelativeLayout
+        android:id="@+id/rlDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent">
+
+        <LinearLayout
+            android:id="@+id/llClose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:padding="@dimen/default_margin">
+
+            <TextView
+                android:id="@+id/tvClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="@string/close"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/normal_text" />
+
+            <ImageView
+                android:id="@+id/close"
+                android:layout_width="@dimen/default_margin_25"
+                android:layout_height="@dimen/default_margin_25"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginStart="@dimen/default_margin"
+                android:src="@drawable/close" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llClose"
+            android:background="@color/blue"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/default_margin_large"
+                android:paddingLeft="@dimen/default_margin_25"
+                android:paddingRight="@dimen/default_margin_25"
+                android:paddingTop="@dimen/default_margin_large">
+
+                <TextView
+                    android:id="@+id/tvDay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha=".48"
+                    android:text="Jan 8, Wed"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/normal_text_large" />
+
+                <TextView
+                    android:id="@+id/tvMyShift"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/my_shift"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_24" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/dark_blue"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/default_margin_large"
+                android:paddingLeft="@dimen/default_margin_25"
+                android:paddingRight="@dimen/default_margin_25"
+                android:paddingTop="@dimen/default_margin_half">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/time"
+                        android:textColor="@color/light_grey"
+                        android:textSize="@dimen/normal_text" />
+
+                    <TextView
+                        android:id="@+id/tvTimeDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:gravity="right"
+                        android:text="11am - 5pm"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/normal_text_large" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_margin_1"
+                    android:layout_marginTop="@dimen/default_margin_large"
+                    android:background="@color/light_grey"
+                    android:padding="@dimen/default_margin" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvRole"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/role"
+                        android:textColor="@color/light_grey"
+                        android:textSize="@dimen/normal_text" />
+
+                    <TextView
+                        android:id="@+id/tvRoleDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="right"
+                        android:text="@string/cashier"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/normal_text_large" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_margin_1"
+                    android:layout_marginTop="@dimen/default_margin_large"
+                    android:background="@color/light_grey"
+                    android:padding="@dimen/default_margin" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvEarning"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/expected_earnings"
+                        android:textColor="@color/light_grey"
+                        android:textSize="@dimen/normal_text" />
+
+                    <TextView
+                        android:id="@+id/tvEarningAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center"
+                        android:gravity="right"
+                        android:text="$215.12"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/normal_text_large" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/default_margin_1"
+                    android:layout_marginTop="@dimen/default_margin_large"
+                    android:background="@color/light_grey"
+                    android:padding="@dimen/default_margin" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvLocation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".5"
+                        android:text="@string/location"
+                        android:textColor="@color/light_grey"
+                        android:textSize="@dimen/normal_text" />
+
+                    <EditText
+                        android:id="@+id/tvLocationDetail"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center"
+                        android:layout_weight=".5"
+                        android:maxLines="4"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:background="@null"
+                        android:inputType="none"
+                        android:gravity="right|center"
+                        android:text="219 brannan st san francisco ca 94107"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/normal_text_large" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:background="@color/blue"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/default_margin_large"
+                android:paddingEnd="@dimen/default_margin_25"
+                android:paddingRight="@dimen/default_margin_25"
+                android:paddingTop="@dimen/default_margin_large">
+
+                <ImageView
+                    android:id="@+id/ivRectangle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginEnd="@dimen/default_margin_extra_large"
+                    android:layout_marginRight="@dimen/default_margin_extra_large"
+                    android:src="@drawable/add_calendar" />
+
+                <ImageView
+                    android:id="@+id/ivDiamond"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:src="@drawable/navigator" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnReleaseShift"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rlDialog"
+        android:layout_marginLeft="@dimen/default_margin_30"
+        android:layout_marginRight="@dimen/default_margin_30"
+        android:layout_marginTop="@dimen/default_margin_large"
+        android:background="@color/black_btn"
+        android:padding="@dimen/default_margin"
+        android:text="@string/release_shift"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/normal_text_minus" />
+
+    <Button
+        android:id="@+id/btnCallManager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnReleaseShift"
+        android:layout_marginLeft="@dimen/default_margin_30"
+        android:layout_marginRight="@dimen/default_margin_30"
+        android:layout_marginTop="@dimen/default_margin_large"
+        android:background="@color/black_btn"
+        android:padding="@dimen/default_margin"
+        android:text="@string/call_manager"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/normal_text_minus" />
+
+</RelativeLayout>

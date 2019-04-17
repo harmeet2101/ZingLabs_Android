@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_margin_40"
+            android:layout_marginRight="@dimen/default_margin_40"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/default_margin_extra_large">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvPersonal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:alpha=".5"
+                        android:text="@string/personal"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="@dimen/text_19" />
+
+                    <TextView
+                        android:id="@+id/tvInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin_neg"
+                        android:text="@string/info"
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/text_32" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight=".5"
+                    android:gravity="end"
+                    android:orientation="vertical">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/civProfileImage"
+                        android:layout_width="@dimen/default_image_size"
+                        android:layout_margin="5dp"
+                        android:layout_height="@dimen/default_image_size"
+                        android:src="@drawable/oval" />
+
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin_35"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvStreetAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/street_address"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/normal_text" />
+
+                <EditText
+                    android:id="@+id/etStreetAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:background="@null"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:letterSpacing=".2"
+                    android:singleLine="true"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/normal_text" />
+
+                <View
+                    android:id="@+id/viewStreetAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_margin_2"
+                    android:layout_marginTop="@dimen/default_margin_half"
+                    android:background="@color/blue" />
+
+                <TextView
+                    android:id="@+id/tvStreetError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/text_11" />
+
+                <TextView
+                    android:id="@+id/tvApt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin_35"
+                    android:text="@string/apt_optional"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/normal_text" />
+
+                <EditText
+                    android:id="@+id/etApt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:background="@null"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:letterSpacing=".2"
+                    android:lineSpacingExtra="@dimen/default_margin_2"
+                    android:singleLine="true"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/normal_text" />
+
+                <View
+                    android:id="@+id/viewApt"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_margin_2"
+                    android:layout_marginTop="@dimen/default_margin_half"
+                    android:background="@color/blue" />
+
+                <TextView
+                    android:id="@+id/tvAptError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/text_11" />
+
+                <TextView
+                    android:id="@+id/tvCountry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin_35"
+                    android:text="@string/country"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/normal_text" />
+
+                <EditText
+                    android:id="@+id/etCountry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:background="@null"
+
+                    android:inputType="text"
+                    android:focusable="false"
+                    android:letterSpacing=".2"
+                    android:lineSpacingExtra="@dimen/default_margin_2"
+                    android:singleLine="true"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/normal_text" />
+
+                <View
+                    android:id="@+id/viewCounty"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_margin_2"
+                    android:layout_marginTop="@dimen/default_margin_half"
+                    android:background="@color/blue" />
+
+                <TextView
+                    android:id="@+id/tvCountryError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/text_11" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin_35"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".3"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvState"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/state"
+                            android:textAllCaps="true"
+                            android:textSize="@dimen/normal_text" />
+
+                        <EditText
+                            android:id="@+id/etState"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/default_margin"
+                            android:layout_marginTop="@dimen/default_margin"
+                            android:background="@null"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:letterSpacing=".2"
+                            android:lineSpacingExtra="@dimen/default_margin_2"
+                            android:singleLine="true"
+                            android:textColor="@color/blue"
+                            android:textSize="@dimen/normal_text" />
+
+                        <View
+                            android:id="@+id/viewState"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/default_margin_2"
+                            android:layout_marginTop="@dimen/default_margin_half"
+                            android:background="@color/blue" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/default_margin_25"
+                        android:layout_weight=".5"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvZipCode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/zip_code"
+                            android:textAllCaps="true"
+                            android:textSize="@dimen/normal_text" />
+
+                        <EditText
+                            android:id="@+id/etZipCode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/default_margin"
+                            android:layout_marginTop="@dimen/default_margin"
+                            android:background="@null"
+                            android:imeOptions="actionDone"
+                            android:inputType="number"
+                            android:letterSpacing=".2"
+                            android:lineSpacingExtra="@dimen/default_margin_2"
+                            android:singleLine="true"
+                            android:textColor="@color/blue"
+                            android:textSize="@dimen/normal_text" />
+
+                        <View
+                            android:id="@+id/viewZipCode"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/default_margin_2"
+                            android:layout_marginTop="@dimen/default_margin_half"
+                            android:background="@color/blue" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvErrorDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/text_11" />
+
+                <Button
+                    android:id="@+id/btnNext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin_35"
+                    android:background="@drawable/blue_button"
+                    android:elevation="@dimen/default_margin"
+                    android:padding="@dimen/default_margin_large"
+                    android:text="@string/next"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/normal_text_minus" />
+
+                <TextView
+                    android:id="@+id/tvBack"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/default_margin_50"
+                    android:gravity="center"
+                    android:padding="@dimen/default_margin_large"
+                    android:text="@string/back"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/normal_text_minus" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>

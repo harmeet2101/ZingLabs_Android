@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_background">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/llLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/page_background"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/default_margin"
+            android:paddingRight="@dimen/default_margin">
+
+            <!--            <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/default_margin_large"
+                            android:clipChildren="false"
+                            android:clipToPadding="false"
+                            android:translationX="2dp"
+                            android:translationY="2dp"
+                            android:translationZ="2dp"
+                            app:cardCornerRadius="@dimen/default_margin_3"
+                            app:cardElevation="@dimen/default_margin_1"
+                            app:cardPreventCornerOverlap="false">  -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin_half"
+                android:background="@drawable/cardview_shadow"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/default_margin_25"
+                android:paddingLeft="@dimen/default_margin_40"
+                android:paddingRight="@dimen/default_margin_40"
+                android:paddingTop="@dimen/default_margin_25">
+
+                <TextView
+                    android:id="@+id/tvPersonalInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/personal_info"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/large_text_minus" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/default_margin_extra_large"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvDob"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/default_margin"
+                        android:text="@string/dob"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_15" />
+
+                    <TextView
+                        android:id="@+id/tvDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginBottom="@dimen/default_margin"
+                        android:gravity="end"
+                        android:text=""
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/text_15" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/default_margin_1"
+                    android:visibility="gone"
+                    android:background="@color/light_grey" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin_extra_large"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/default_margin"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:text="@string/phone"
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/text_15" />
+
+                    <TextView
+                        android:id="@+id/tvPhoneNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/default_margin"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:gravity="end"
+                        android:text=""
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/text_15" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/default_margin_1"
+                    android:background="@color/light_grey" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvAddress"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/default_margin_extra_large"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:layout_weight=".5"
+                        android:text="@string/address"
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/text_15" />
+
+                    <TextView
+                        android:id="@+id/tvAddressDetail"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|center"
+                        android:layout_marginBottom="@dimen/default_margin"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:layout_weight=".5"
+                        android:gravity="end|center"
+                        android:text=""
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/text_15" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnPersonalInfo"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:background="@drawable/blue_button"
+                    android:padding="@dimen/default_margin_large"
+                    android:paddingLeft="@dimen/default_margin_extra_large"
+                    android:paddingRight="@dimen/default_margin_extra_large"
+                    android:text="@string/edit_personal_info"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/normal_text_minus" />
+
+            </LinearLayout>
+
+            <!--      </android.support.v7.widget.CardView>-->
+            <!--
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/cvPaymentDetails"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/default_margin_large"
+                            android:clipChildren="false"
+                            android:clipToPadding="false"
+                            android:translationX="2dp"
+                            android:translationY="2dp"
+                            android:translationZ="2dp"
+                            app:cardCornerRadius="@dimen/default_margin_3"
+                            app:cardElevation="@dimen/default_margin_1"
+                            app:cardPreventCornerOverlap="false">-->
+
+            <LinearLayout
+                android:id="@+id/cvPaymentDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin_half"
+                android:background="@drawable/cardview_shadow"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/default_margin_25"
+                android:paddingLeft="@dimen/default_margin_40"
+                android:paddingRight="@dimen/default_margin_40"
+                android:paddingTop="@dimen/default_margin_25">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/payment" />
+
+                <TextView
+                    android:id="@+id/tvPaymentDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:gravity="center"
+                    android:text="@string/payment_details"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/large_text_minus" />
+
+                <LinearLayout
+                    android:id="@+id/llBank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:orientation="vertical"
+                    android:padding="@dimen/default_margin">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvBankName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/bank_of_america_debit"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_15" />
+
+                        <TextView
+                            android:id="@+id/tvDelete"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:gravity="right"
+                            android:text="@string/delete"
+                            android:textColor="@color/blue"
+                            android:textSize="@dimen/text_15" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvAccountNo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/account"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/normal_text" />
+
+                        <TextView
+                            android:id="@+id/tvAccountDetail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="right"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/normal_text" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnPaymentSetting"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/default_margin_large"
+                    android:background="@drawable/blue_button"
+                    android:paddingLeft="@dimen/default_margin_extra_large"
+                    android:paddingRight="@dimen/default_margin_extra_large"
+                    android:text="@string/edit_payment_settings"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/normal_text_minus" />
+
+            </LinearLayout>
+
+            <!-- </android.support.v7.widget.CardView>-->
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin_large"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:translationX="2dp"
+                android:translationY="2dp"
+                android:translationZ="2dp"
+                app:cardCornerRadius="@dimen/default_margin_3"
+                app:cardElevation="@dimen/default_margin_1"
+                app:cardPreventCornerOverlap="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:padding="@dimen/default_margin_extra_large">
+
+                    <TextView
+                        android:id="@+id/tvTimePreferences"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/time_preferences"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/large_text_minus" />
+
+                    <TextView
+                        android:id="@+id/tvTimePreferencesDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/default_margin_extra_large"
+                        android:alpha=".66"
+                        android:gravity="center"
+                        android:text="@string/make_sure_you_have_your_time_preferences_set_up_so_you_are_eligible_for_shirts"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="@dimen/normal_text_minus" />
+
+                    <Button
+                        android:id="@+id/btnManage"
+                        android:layout_width="170dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/default_margin_extra_large"
+                        android:background="@drawable/blue_button"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/default_margin_extra_large"
+                        android:paddingRight="@dimen/default_margin_extra_large"
+                        android:text="@string/manage"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/normal_text_minus" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin_large"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:translationX="2dp"
+                android:translationY="2dp"
+                android:translationZ="2dp"
+                app:cardCornerRadius="@dimen/default_margin_3"
+                app:cardElevation="@dimen/default_margin_1"
+                app:cardPreventCornerOverlap="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:padding="@dimen/default_margin_extra_large">
+
+                    <TextView
+                        android:id="@+id/tvTimeOff"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/time_off"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/large_text_minus" />
+
+
+                    <TextView
+                        android:id="@+id/tvTimeOffHeading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/default_margin_extra_large"
+                        android:alpha=".66"
+                        android:gravity="center"
+                        android:text="@string/your_requested_and_approved_time_off_requests_will_show_up_here"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="@dimen/normal_text_minus" />
+
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvTimeOff"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <Button
+                        android:id="@+id/btnRequestNew"
+                        android:layout_width="170dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:background="@drawable/blue_button"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/default_margin_extra_large"
+                        android:paddingRight="@dimen/default_margin_extra_large"
+                        android:text="@string/request_new"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/normal_text_minus" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/default_margin_extra_large"
+                android:background="@drawable/blue_button"
+                android:padding="@dimen/default_margin_large"
+                android:paddingLeft="@dimen/default_margin_extra_large"
+                android:paddingRight="@dimen/default_margin_extra_large"
+                android:text="@string/logout"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/normal_text_minus" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/light_black_bg_rating_bar_dialog"
+    android:orientation="vertical">
+
+
+
+    <TextView
+        android:id="@+id/tvRateShift"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/default_margin"
+        android:gravity="center"
+        android:text="@string/rate_this_shift"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/normal_text" />
+
+    <RatingBar
+        android:id="@+id/rbShiftRating"
+        android:theme="@style/RatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/default_margin"
+        android:numStars="5"
+        android:rating="0"
+        android:stepSize="1.0" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textAllCaps="true"
+        android:layout_margin="20dp"
+        android:text="Next"
+        android:id="@+id/btnNext"
+        android:background="@color/blue"
+        android:textColor="@color/white"/>
+</LinearLayout>

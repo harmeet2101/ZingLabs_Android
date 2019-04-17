@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+
+    <TextView
+        android:id="@+id/tvCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/code"
+        android:textSize="@dimen/normal_text" />
+
+
+    <com.zing.util.Otp_screen.OtpView
+        android:id="@+id/otp_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvCode"
+        android:inputType="number"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/blue"
+        app:hideLineWhenFilled="false"
+        app:itemCount="4"
+        app:viewType="line"/>
+
+
+    <TextView
+        android:id="@+id/tvErrorDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/otp_view"
+        android:textColor="@color/red"
+        android:layout_marginTop="@dimen/default_margin"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/tvResendCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvErrorDetail"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/default_margin_40"
+        android:alpha=".5"
+        android:gravity="center"
+        android:text="@string/resend_code"
+        android:textSize="@dimen/normal_text_minus" />
+</LinearLayout>

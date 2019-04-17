@@ -1,0 +1,69 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".9"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTimePreferences"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/default_margin_large"
+            android:gravity="center"
+            android:text="@string/time_preferences"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/text_32" />
+
+        <TextView
+            android:id="@+id/tvTimePreferencesDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/default_margin"
+            android:gravity="center"
+            android:text="@string/take_control_of_your_schedule"
+            android:textSize="@dimen/text_19" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".3"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/default_margin_25"
+        android:layout_marginLeft="@dimen/default_margin_40"
+        android:layout_marginRight="@dimen/default_margin_40">
+
+        <Button
+            android:id="@+id/btnSetPreference"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_button"
+            android:text="@string/set_preferences"
+            android:textAllCaps="true"
+            android:elevation="@dimen/default_margin"
+            android:padding="@dimen/default_margin_large"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/normal_text_minus" />
+
+        <TextView
+            android:id="@+id/tvSkipStep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="@dimen/default_margin_extra_large"
+            android:text="@string/skip_for_now"
+            android:textColor="@color/dark_grey"
+            android:textSize="@dimen/normal_text_minus" />
+
+    </LinearLayout>
+
+</LinearLayout>

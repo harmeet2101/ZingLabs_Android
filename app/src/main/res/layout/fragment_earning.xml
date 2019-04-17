@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".6"
+            android:background="@color/blue"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".5"
+            android:background="@android:color/white"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vpGraph"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tlGraph"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/default_margin"
+                android:background="@color/blue"
+                app:tabIndicatorColor="@color/offwhite"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@android:color/white"
+                app:tabTextAppearance="@style/TabTextAppearance"
+                app:tabTextColor="@color/light_blue" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_margin_extra_large"
+                android:layout_marginRight="@dimen/default_margin_extra_large"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cvCurrentWallet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/default_margin_3"
+                    android:background="@android:color/white"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    android:translationX="2dp"
+                    android:translationY="2dp"
+                    android:translationZ="2dp"
+                    app:cardCornerRadius="@dimen/default_margin_3"
+                    app:cardElevation="@dimen/default_margin_1"
+                    app:cardPreventCornerOverlap="false">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:orientation="vertical"
+                        android:padding="@dimen/default_margin_extra_large">
+
+                        <TextView
+                            android:id="@+id/tvCurrentWallet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:alpha=".66"
+                            android:gravity="start"
+                            android:text="@string/current_wallet"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/normal_text_minus" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/default_margin"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvEarningDescription"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/default_margin"
+                                android:layout_weight="0.7"
+                                android:alpha=".66"
+                                android:gravity="start"
+                                android:text="@string/your_earnings_since_your_last_withdrawal"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/normal_text" />
+
+                            <TextView
+                                android:id="@+id/tvCurrentEarning"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="@dimen/default_margin"
+                                android:layout_weight="0.3"
+                                android:gravity="end"
+                                android:text="$2,370"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_24" />
+
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btnBankTransfer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/default_margin"
+                            android:background="@drawable/blue_button_smallcurve"
+                            android:text="@string/transfer_to_bank"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/normal_text_plus" />
+
+                        <TextView
+                            android:id="@+id/tvNote"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginTop="@dimen/default_margin_large"
+                            android:alpha=".66"
+                            android:gravity="start"
+                            android:text="@string/we_will_automatically_transfer_the_final_amount_at_the_end_of_the_week"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/normal_text_minus" />
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cvSetUpPay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/default_margin_3"
+                    android:layout_marginTop="@dimen/default_margin_25"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    android:translationX="2dp"
+                    android:translationY="2dp"
+                    android:translationZ="2dp"
+                    app:cardCornerRadius="@dimen/default_margin_3"
+                    app:cardElevation="@dimen/default_margin_1"
+                    app:cardPreventCornerOverlap="false">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:orientation="vertical"
+                        android:padding="@dimen/default_margin_extra_large">
+
+                        <TextView
+                            android:id="@+id/tvSetUpPay"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="start"
+                            android:text="@string/set_up_pay"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="@dimen/normal_text_minus" />
+
+                        <TextView
+                            android:id="@+id/tvSetPayHeading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/default_margin"
+                            android:drawableTop="@drawable/set_up_pay"
+                            android:text="@string/connect_your_bank_account_to_set_up_direct_deposit"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/normal_text_plus" />
+
+                        <TextView
+                            android:id="@+id/tvSetPayDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/default_margin"
+                            android:alpha=".66"
+                            android:text="@string/link_your_bank_account_and_enable_instant_cash_out_your_earnings_will_be_available_for_use_the_same_day"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/normal_text_minus" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cvPreviousPaystub"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/default_margin_3"
+                    android:layout_marginTop="@dimen/default_margin_25"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    android:translationX="2dp"
+                    android:translationY="2dp"
+                    android:translationZ="2dp"
+                    app:cardCornerRadius="@dimen/default_margin_3"
+                    app:cardElevation="@dimen/default_margin_1"
+                    app:cardPreventCornerOverlap="false">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:orientation="vertical"
+                        android:padding="@dimen/default_margin_extra_large">
+
+                        <TextView
+                            android:id="@+id/tvPreviousPaystubs"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:alpha=".66"
+                            android:gravity="start"
+                            android:text="@string/previous_paystubs"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/normal_text_minus" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rvPreviousPaystubs"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/default_margin" />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="@dimen/default_margin_extra_large"
+                    android:background="@color/white" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</RelativeLayout>

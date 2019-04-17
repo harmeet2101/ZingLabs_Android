@@ -1,0 +1,56 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/light_grey</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
+    </style>
+
+    <style name="TextAppearence.TextInputLayout.Black" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColorHighlight">@color/blue</item>
+    </style>
+
+    <style name="TextLabelBlack" parent="TextAppearance.AppCompat">        <!-- Hint color and label color in FALSE state -->
+        <item name="android:textColorHint">@color/dark_grey</item>
+        <item name="colorAccent">@color/grey</item>
+        <item name="colorControlNormal">@color/dark_grey</item>
+        <item name="colorControlActivated">@color/blue</item>
+    </style>
+
+    <style name="navigation" parent="Widget.Design.BottomNavigationView">
+        <item name="colorAccent">@color/black</item>
+    </style>
+
+    <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/light_grey</item>
+        <item name="colorControlActivated">@android:color/white</item>
+    </style>
+
+    <style name="SeekBar">
+        <item name="android:progressDrawable">@drawable/greenprogress</item>
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:minHeight">5dip</item>
+        <item name="android:maxHeight">5dip</item>
+        <item name="android:thumb">@drawable/ic_dot_circle</item>
+        <item name="android:thumbOffset">8dip</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+
+    <style name="OtpWidget"/>
+
+    <style name="OtpWidget.OtpView" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@null</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:maxLines">1</item>
+    </style>
+</resources>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <RelativeLayout
+        android:id="@+id/rlPin"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight=".85"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:padding="@dimen/default_margin_extra_large">
+
+        <TextView
+            android:id="@+id/tvEnterPin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawablePadding="@dimen/default_margin"
+            android:drawableTop="@drawable/otp"
+            android:gravity="center"
+            android:text="@string/enter_pin_to_start_shift"
+            android:textColor="@color/light_grey"
+            android:textSize="@dimen/normal_text_large" />
+
+        <LinearLayout
+            android:id="@+id/llText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvEnterPin"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/default_margin_large"
+            android:paddingRight="@dimen/default_margin_large">
+
+            <TextView
+                android:id="@+id/tvPin1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/default_margin_half"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="@dimen/normal_text_plus" />
+
+            <TextView
+                android:id="@+id/tvPin2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/default_margin_half"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="@dimen/normal_text_plus" />
+
+            <TextView
+                android:id="@+id/tvPin3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/default_margin_half"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="@dimen/normal_text_plus" />
+
+            <TextView
+                android:id="@+id/tvPin4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/default_margin_half"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="@dimen/normal_text_plus" />
+
+            <TextView
+                android:id="@+id/tvPin5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/default_margin_half"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="@dimen/normal_text_plus" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llPin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llText"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/default_margin_large"
+            android:paddingRight="@dimen/default_margin_large">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/default_margin_half"
+                android:layout_weight="1"
+                android:background="@color/blue"
+                android:gravity="center"
+                android:textSize="@dimen/normal_text_plus" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/default_margin_half"
+                android:layout_weight="1"
+                android:background="@color/blue"
+                android:gravity="center"
+                android:textSize="@dimen/normal_text_plus" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/default_margin_half"
+                android:layout_weight="1"
+                android:background="@color/blue"
+                android:gravity="center"
+                android:textSize="@dimen/normal_text_plus" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/default_margin_half"
+                android:layout_weight="1"
+                android:background="@color/blue"
+                android:gravity="center"
+                android:textSize="@dimen/normal_text_plus" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/default_margin_half"
+                android:layout_weight="1"
+                android:background="@color/blue"
+                android:gravity="center"
+                android:textSize="@dimen/normal_text_plus" />
+        </LinearLayout>
+
+        <GridView
+            android:id="@+id/gvKeyPad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llPin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:numColumns="3"
+            android:scrollbars="none">
+
+        </GridView>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvCheckinClose"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".2"
+        android:background="@color/white"
+        android:layout_gravity="center"
+        android:padding="@dimen/default_margin_25"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:gravity="center"
+        android:drawableBottom="@drawable/arrow_down"
+        android:text="@string/close_checkin"
+        android:textAllCaps="true"
+        android:textColor="@color/dark_grey"
+        android:textSize="@dimen/normal_text_minus" />
+
+</LinearLayout>

@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/default_margin_30"
+    android:paddingRight="@dimen/default_margin_30"
+    android:paddingTop="@dimen/default_margin_30">
+
+    <TextView
+        android:id="@+id/tvBadges"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/badges"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/text_32" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvBadges"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/default_margin_extra_large" />
+
+</LinearLayout>

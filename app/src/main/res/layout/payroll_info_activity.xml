@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/default_margin_40"
+        android:layout_marginRight="@dimen/default_margin_40"
+        android:paddingTop="@dimen/default_margin_40"
+        android:layout_weight=".8"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvPayroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha=".5"
+                    android:text="@string/payroll"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="@dimen/text_19" />
+
+                <TextView
+                    android:id="@+id/tvInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin_neg"
+                    android:text="@string/info"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/text_32" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_weight=".5"
+                android:gravity="end"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/civProfileImage"
+                    android:layout_width="@dimen/default_image_size"
+                    android:layout_margin="5dp"
+                    android:layout_height="@dimen/default_image_size"
+                    android:src="@drawable/oval" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvSsn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin_35"
+            android:text="@string/ssn"
+            android:textAllCaps="true"
+            android:textSize="@dimen/normal_text" />
+
+        <EditText
+            android:id="@+id/etSsn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:background="@null"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:letterSpacing=".2"
+            android:singleLine="true"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/normal_text" />
+
+        <View
+            android:id="@+id/viewFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_margin_2"
+            android:layout_marginTop="@dimen/default_margin_half"
+            android:background="@color/blue" />
+
+        <TextView
+            android:id="@+id/tvErrorDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:layout_marginTop="@dimen/default_margin"
+            android:textSize="@dimen/text_11" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".3"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/default_margin_40"
+        android:layout_marginRight="@dimen/default_margin_40">
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_button"
+            android:text="@string/next"
+            android:textAllCaps="false"
+            android:elevation="@dimen/default_margin"
+            android:padding="@dimen/default_margin_large"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/normal_text_minus" />
+
+        <TextView
+            android:id="@+id/tvBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="@dimen/default_margin_large"
+            android:text="@string/back"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/normal_text_minus" />
+
+    </LinearLayout>
+
+</LinearLayout>

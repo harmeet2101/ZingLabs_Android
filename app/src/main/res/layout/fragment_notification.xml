@@ -1,0 +1,59 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/broadcast_bg"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvBroadcast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_margin_25"
+        android:text="@string/broadcast"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/text_32" />
+
+    <RelativeLayout
+        android:id="@+id/ivBroadcast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvBroadcast">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivBroadcast"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvBroadcastHeading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="@dimen/default_margin_large"
+            android:paddingRight="@dimen/default_margin_large"
+            android:text="@string/receive_messages_from_your_store_manager"
+            android:textColor="@color/dark_grey"
+            android:textSize="@dimen/text_24" />
+
+        <TextView
+            android:id="@+id/tvBroadcastDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/default_margin"
+            android:layout_marginLeft="@dimen/default_margin_large"
+            android:layout_marginRight="@dimen/default_margin_large"
+            android:text="@string/make_sure_you_have_your_pay_details_set_up_so_that_we_can_show_you_all_your_earnings"
+            android:textColor="@color/dark_grey"
+            android:textSize="@dimen/normal_text_plus"/>
+
+    </LinearLayout>
+
+</LinearLayout>

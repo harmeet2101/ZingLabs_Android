@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#5C58F6</color>
+    <color name="colorAccent">#5C58F6</color>
+    <color name="grey">#f8f8f9</color>
+    <color name="light_grey">#E8E8E8</color>
+    <color name="dark_grey">#707070</color>
+    <color name="light_blue">#ccccff</color>
+    <color name="blue">#4463F7</color>
+    <color name="black">#000000</color>
+    <color name="offwhite">#eff1f3</color>
+    <color name="orange">#f0b566</color>
+    <color name="green">#00d3b0</color>
+    <color name="dark_green">#00b99b</color>
+    <color name="light_black">#313B45</color>
+    <color name="dark_blue">#3c57d9</color>
+    <color name="yellow">#f4b414</color>
+    <color name="white">#ffffff</color>
+    <color name="red">#D0021B</color>
+    <color name="black_btn">#333333</color>
+     <color name="light_green">#eeffff</color>
+     <color name="graph_text">#BCC0F2</color>
+    <color name="page_background">#F4F4F8</color>
+    <color name="whiteTranperent">#7Fffffff</color>
+    <color name="text_bg">#44AE94</color>
+    <color name="text_dark_blue">#6162E3</color>
+    <color name="otp_box_color">#A5B9FF</color>
+    <color name="now_show_bg">#99FF0000</color>
+    <color name="now_show_bg_dark">#66FF0000</color>
+</resources>

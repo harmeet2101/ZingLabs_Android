@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="370dp"
+    android:elevation="3dp"
+    android:layout_height="wrap_content">
+
+
+
+    <LinearLayout
+        android:id="@+id/rlDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="@dimen/default_margin_30"
+        android:layout_marginRight="16dp"
+        android:background="@color/blue"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textviewshiftType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:alpha=".60"
+            android:text="Next Shift"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"
+            android:text="Tommorrow"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_22"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="@dimen/default_margin_40"
+                android:background="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="35dp"
+                android:alpha=".60"
+                android:text="Start time"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvStartTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="10dp"
+            android:text="9:30am"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="@dimen/default_margin_40"
+                android:background="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="35dp"
+                android:alpha=".60"
+                android:text="End time"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvEndTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="10dp"
+            android:text="3:30pm"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/lay01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/dark_blue"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="12dp"
+                    android:background="@drawable/outline_account_balance_white_18"
+                    android:padding="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:alpha=".60"
+                    android:padding="10dp"
+                    android:text="Cashier"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lay02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/dark_blue"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="12dp"
+                    android:background="@drawable/outline_monetization_on_white_18"
+                    android:padding="10dp" />
+
+                <TextView
+                    android:id="@+id/tvEarningAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:alpha=".60"
+                    android:padding="10dp"
+                    android:text="$ 150"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lay03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/dark_blue"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical|left"
+                android:background="@drawable/outline_location_on_white_18"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp" />
+
+            <TextView
+                android:id="@+id/tvLocationDetail"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:alpha=".60"
+                android:padding="10dp"
+                android:text="Blue Bottle Coffee"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lay04"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="5dp"
+            android:background="@color/dark_blue"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/default_margin_large"
+            android:paddingEnd="@dimen/default_margin_25"
+            android:paddingRight="@dimen/default_margin_25"
+            android:paddingBottom="@dimen/default_margin_large">
+
+            <ImageView
+                android:id="@+id/ivRectangle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginEnd="@dimen/default_margin_extra_large"
+                android:layout_marginRight="@dimen/default_margin_extra_large"
+                android:src="@drawable/add_calendar" />
+
+            <ImageView
+                android:id="@+id/ivDiamond"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:src="@drawable/navigator" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnReleaseShift"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rlDialog"
+        android:layout_marginLeft="@dimen/default_margin_30"
+        android:layout_marginTop="@dimen/default_margin_large"
+        android:layout_marginRight="@dimen/default_margin_30"
+        android:background="@color/black_btn"
+        android:padding="@dimen/default_margin"
+        android:text="@string/release_shift"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/normal_text_minus" />
+
+    <Button
+        android:id="@+id/btnCallManager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnReleaseShift"
+        android:layout_marginLeft="@dimen/default_margin_30"
+        android:layout_marginTop="@dimen/default_margin_large"
+        android:layout_marginRight="@dimen/default_margin_30"
+        android:background="@color/black_btn"
+        android:padding="@dimen/default_margin"
+        android:text="@string/call_manager"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/normal_text_minus" />
+
+    <TextView
+        android:id="@+id/tvClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnCallManager"
+        android:layout_centerHorizontal="true"
+        android:padding="20dp"
+        android:text="@string/close"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/normal_text" />
+
+</RelativeLayout>

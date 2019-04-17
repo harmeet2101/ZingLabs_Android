@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_background"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/default_margin_25">
+
+    <TextView
+        android:id="@+id/tvBroadcast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/broadcast"
+        android:textColor="@color/blue"
+        android:paddingLeft="@dimen/default_margin_40"
+        android:paddingRight="@dimen/default_margin_40"
+        android:textSize="@dimen/text_32" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvNotification"
+        android:layout_width="match_parent"
+        android:paddingLeft="@dimen/default_margin_extra_large"
+        android:paddingRight="@dimen/default_margin_extra_large"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

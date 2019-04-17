@@ -1,0 +1,47 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="smaller_text">8sp</dimen>
+    <dimen name="smallest_text">10sp</dimen>
+    <dimen name="normal_text_minus">12sp</dimen>
+
+    <dimen name="normal_text_plus">16sp</dimen>
+    <dimen name="normal_text_large">18sp</dimen>
+    <dimen name="normal_text_large_extra">18sp</dimen>
+
+    <dimen name="large_text">26sp</dimen>
+    <dimen name="large_text_30">30sp</dimen>
+    <dimen name="extra_large_text">35sp</dimen>
+    <dimen name="margin">5dp</dimen>
+    <dimen name="margin_large">18dp</dimen>
+    <dimen name="feedback_edittext">130dp</dimen>
+    <dimen name="menu_image">35dp</dimen>
+    <dimen name="large_margin">25dp</dimen>
+    <dimen name="extra_large_margin">30dp</dimen>
+    <dimen name="double_extra_large_margin">40dp</dimen>
+    <dimen name="large_text_minus">20sp</dimen>
+    `
+    <dimen name="text_22">22sp</dimen>
+    <dimen name="text_32">32sp</dimen>
+    <dimen name="text_48">48sp</dimen>
+    <dimen name="text_24">24sp</dimen>
+    <dimen name="text_19">19sp</dimen>
+    <dimen name="text_39">39sp</dimen>
+    <dimen name="text_13">13sp</dimen>
+    <dimen name="text_11">11sp</dimen>
+    <dimen name="text_28">28sp</dimen>
+    <dimen name="text_15">15sp</dimen>
+
+    <dimen name="normal_text">14sp</dimen>
+    <dimen name="normal_textmenu">13sp</dimen>
+    <dimen name="default_padding">10dp</dimen>
+    <dimen name="profileImage">100dp</dimen>
+    <dimen name="uploadImage">100dp</dimen>
+    <dimen name="circular_image_size">80dp</dimen>
+    <dimen name="cart_count_size">15dp</dimen>
+
+    <dimen name="bookTechnicianPopUp">250dp</dimen>
+
+</resources>

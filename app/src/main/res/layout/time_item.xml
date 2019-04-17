@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llMain"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/default_margin_60"
+        android:background="@color/light_grey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_weight="2"
+                android:gravity="top"
+                android:paddingLeft="@dimen/default_margin"
+                android:paddingStart="@dimen/default_margin"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/smallest_text" />
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="@dimen/default_margin_1"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginStart="@dimen/default_margin"
+                android:background="@color/light_grey" />
+
+            <LinearLayout
+                android:id="@+id/llAvailableBg"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/default_margin_40"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginRight="@dimen/default_margin"
+                android:layout_weight="4"
+                android:orientation="horizontal" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="@dimen/default_margin_1"
+                android:layout_height="match_parent"
+                android:background="@color/light_grey" />
+
+            <LinearLayout
+                android:id="@+id/llPrefferedBg"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/default_margin_40"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginRight="@dimen/default_margin"
+                android:layout_weight="4"
+                android:orientation="horizontal" />
+        </LinearLayout>
+
+</LinearLayout>

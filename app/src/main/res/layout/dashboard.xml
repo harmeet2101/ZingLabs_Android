@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:design="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".9" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_margin_1"
+        android:background="@color/light_grey" />
+
+    <!-- <android.support.design.widget.BottomNavigationView
+         android:id="@+id/btmNavigation"
+         android:layout_width="match_parent"
+         android:layout_height="0dp"
+         android:layout_gravity="start"
+         android:layout_weight=".1"
+         android:visibility="gone"
+         android:background="@android:color/white"
+         android:paddingTop="@dimen/default_margin_large"
+         android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+         design:itemBackground="@android:color/white"
+         design:menu="@menu/bottom_nav_items" />-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvFooter"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingTop="@dimen/default_margin"
+        android:background="@color/white"
+        android:layout_gravity="center"
+        android:layout_weight=".1" />
+
+</LinearLayout>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/default_margin_large">
+
+    <TextView
+        android:id="@+id/tvHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:text="@string/oops"
+        android:textSize="@dimen/text_24" />
+
+    <TextView
+        android:id="@+id/tvErrorDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/light_black"
+        android:padding="@dimen/default_margin_extra_large"
+        android:text="@string/the_phone_number_and_the_password_combination_does_not_match_please_try_again"
+        android:textSize="@dimen/normal_text_plus" />
+
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_margin_50"
+        android:layout_marginRight="@dimen/default_margin_50"
+        android:layout_marginTop="@dimen/default_margin"
+        android:background="@drawable/blue_button"
+        android:text="@string/ok"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/normal_text_minus" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin_large"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/default_margin_25"
+        android:paddingLeft="@dimen/default_margin"
+        android:paddingRight="@dimen/default_margin">
+
+        <TextView
+            android:id="@+id/tvAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/not_a_member"
+            android:textColor="@color/black"
+            android:textSize="@dimen/normal_text_minus" />
+
+        <TextView
+            android:id="@+id/tvLogIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_up"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/normal_text_minus" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

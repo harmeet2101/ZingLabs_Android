@@ -1,0 +1,614 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_background"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/default_margin_extra_large"
+    android:paddingRight="@dimen/default_margin_extra_large">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/llLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin_30"
+            android:layout_marginTop="@dimen/default_margin_30"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvWelcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/welcome"
+                    android:textSize="@dimen/text_32" />
+
+                <TextView
+                    android:id="@+id/tvUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tito"
+                    android:textSize="@dimen/text_32" />
+
+            </LinearLayout>
+
+            <!--<ImageView
+                android:id="@+id/ivImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin"
+                android:visibility="gone"
+                android:src="@drawable/home_bg_img" />-->
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cvShift"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/default_margin_3"
+                android:layout_marginTop="@dimen/default_margin_25"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:translationX="2dp"
+                android:translationY="2dp"
+                android:translationZ="2dp"
+                android:visibility="gone"
+                app:cardCornerRadius="@dimen/default_margin_3"
+                app:cardElevation="@dimen/default_margin_1"
+                app:cardPreventCornerOverlap="false">
+
+                <LinearLayout
+                    android:id="@+id/llCurrentShift"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/blue"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvNxtShift"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:alpha=".66"
+                        android:paddingLeft="@dimen/default_margin_large"
+                        android:paddingRight="@dimen/default_margin_large"
+                        android:paddingTop="@dimen/default_margin_large"
+                        android:text="@string/next_shift"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/normal_text_minus" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/default_margin_large"
+                        android:paddingRight="@dimen/default_margin_large">
+
+                        <TextView
+                            android:id="@+id/tvStartsIn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/starts_in"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_22" />
+
+                        <TextView
+                            android:id="@+id/tvStartTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_22" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin_extra_large"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/default_margin_large"
+                        android:paddingRight="@dimen/default_margin_large">
+
+                        <TextView
+                            android:id="@+id/tvToday"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight=".3"
+                            android:text="Today"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/normal_text_plus" />
+
+                        <TextView
+                            android:id="@+id/tvShiftTime"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center"
+                            android:layout_weight=".8"
+                            android:gravity="right"
+                            android:text="3pm - 7pm"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/normal_text_plus" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/light_grey"
+                        android:paddingLeft="@dimen/default_margin"
+                        android:paddingRight="@dimen/default_margin"
+                        android:visibility="invisible" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/default_margin"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/default_margin_large"
+                        android:paddingRight="@dimen/default_margin_large">
+
+                        <TextView
+                            android:id="@+id/tvShiftCashierName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:alpha=".84"
+                            android:text="Cashier, Blue Bottle"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/normal_text_plus" />
+
+                        <TextView
+                            android:id="@+id/tvShiftEarningAmount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center"
+                            android:alpha=".84"
+                            android:gravity="right"
+                            android:text="$82.21"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/normal_text_plus" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/default_margin_half"
+                        android:alpha=".53"
+                        android:background="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tvViewShift"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:padding="@dimen/default_margin_large"
+                        android:text="@string/view_shift"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/normal_text" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cvNextShift"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/default_margin_3"
+                android:layout_marginTop="@dimen/default_margin_25"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:translationX="2dp"
+                android:translationY="2dp"
+                android:translationZ="2dp"
+                android:visibility="gone"
+                app:cardCornerRadius="@dimen/default_margin_3"
+                app:cardElevation="@dimen/default_margin_1"
+                app:cardPreventCornerOverlap="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:padding="@dimen/default_margin_large">
+
+                    <TextView
+                        android:id="@+id/tvNextShift"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/next_shift"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="@dimen/normal_text_minus" />
+
+                    <LinearLayout
+                        android:id="@+id/llShift"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvDay"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".4"
+                            android:text="Today"
+                            android:textColor="@color/blue"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tvTime"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".6"
+                            android:drawableEnd="@drawable/right_arrow_dark"
+                            android:drawablePadding="@dimen/default_margin"
+                            android:drawableRight="@drawable/right_arrow_dark"
+                            android:text="3pm - 7pm"
+                            android:textColor="@color/blue"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/light_grey"
+                        android:paddingTop="@dimen/default_margin"
+                        android:paddingLeft="@dimen/default_margin"
+                        android:paddingRight="@dimen/default_margin" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/default_margin"
+                        android:layout_marginTop="@dimen/default_margin_large"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvCashierName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cashier, Blue Bottle"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/normal_text_plus" />
+
+                        <TextView
+                            android:id="@+id/tvShiftAmount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center"
+                            android:gravity="right"
+                            android:text="$82.21"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/normal_text_plus" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cvUpcomingShift"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/default_margin_3"
+                android:layout_marginTop="@dimen/default_margin_25"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:translationX="2dp"
+                android:translationY="2dp"
+                android:translationZ="2dp"
+                app:cardCornerRadius="@dimen/default_margin_3"
+                app:cardElevation="@dimen/default_margin_1"
+                app:cardPreventCornerOverlap="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-10dp"
+                        android:src="@drawable/home_img" />
+
+                    <TextView
+                        android:id="@+id/tvPreferenceHeading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/default_margin_large"
+                        android:paddingStart="@dimen/default_margin_large"
+                        android:text="@string/you_have_no_upcoming_shifts"
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/normal_text_plus" />
+
+                    <TextView
+                        android:id="@+id/tvPreferenceDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:paddingLeft="@dimen/default_margin_large"
+                        android:paddingRight="@dimen/default_margin_large"
+                        android:text="@string/make_sure_you_have_your_time_preferences_set_up_so_you_are_eligible_for_shifts"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="@dimen/normal_text_minus" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/default_margin_large"
+                        android:background="@color/light_grey" />
+
+                    <TextView
+                        android:id="@+id/tvSetPreference"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:padding="@dimen/default_margin_large"
+                        android:text="@string/set_up_your_preferences"
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/normal_text_minus" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cvUpcomingShiftList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/default_margin_3"
+                android:layout_marginTop="@dimen/default_margin_25"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:translationX="2dp"
+                android:translationY="2dp"
+                android:translationZ="2dp"
+                app:cardCornerRadius="@dimen/default_margin_3"
+                app:cardElevation="@dimen/default_margin_1"
+                app:cardPreventCornerOverlap="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvUpcomingShift"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:paddingLeft="@dimen/default_margin_large"
+                        android:paddingStart="@dimen/default_margin_large"
+                        android:text="@string/upcoming_shifts"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="@dimen/normal_text_minus" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvUpcomingShift"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/default_margin_half"
+                        android:layout_marginRight="@dimen/default_margin_half"
+                        android:layout_marginTop="@dimen/default_margin" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/default_margin_large"
+                        android:background="@color/light_grey" />
+
+                    <TextView
+                        android:id="@+id/tvViewCalendar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:padding="@dimen/default_margin_large"
+                        android:text="@string/view_calendar"
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/normal_text_minus" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cvMyPay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/default_margin_3"
+                android:layout_marginTop="@dimen/default_margin_25"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:translationX="2dp"
+                android:translationY="2dp"
+                android:translationZ="2dp"
+                app:cardCornerRadius="@dimen/default_margin_3"
+                app:cardElevation="@dimen/default_margin_1"
+                app:cardPreventCornerOverlap="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/card_img" />
+
+                    <TextView
+                        android:id="@+id/tvPayCardHeading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/default_margin_large"
+                        android:paddingStart="@dimen/default_margin_large"
+                        android:text="@string/cash_out_your_earnings_any_time_you_want_using_instant_pay"
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/normal_text_plus" />
+
+                    <TextView
+                        android:id="@+id/tvPayCardDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:paddingLeft="@dimen/default_margin_large"
+                        android:paddingRight="@dimen/default_margin_large"
+                        android:text="@string/link_your_bank_account_and_enable_instant_cash_out_your_earnings_will_be_available_for_use_the_same_day"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="@dimen/normal_text_minus" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/default_margin_large"
+                        android:background="@color/light_grey" />
+
+                    <TextView
+                        android:id="@+id/tvInstantPay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:padding="@dimen/default_margin_large"
+                        android:text="@string/set_up_instant_pay"
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/normal_text_minus" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cvMyPayData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/default_margin_3"
+                android:layout_marginTop="@dimen/default_margin_25"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:translationX="2dp"
+                android:translationY="2dp"
+                android:translationZ="2dp"
+                app:cardCornerRadius="@dimen/default_margin_3"
+                app:cardElevation="@dimen/default_margin_1"
+                app:cardPreventCornerOverlap="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvMyPay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:paddingLeft="@dimen/default_margin_large"
+                        android:paddingStart="@dimen/default_margin_large"
+                        android:text="@string/my_pay"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="@dimen/normal_text_minus" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/default_margin_large"
+                        android:paddingRight="@dimen/default_margin_large">
+
+                        <TextView
+                            android:id="@+id/tvDollar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:alpha=".47"
+                            android:text="@string/dollar"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/large_text_30" />
+
+                        <TextView
+                            android:id="@+id/tvPayoutAmount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2,301"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_48" />
+
+                        <TextView
+                            android:id="@+id/tvPayoutDecimal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=".50"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/large_text_30" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvPayoutDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:paddingLeft="@dimen/default_margin_large"
+                        android:paddingStart="@dimen/default_margin_large"
+                        android:text="@string/we_will_automatically_transfer_the_final_amount_at_the_end_of_the_week"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="@dimen/normal_text_minus" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/default_margin_large"
+                        android:background="@color/light_grey"
+                        android:paddingLeft="@dimen/default_margin"
+                        android:paddingRight="@dimen/default_margin" />
+
+                    <TextView
+                        android:id="@+id/tvViewEarning"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:padding="@dimen/default_margin_large"
+                        android:text="@string/view_earnings"
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/normal_text_minus" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/default_margin_extra_large"
+                android:visibility="invisible"
+                android:background="@color/white" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

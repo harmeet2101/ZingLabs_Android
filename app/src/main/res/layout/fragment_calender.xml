@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_margin_extra_large"
+        android:layout_marginRight="@dimen/default_margin_extra_large"
+        android:layout_marginTop="@dimen/default_margin_30"
+        android:orientation="horizontal"
+        android:padding="@dimen/default_margin_half">
+
+        <TextView
+            android:id="@+id/tvCalendar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.75"
+            android:text="@string/calendar"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/text_32" />
+
+        <TextView
+            android:id="@+id/tvCalendarSelection"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:drawableEnd="@drawable/drop_down"
+            android:drawableRight="@drawable/drop_down"
+            android:text="@string/week"
+            android:textSize="@dimen/text_19" />
+
+    </LinearLayout>
+
+    <com.zing.util.NonSwipeableViewPager
+        android:id="@+id/vpCalendar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

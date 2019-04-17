@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/default_margin_40"
+        android:layout_marginRight="@dimen/default_margin_40"
+        android:paddingTop="@dimen/default_margin_25"
+        android:layout_weight=".7"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/ivCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/blue_circle"
+            android:padding="@dimen/default_margin_large"
+            android:src="@drawable/ic_photo_camera" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivAddImg"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_add" />
+
+        <TextView
+            android:id="@+id/tvAddPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivAddImg"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/default_margin_35"
+            android:alpha=".5"
+            android:gravity="center"
+            android:padding="@dimen/default_margin"
+            android:text="@string/add_your_photo"
+            android:textSize="@dimen/normal_text" />
+
+        <ImageView
+            android:id="@+id/ivGallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/blue_circle"
+            android:padding="@dimen/default_margin_large"
+            android:src="@drawable/ic_photo" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".3"
+        android:layout_marginLeft="@dimen/default_margin_40"
+        android:layout_marginRight="@dimen/default_margin_40"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_button"
+            android:elevation="@dimen/default_margin"
+            android:padding="@dimen/default_margin_large"
+            android:text="@string/next"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/normal_text" />
+
+        <TextView
+            android:id="@+id/tvBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="@dimen/default_margin_large"
+            android:text="@string/back"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/normal_text_minus" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

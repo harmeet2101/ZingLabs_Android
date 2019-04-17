@@ -1,0 +1,417 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        android:padding="@dimen/default_margin_large">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_left_arrow" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_weight=".5"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvPaymentDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha=".63"
+                android:text="@string/payment_details"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/normal_text_minus" />
+
+            <TextView
+                android:id="@+id/tvPaymentAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin_half"
+                android:text="$2,301"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_28" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight=".4"
+            android:gravity="right"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha=".48"
+                android:text="Feb 21- Feb 28"
+                android:textColor="@color/black"
+                android:textSize="@dimen/normal_text" />
+
+            <Button
+                android:id="@+id/btnStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin_half"
+                android:background="@drawable/green_button"
+                android:padding="@dimen/default_margin"
+                android:text="Processing"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_11" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_margin_1"
+        android:background="@color/dark_grey" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin_25"
+                android:elevation="@dimen/default_margin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/default_margin_extra_large">
+
+                        <TextView
+                            android:id="@+id/tvPaystubs"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:alpha=".66"
+                            android:gravity="start"
+                            android:text="@string/paystub"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/normal_text_minus" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/default_margin_large"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvTotalWages"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".5"
+                                android:text="@string/total_wages"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/normal_text_plus" />
+
+                            <TextView
+                                android:id="@+id/tvTotalWagesAmount"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:layout_weight=".5"
+                                android:gravity="right"
+                                android:text="$2000"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/normal_text_plus" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/default_margin_1"
+                            android:layout_marginTop="@dimen/default_margin_large"
+                            android:background="@color/light_grey" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/default_margin_large"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvTips"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".5"
+                                android:text="@string/tips"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/normal_text_plus" />
+
+                            <TextView
+                                android:id="@+id/tvTipsAmount"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:layout_weight=".5"
+                                android:gravity="right"
+                                android:text="$20"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/normal_text_plus" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/default_margin_1"
+                            android:layout_marginTop="@dimen/default_margin_large"
+                            android:background="@color/light_grey" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/default_margin_large"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/ivDrop"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight=".1"
+                                android:drawablePadding="@dimen/default_margin"
+                                android:src="@drawable/arrow_down" />
+
+                            <TextView
+                                android:id="@+id/tvOther"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/default_margin_half"
+                                android:layout_weight=".5"
+                                android:text="Other"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/normal_text_plus" />
+
+                            <TextView
+                                android:id="@+id/tvOtherAmount"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:layout_weight=".5"
+                                android:gravity="right"
+                                android:text="$0"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/normal_text_plus" />
+
+                        </LinearLayout>
+
+                        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                            android:id="@+id/expandableLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/default_margin_50"
+                            android:layout_margin="@dimen/default_margin"
+                            app:ael_duration="500"
+                            app:ael_expanded="true"
+                            app:ael_interpolator="anticipateOvershoot"
+                            app:ael_orientation="vertical">
+
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/rvOthers"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+
+                        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/default_margin_1"
+                        android:background="@color/light_grey" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/default_margin_25"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvTotal"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".5"
+                            android:text="@string/total"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/normal_text_plus" />
+
+                        <TextView
+                            android:id="@+id/tvTotalAmount"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_weight=".5"
+                            android:gravity="right"
+                            android:text="$2020"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/normal_text_plus" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/default_margin_25"
+                android:layout_marginLeft="@dimen/default_margin_25"
+                android:layout_marginRight="@dimen/default_margin_25"
+                android:elevation="@dimen/default_margin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:padding="@dimen/default_margin_extra_large">
+
+                    <TextView
+                        android:id="@+id/tvTransferDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:alpha=".66"
+                        android:text="@string/transfer_details"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/normal_text_minus" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:background="@color/grey"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/default_margin">
+
+                        <ImageView
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/default_margin"
+                            android:src="@drawable/payment" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvBankName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Bank of America"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/normal_text" />
+
+                            <TextView
+                                android:id="@+id/tvAccountNo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/default_margin"
+                                android:text="Account ***7789"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/normal_text" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/default_margin"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/lock" />
+
+                        <TextView
+                            android:id="@+id/tvEncryptDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/default_margin"
+                            android:alpha=".33"
+                            android:text="@string/all_transfers_are_256_bit_encrypted"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_11" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/default_margin_25"
+                android:layout_marginLeft="@dimen/default_margin_25"
+                android:layout_marginRight="@dimen/default_margin_25"
+                android:elevation="@dimen/default_margin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:padding="@dimen/default_margin_extra_large">
+
+                    <TextView
+                        android:id="@+id/tvIncludedShift"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/included_shifts"
+                        android:textColor="@color/black"
+                        android:alpha=".66"
+                        android:textSize="@dimen/normal_text_minus" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvIncludedShift"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
