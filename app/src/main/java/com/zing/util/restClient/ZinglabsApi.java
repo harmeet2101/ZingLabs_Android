@@ -18,6 +18,7 @@ import com.zing.model.request.PhoneModel;
 import com.zing.model.request.RateShiftRequest;
 import com.zing.model.request.ShiftBreak;
 import com.zing.model.request.ShiftCheckInRequest;
+import com.zing.model.request.ShiftDetailByDateRequest;
 import com.zing.model.request.TimePreferenceRequest.TimePreferenceRequest;
 import com.zing.model.request.UpcomingShiftRequest;
 import com.zing.model.request.VerifyCheckInRequest;
@@ -35,7 +36,9 @@ import com.zing.model.response.ShiftDetailResponse.ShiftDetailResponse;
 import com.zing.model.response.WeekPreference.WeekPreference;
 import com.zing.model.response.countryListResponse.CountryResponse;
 import com.zing.model.response.otpVerifyResponse.OtpVerifyResponse;
+import com.zing.model.response.shiftbydate.ShiftByDateBaseModel;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -151,6 +154,11 @@ public interface ZinglabsApi {
     @POST("shift_detail")
     Call<ShiftDetailResponse> shiftDetailApi(@Header("Authorization") String userToken,
                                              @Body ShiftCheckInRequest shiftCheckInRequest);
+
+
+    @POST("shift_by_date")
+    Call<ShiftByDateBaseModel> shiftByDate(@Header("Authorization") String userToken,
+                                           @Body ShiftDetailByDateRequest dateBean);
 
     @GET("get_preference_data")
     Call<WeekPreference> getWeekPreferenceApi(@Header("Authorization") String userToken);

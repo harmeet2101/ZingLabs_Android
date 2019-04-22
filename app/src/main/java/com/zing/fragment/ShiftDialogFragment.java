@@ -127,7 +127,7 @@ public class ShiftDialogFragment extends BaseFragment {
     private String from;
     private int PERMISSION = 0;
     private boolean isWithin24hrs;
-    private ArrayList<CalendarDataModel> calendarDataModel;
+//    private ArrayList<CalendarDataModel> calendarDataModel;
 
     public static ShiftDialogFragment newInstance(String param1, String param2,
                                                   String param3, String param4,
@@ -165,7 +165,7 @@ public class ShiftDialogFragment extends BaseFragment {
             role = getArguments().getString(ARG_PARAM8);
             release = getArguments().getString(ARG_PARAM9);
             shiftType = getArguments().getString(ARG_PARAM10);
-            calendarDataModel = (ArrayList<CalendarDataModel>) getArguments().getSerializable(ARG_PARAM11);
+//            calendarDataModel = (ArrayList<CalendarDataModel>) getArguments().getSerializable(ARG_PARAM11);
         }
     }
 
@@ -174,13 +174,6 @@ public class ShiftDialogFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.shift_dialog, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-
-        if (calendarDataModel != null && calendarDataModel.size() > 0) {
-            rvShiftCalendarData.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-
-            ShiftCalendarAdapter recomendedAdapter = new ShiftCalendarAdapter(getActivity());
-            rvShiftCalendarData.setAdapter(recomendedAdapter);
-        }
         return view;
     }
 

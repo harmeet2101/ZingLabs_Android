@@ -3,6 +3,7 @@ package com.zing.calendar;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,11 +18,14 @@ import android.widget.TextView;
 
 import com.zing.R;
 import com.zing.fragment.CalendarMonthFragment;
+import com.zing.fragment.ShiftByDateFragment;
 import com.zing.fragment.ShiftDialogFragment;
 import com.zing.interfaces.FragmentInterface;
 import com.zing.model.CalendarDataModel;
 import com.zing.model.request.ShiftCheckInRequest;
+import com.zing.model.request.ShiftDetailByDateRequest;
 import com.zing.model.response.ShiftDetailResponse.ShiftDetailResponse;
+import com.zing.model.response.shiftbydate.ShiftByDateBaseModel;
 import com.zing.util.AppTypeface;
 import com.zing.util.CommonUtils;
 import com.zing.util.SessionManagement;
@@ -39,6 +43,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -144,7 +149,8 @@ public class GridAdapter extends ArrayAdapter {
             public void onClick(View v) {
                 shiftId = shiftData.get(formattedDate);
                 if (shiftId != null) {
-                    getShiftDetails(formattedDate, calendarData.get(formattedDate));
+//                    getShiftDetails(formattedDate, calendarData.get(formattedDate));
+                    getShiftDetailByDate(formattedDate);
                 }
             }
         });
@@ -171,6 +177,56 @@ public class GridAdapter extends ArrayAdapter {
             default:
                 eventIndicator.setImageResource(R.drawable.white_circle);
                 break;
+        }
+    }
+
+//    Url: http://zira.n1.iworklab.com/public/api/shift_by_date
+//    request body : {"date":"2019-03-29"}
+//    End point is: shift_by_date
+//    method post
+    private void getShiftDetailByDate(final String formattedDate) {
+        progressDialog = CommonUtils.getProgressBar(getContext());
+        ZinglabsApi api = ApiClient.getClient().create(ZinglabsApi.class);
+
+        try {
+            ShiftDetailByDateRequest dateBean = new ShiftDetailByDateRequest();
+            dateBean.setDate(formattedDate);
+
+            Call<ShiftByDateBaseModel> call = api.shiftByDate("Bearer " + session.getUserToken(), dateBean);
+            call.enqueue(new Callback<ShiftByDateBaseModel>() {
+                @Override
+                public void onResponse(@NonNull Call<ShiftByDateBaseModel> call,
+                                       @NonNull Response<ShiftByDateBaseModel> response) {
+                    progressDialog.dismiss();
+                    if (response.code() == 200) {
+                        try {
+                            ShiftByDateBaseModel shiftDetailResponse = response.body();
+                            if (shiftDetailResponse != null && shiftDetailResponse.getResponse().getCode() == 200) {
+                                Fragment fragment = new ShiftByDateFragment();
+                                Bundle bundle =new Bundle();
+                                bundle.putString("date", formattedDate);
+                                fragment.setArguments(bundle);
+                                fragmentInterface.fragmentResult(fragment, "+");
+                            } else {
+                                CommonUtils.showSnackbar(llDate, shiftDetailResponse.getResponse().getMessage());
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        CommonUtils.showSnackbar(llDate, response.message());
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<ShiftByDateBaseModel> call, @NonNull Throwable t) {
+                    progressDialog.dismiss();
+                    CommonUtils.showSnakBar(llDate, t.getMessage());
+                }
+            });
+        } catch (Exception e) {
+            progressDialog.dismiss();
+            e.printStackTrace();
         }
     }
 
