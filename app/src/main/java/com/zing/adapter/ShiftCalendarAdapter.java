@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zing.R;
+import com.zing.fragment.ShiftByDateFragment;
 import com.zing.model.response.shiftbydate.Shift;
 import com.zing.util.AppTypeface;
 import com.zing.util.SessionManagement;
@@ -31,10 +32,13 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<ShiftCalendarAdap
 
     private Context context;
     private List<Shift> shiftsList;
+    SessionManagement session;
+    private String nextShiftId;
 
     public ShiftCalendarAdapter(Context context, List<Shift> shiftsList) {
         this.context = context;
         this.shiftsList = shiftsList;
+        this.session = new SessionManagement(context);
     }
 
     @NonNull
@@ -47,62 +51,55 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<ShiftCalendarAdap
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-//        holder.tvEarningAmount.setText(""+shiftsList.get(position).getExpectedEarning());
-//        holder.tvLocationDetail.setText(shiftsList.get(position).getLocation());
-//
-//        nextShiftId = session.getNextShift();
-//
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//        try {
-//            Date date1 = format.parse(date);
-//            String day_no = (String) DateFormat.format("dd", date1); // 20
-//            String monthString = (String) DateFormat.format("MMM", date1); // Jun
-//            day = (String) DateFormat.format("EEE", date1); // Thursday
-//
-//            tvDay.setText(monthString + " " + day_no + ", " + day);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//
-//        String shift_id, date, day;
-//         boolean isWithin24hrs = false;
-//        try {
-//
-//            Date currentDate = new Date();
-//            String pattern = "yyyy-MM-dd hh:mm a";
-//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-//            StringTokenizer tokenizer = new StringTokenizer(timeSlot, "-");
-//            String startTime = tokenizer.nextToken();
-//            String endTime = tokenizer.nextToken();
-//
-//            holder.tvStartTime.setText(startTime);
-//            holder.tvEndTime.setText(endTime);
-//
-//            String mDateString = date + " " + startTime.toUpperCase();
-//            Calendar cal = Calendar.getInstance();
-//            cal.setTime(currentDate);
-//            cal.add(Calendar.DATE, 1);
-//            Date nxtDate = cal.getTime();
-//            String nextDateString = simpleDateFormat.format(nxtDate);
-//            Date nextDate = simpleDateFormat.parse(nextDateString);
-//            Date nextShiftDate = simpleDateFormat.parse(mDateString);
-//
-//            if (nextShiftDate.compareTo(nextDate) < 0) {
-//                isWithin24hrs = true;
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//        session.setDialogData(from, shift_id, date, day, expectedEarning, timeSlot, location, role);
-//
-//        if (isWithin24hrs) {
-//            holder.btnReleaseShift.setVisibility(View.GONE);
-//        } else {
-//            holder.btnReleaseShift.setVisibility(View.VISIBLE);
-//        }
+        holder.tvEarningAmount.setText(""+shiftsList.get(position).getExpectedEarning());
+        holder.tvLocationDetail.setText(shiftsList.get(position).getStoreName());
+
+        nextShiftId = session.getNextShift();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+       try {
+            Date date1 = format.parse(shiftsList.get(position).getDate());
+            String day_no = (String) DateFormat.format("dd", date1); // 20
+            String monthString = (String) DateFormat.format("MMM", date1); // Jun
+            String day = (String) DateFormat.format("EEE", date1); // Thursday
+
+           holder.tvDay.setText(monthString + " " + day_no + ", " + day);
+       } catch (ParseException e) {
+            e.printStackTrace();
+       }
+        boolean isWithin24hrs = false;
+       try {
+
+            Date currentDate = new Date();
+            String pattern = "yyyy-MM-dd hh:mm a";
+           SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            StringTokenizer tokenizer = new StringTokenizer(shiftsList.get(position).getTimeSlot(), "-");
+            String startTime = tokenizer.nextToken();
+            String endTime = tokenizer.nextToken();
+
+           holder.tvStartTime.setText(startTime);
+            holder.tvEndTime.setText(endTime);
+
+           String mDateString = shiftsList.get(position).getDate() + " " + startTime.toUpperCase();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(currentDate);
+            cal.add(Calendar.DATE, 1);
+            Date nxtDate = cal.getTime();
+           String nextDateString = simpleDateFormat.format(nxtDate);
+           Date nextDate = simpleDateFormat.parse(nextDateString);
+            Date nextShiftDate = simpleDateFormat.parse(mDateString);
+
+           if (nextShiftDate.compareTo(nextDate) < 0) {
+               isWithin24hrs = true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (isWithin24hrs) {
+            holder.btnReleaseShift.setVisibility(View.GONE);
+        } else {
+            holder.btnReleaseShift.setVisibility(View.VISIBLE);
+        }
 //        if (from.equalsIgnoreCase("home")) {
 ////            if (release.equalsIgnoreCase("0")) {
 ////                btnReleaseShift.setText("RELEASE SHIFT");
@@ -118,46 +115,46 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<ShiftCalendarAdap
 //            holder.btnReleaseShift.setVisibility(View.GONE);
 //            holder.btnCallManager.setVisibility(View.GONE);
 //        } else {
-//            if (release.equalsIgnoreCase("0")) {
-//
-//                holder.btnReleaseShift.setText("RELEASE SHIFT");
-//            } else if (release.equalsIgnoreCase("1")) {
-//
-//                holder.btnReleaseShift.setText("UNDO RELEASE");
-//                holder.btnReleaseShift.setBackgroundColor(context.getResources().getColor(R.color.blue));
-//            } else {
-//
-//                holder.btnReleaseShift.setText(context.getResources().getString(R.string.check_in));
-//                holder.btnReleaseShift.setBackgroundColor(context.getResources().getColor(R.color.blue));
-//            }
+            if (shiftsList.get(position).getRelease().toString().equalsIgnoreCase("0")) {
+
+                holder.btnReleaseShift.setText("RELEASE SHIFT");
+            } else if (shiftsList.get(position).getRelease().toString().equalsIgnoreCase("1")) {
+
+                holder.btnReleaseShift.setText("UNDO RELEASE");
+                holder.btnReleaseShift.setBackgroundColor(context.getResources().getColor(R.color.blue));
+            } else {
+
+                holder.btnReleaseShift.setText(context.getResources().getString(R.string.check_in));
+                holder.btnReleaseShift.setBackgroundColor(context.getResources().getColor(R.color.blue));
+            }
 //        }
-//        if (shift_id.equalsIgnoreCase(nextShiftId)) {
-//
-//            holder.btnReleaseShift.setVisibility(View.VISIBLE);
-//            holder.textviewshiftType.setText("Next Shift");
-//            holder.btnReleaseShift.setText(context.getResources().getString(R.string.check_in));
-//            holder.btnReleaseShift.setBackgroundColor(context.getResources().getColor(R.color.blue));
-//        }
-//
-//
-//        switch (shiftType) {
-//            case "NOSHOW":
-//                holder.textviewshiftType.setText("No Show");
-//                holder.btnReleaseShift.setVisibility(View.GONE);
-//                holder.rlDialog.setBackgroundColor(context.getResources().getColor(R.color.now_show_bg));
-//                holder.lay01.setBackgroundColor(context.getResources().getColor(R.color.now_show_bg_dark));
-//                holder.lay02.setBackgroundColor(context.getResources().getColor(R.color.now_show_bg_dark));
-//                holder.lay03.setBackgroundColor(context.getResources().getColor(R.color.now_show_bg_dark));
-//                holder.lay04.setBackgroundColor(context.getResources().getColor(R.color.now_show_bg_dark));
-//                break;
-//
-//            case "COMPLETED":
-//                holder.textviewshiftType.setText("Completed Shift");
-//                break;
-//            case "UPCOMING":
-//                holder.textviewshiftType.setText("Upcoming Shift");
-//                break;
-//        }
+        if (shiftsList.get(position).getShiftId().equalsIgnoreCase(nextShiftId)) {
+
+           holder.btnReleaseShift.setVisibility(View.VISIBLE);
+            holder.textviewshiftType.setText("Next Shift");
+            holder.btnReleaseShift.setText(context.getResources().getString(R.string.check_in));
+            holder.btnReleaseShift.setBackgroundColor(context.getResources().getColor(R.color.blue));
+       }
+
+
+        switch (shiftsList.get(position).getShiftStatus()) {
+            case "NOSHOW":
+                holder.textviewshiftType.setText("No Show");
+                holder.btnReleaseShift.setVisibility(View.GONE);
+               holder.rlDialog.setBackgroundColor(context.getResources().getColor(R.color.now_show_bg));
+                holder.lay01.setBackgroundColor(context.getResources().getColor(R.color.now_show_bg_dark));
+                holder.lay02.setBackgroundColor(context.getResources().getColor(R.color.now_show_bg_dark));
+                holder.lay03.setBackgroundColor(context.getResources().getColor(R.color.now_show_bg_dark));
+                holder.lay04.setBackgroundColor(context.getResources().getColor(R.color.now_show_bg_dark));
+                break;
+
+            case "COMPLETED":
+                holder.textviewshiftType.setText("Completed Shift");
+                break;
+           case "UPCOMING":
+                holder.textviewshiftType.setText("Upcoming Shift");
+                break;
+        }
 
     }
 
@@ -166,7 +163,7 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<ShiftCalendarAdap
         return shiftsList.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.textviewshiftType)
         TextView textviewshiftType;
         @BindView(R.id.tvDay)
@@ -215,6 +212,17 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<ShiftCalendarAdap
             tvDay.setTypeface(AppTypeface.avenieNext_medium);
             tvStartTime.setTypeface(AppTypeface.avenieNext_regular);
             tvEndTime.setTypeface(AppTypeface.avenieNext_regular);
+        }
+
+        @Override
+        public void onClick(View v) {
+
+            int id = v.getId();
+            switch (id){
+
+                case  R.id.tvClose:
+                    break;
+            }
         }
     }
 }
