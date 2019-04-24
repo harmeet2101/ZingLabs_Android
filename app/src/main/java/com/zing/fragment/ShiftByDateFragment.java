@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.zing.R;
 import com.zing.adapter.ShiftCalendarAdapter;
@@ -33,7 +34,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ShiftByDateFragment extends Fragment {
+public class ShiftByDateFragment extends BaseFragment {
 
     @BindView(R.id.rv_shift_view)
     RecyclerView rvShiftView;
@@ -74,7 +75,7 @@ public class ShiftByDateFragment extends Fragment {
 
     private void settingUpAdapter() {
         rvShiftView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        ShiftCalendarAdapter recomendedAdapter = new ShiftCalendarAdapter(mActivity, shiftsList);
+        ShiftCalendarAdapter recomendedAdapter = new ShiftCalendarAdapter(mActivity, shiftsList,fragmentInterface);
         rvShiftView.setAdapter(recomendedAdapter);
     }
 

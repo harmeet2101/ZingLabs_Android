@@ -81,7 +81,7 @@ public class RecomendedShiftAdapter extends RecyclerView.Adapter<RecomendedShift
                                     recomendedShiftList.get(getLayoutPosition()).getDay(),
                                     recomendedShiftList.get(getLayoutPosition()).getExpectedEarning(),
                                     recomendedShiftList.get(getLayoutPosition()).getTimeSlot(),
-                                    recomendedShiftList.get(getLayoutPosition()).getLocation(),
+                                    recomendedShiftList.get(getLayoutPosition()).getStoreName(),
                                     recomendedShiftList.get(getLayoutPosition()).getRole(),
                                     recomendedShiftList.get(getLayoutPosition()).getRelease());
                     fragmentInterface.fragmentResult(fragment, "+");

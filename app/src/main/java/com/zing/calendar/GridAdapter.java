@@ -162,7 +162,7 @@ public class GridAdapter extends ArrayAdapter {
     private void setColorDot(String color, ImageView eventIndicator) {
         eventIndicator.setVisibility(View.VISIBLE);
         switch (color) {
-            case "Blue":
+            case "blue":
                 eventIndicator.setImageResource(R.drawable.blue_circle);
                 break;
             case "orange":

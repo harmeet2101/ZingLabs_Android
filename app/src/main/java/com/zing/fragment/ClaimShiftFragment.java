@@ -40,6 +40,7 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.StringTokenizer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,30 +54,30 @@ public class ClaimShiftFragment extends BaseFragment {
 
     @BindView(R.id.tvClose)
     TextView tvClose;
-    @BindView(R.id.close)
-    ImageView close;
-    @BindView(R.id.llClose)
-    LinearLayout llClose;
+   /* @BindView(R.id.close)
+    ImageView close;*/
+   /* @BindView(R.id.llClose)
+    LinearLayout llClose;*/
     @BindView(R.id.tvDay)
     TextView tvDay;
     @BindView(R.id.tvOpenShift)
     TextView tvOpenShift;
-    @BindView(R.id.tvUnclaimed)
-    TextView tvUnclaimed;
-    @BindView(R.id.tvTime)
-    TextView tvTime;
-    @BindView(R.id.tvTimeDetail)
-    TextView tvTimeDetail;
-    @BindView(R.id.tvRole)
-    TextView tvRole;
-    @BindView(R.id.tvRoleDetail)
-    TextView tvRoleDetail;
-    @BindView(R.id.tvEarning)
-    TextView tvEarning;
+    /*@BindView(R.id.tvUnclaimed)
+    TextView tvUnclaimed;*/
+    /*@BindView(R.id.tvTime)
+    TextView tvTime;*/
+   /* @BindView(R.id.tvTimeDetail)
+    TextView tvTimeDetail;*/
+   /* @BindView(R.id.tvRole)
+    TextView tvRole;*/
+   /* @BindView(R.id.tvRoleDetail)
+    TextView tvRoleDetail;*/
+    /*@BindView(R.id.tvEarning)
+    TextView tvEarning;*/
     @BindView(R.id.tvEarningAmount)
     TextView tvEarningAmount;
-    @BindView(R.id.tvLocation)
-    TextView tvLocation;
+   /* @BindView(R.id.tvLocation)
+    TextView tvLocation;*/
     @BindView(R.id.tvLocationDetail)
     TextView tvLocationDetail;
     @BindView(R.id.ivRectangle)
@@ -84,12 +85,17 @@ public class ClaimShiftFragment extends BaseFragment {
     @BindView(R.id.ivDiamond)
     ImageView ivDiamond;
     @BindView(R.id.rlDialog)
-    RelativeLayout rlDialog;
+    LinearLayout rlDialog;
     @BindView(R.id.btnClaimShift)
     Button btnClaimShift;
     @BindView(R.id.btnCallManager)
     Button btnCallManager;
     Unbinder unbinder;
+
+    @BindView(R.id.tvStartTime)
+    TextView tvStartTime;
+    @BindView(R.id.tvEndTime)
+    TextView tvEndTime;
 
     private String shift_id, date, day, expectedEarning, timeSlot, location, role, release = "";
     private String from;
@@ -156,7 +162,7 @@ public class ClaimShiftFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_claim_shift, container, false);
+        View view = inflater.inflate(R.layout.layout_claim_shift, container, false);
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
@@ -189,10 +195,10 @@ public class ClaimShiftFragment extends BaseFragment {
                             ShiftDetailResponse shiftDetailResponse = response.body();
                             if (shiftDetailResponse != null && shiftDetailResponse.getResponse().getCode() == 200) {
 
-                                tvTimeDetail.setText(shiftDetailResponse.getResponse().getData().getTimeSlot());
-                                tvRoleDetail.setText(shiftDetailResponse.getResponse().getData().getRole());
+                               // tvTimeDetail.setText(shiftDetailResponse.getResponse().getData().getTimeSlot());
+                               // tvRoleDetail.setText(shiftDetailResponse.getResponse().getData().getRole());
                                 tvEarningAmount.setText(/*"$" + */shiftDetailResponse.getResponse().getData().getExpectedEarning());
-                                tvLocationDetail.setText(shiftDetailResponse.getResponse().getData().getLocation());
+                               // tvLocationDetail.setText(shiftDetailResponse.getResponse().getData().getLocation());
                                 shift_id = shiftDetailResponse.getResponse().getData().getShiftId();
 
                                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -203,13 +209,20 @@ public class ClaimShiftFragment extends BaseFragment {
                                     String day = (String) DateFormat.format("EEE", date1); // Thursday
 
                                     tvDay.setText(monthString + " " + day_no + ", " + day);
+
+                                    StringTokenizer tokenizer = new StringTokenizer(shiftDetailResponse.getResponse().getData().getTimeSlot(),"-");
+                                    String startTime = tokenizer.nextToken();
+                                    String endTime = tokenizer.nextToken();
+
+                                    tvStartTime.setText(startTime);
+                                    tvEndTime.setText(endTime);
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }
 
                                 if(from.equalsIgnoreCase("true")){
                                     btnClaimShift.setVisibility(View.GONE);
-                                    tvUnclaimed.setText("claimed");
+                                   // tvUnclaimed.setText("claimed");
                                 }
 
                             } else {
@@ -244,25 +257,25 @@ public class ClaimShiftFragment extends BaseFragment {
         session = new SessionManagement(getActivity());
 
         tvClose.setTypeface(AppTypeface.avenieNext_regular);
-        tvTimeDetail.setTypeface(AppTypeface.avenieNext_regular);
-        tvRoleDetail.setTypeface(AppTypeface.avenieNext_regular);
+       // tvTimeDetail.setTypeface(AppTypeface.avenieNext_regular);
+       // tvRoleDetail.setTypeface(AppTypeface.avenieNext_regular);
         tvEarningAmount.setTypeface(AppTypeface.avenieNext_regular);
         tvLocationDetail.setTypeface(AppTypeface.avenieNext_regular);
 
         btnClaimShift.setTypeface(AppTypeface.avenieNext_demibold);
         btnCallManager.setTypeface(AppTypeface.avenieNext_demibold);
         tvOpenShift.setTypeface(AppTypeface.avenieNext_demibold);
-        tvUnclaimed.setTypeface(AppTypeface.avenieNext_demibold);
+        //tvUnclaimed.setTypeface(AppTypeface.avenieNext_demibold);
 
         tvDay.setTypeface(AppTypeface.avenieNext_medium);
-        tvTime.setTypeface(AppTypeface.avenieNext_medium);
-        tvEarning.setTypeface(AppTypeface.avenieNext_medium);
-        tvRole.setTypeface(AppTypeface.avenieNext_medium);
-        tvLocation.setTypeface(AppTypeface.avenieNext_medium);
+       // tvTime.setTypeface(AppTypeface.avenieNext_medium);
+       // tvEarning.setTypeface(AppTypeface.avenieNext_medium);
+       // tvRole.setTypeface(AppTypeface.avenieNext_medium);
+      //  tvLocation.setTypeface(AppTypeface.avenieNext_medium);
 
-        tvTimeDetail.setText(session.getTimeSlot());
-        tvRoleDetail.setText(session.getRole());
-        tvLocationDetail.setText(session.getLocation());
+      //  tvTimeDetail.setText(session.getTimeSlot());
+      //  tvRoleDetail.setText(session.getRole());
+        tvLocationDetail.setText(location);
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -284,13 +297,13 @@ public class ClaimShiftFragment extends BaseFragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.llClose, R.id.btnClaimShift, R.id.btnCallManager, R.id.ivRectangle})
+    @OnClick({R.id.tvClose,R.id.btnClaimShift, R.id.btnCallManager, R.id.ivRectangle,R.id.ivDiamond})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.llClose:
-               /* Fragment fragment = CalenderFragment.newInstance("", "");
-                fragmentInterface.fragmentResult(fragment, "");*/
-               getActivity().onBackPressed();
+
+            case R.id.tvClose:
+                    getActivity().onBackPressed();
+
                 break;
             case R.id.btnClaimShift:
                 claimShift();

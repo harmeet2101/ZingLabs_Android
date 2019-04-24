@@ -164,12 +164,13 @@ public class CalendarMonthFragment extends BaseFragment {
                                 String event = calendarObj.optString("event");
                                 String event_color = calendarObj.optString("event_color");
                                 String shift_id = calendarObj.optString("shift_id");
-
+                                String shift_status = calendarObj.optString("shift_status");
                                 CalendarDataModel tempModel = new CalendarDataModel();
                                 tempModel.setDate(date);
                                 tempModel.setEvent(event);
                                 tempModel.setEventColor(event_color);
                                 tempModel.setShiftId(shift_id);
+                                tempModel.setShiftStatus(shift_status);
                                 ArrayList<CalendarDataModel> calendarModelList;
                                 if (calendarData.get(date) != null) {
                                     calendarModelList = calendarData.get(date);

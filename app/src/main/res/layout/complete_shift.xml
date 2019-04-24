@@ -4,10 +4,21 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/counterTextview"
+        android:text=""
+        android:visibility="gone"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin_30"
+        android:layout_marginTop="@dimen/default_margin_extra_large"
+        android:layout_below="@id/counterTextview"
         android:orientation="vertical"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
@@ -345,7 +356,7 @@
         android:id="@+id/rateView"
         android:layout_marginTop="@dimen/default_margin_large"
         android:background="@drawable/light_black_bg"
-        android:visibility="visible"
+        android:visibility="gone"
         android:orientation="vertical"
         android:padding="@dimen/default_margin_half">
 
