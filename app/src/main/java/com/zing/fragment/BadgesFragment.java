@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.zing.R;
 import com.zing.adapter.BadgesAdapter;
 import com.zing.adapter.GridBadgesAdapter;
@@ -126,11 +127,23 @@ public class BadgesFragment extends BaseFragment {
                             JSONObject jsonObject = responseObject.optJSONObject("response");
                             String code = jsonObject.optString("code");
                             String message = jsonObject.optString("message");
-                            String rate = jsonObject.optString("rate");
+                            //String rate = jsonObject.optString("rate");
+                            JSONObject show_rate = jsonObject.optJSONObject("show_rate");
+                            String label = show_rate.optString("label");
+                            String description = show_rate.optString("description");
+                            String rate = show_rate.optString("rate");
 
-                            CommonUtils.showSnackbar(tvBadges, message);
-                            badgesList.clear();
-                            JSONArray badgeArr = jsonObject.optJSONArray("badges");
+                            // CommonUtils.showSnackbar(tvBadges, message);
+                            //badgesList.clear();
+
+                            JSONObject badgesObj = jsonObject.optJSONObject("badges");
+                            int first_shift_completed = badgesObj.optInt("first_shift_completed");
+                            int show_up_on_time = badgesObj.optInt("show_up_on_time");
+                            int perfect_week = badgesObj.optInt("perfect_week");
+                            int perfect_month = show_rate.optInt("perfect_month");
+                            int recommended_shift_picked = badgesObj.optInt("recommended_shift_picked");
+
+                            /*JSONArray badgeArr = jsonObject.optJSONArray("badges");
                             for (int i = 0; i < badgeArr.length(); i++) {
                                 JSONObject badgesObj = badgeArr.optJSONObject(i);
                                 Badge badge = new Badge();
@@ -141,7 +154,7 @@ public class BadgesFragment extends BaseFragment {
                                 badge.setName(badgesObj.optString("name"));
 
                                 badgesList.add(badge);
-                            }
+                            }*/
 
                             myAdapter.notifyDataSetChanged();
 
