@@ -105,6 +105,9 @@
             android:name=".activity.RegisterActivity"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".activity.BadgeDetailsActivity"
+            android:screenOrientation="portrait"/>
+
         <service
             android:name=".notification.MyFirebaseMessagingService"
             android:enabled="true"

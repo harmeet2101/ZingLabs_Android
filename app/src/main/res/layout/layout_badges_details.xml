@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/badgeImage"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/tvBadgeInfo"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/badge_perfect_month"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:text="Badge Info"
+        android:textSize="@dimen/text_22"
+        android:id="@+id/tvBadgeInfo"
+        android:textStyle="bold"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textAlignment="center"
+        android:text="Your Checkin on Time for every shift this week.keep it up."
+        android:textSize="18sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/tvBadgeDetail"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvBadgeInfo"
+        android:textStyle="normal"/>
+
+
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/close"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/close"/>
+
+</RelativeLayout>
