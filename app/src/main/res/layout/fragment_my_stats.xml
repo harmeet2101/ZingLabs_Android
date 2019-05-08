@@ -116,7 +116,228 @@
                 app:cardElevation="@dimen/default_margin_1"
                 app:cardPreventCornerOverlap="false">
 
-                <LinearLayout
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Your Badges"
+                        android:textSize="@dimen/text_19"
+                        android:textColor="@color/black"
+                        android:id="@+id/tvHeading"
+                        android:layout_margin="20dp"
+                        android:textStyle="bold"/>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp"
+                        android:visibility="gone"
+                        android:id="@+id/firstShiftLayout"
+                        android:layout_below="@+id/tvHeading">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="First Shift Completed"
+                            android:textSize="@dimen/text_19"
+                            android:layout_gravity="center_horizontal"
+                            />
+
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_margin="20dp"
+                            android:id="@+id/ImageView_shift_completed"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/badge_first_shift_completed"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="20dp"
+                        android:visibility="gone"
+                        android:id="@+id/onTimeShiftLayout"
+                        android:layout_below="@+id/firstShiftLayout">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Show up on time"
+                            android:textSize="@dimen/text_19"
+                            android:layout_gravity="center_horizontal"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_gravity="center_horizontal"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+
+                                android:id="@+id/ImageView_show_up_on_time_5"
+                                android:layout_marginBottom="10dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/badge_show_up_on_time_5"/>
+
+                            <ImageView
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:id="@+id/ImageView_show_up_on_time_10"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/badge_show_up_on_time_10"/>
+                            <ImageView
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginBottom="10dp"
+                                android:id="@+id/ImageView_show_up_on_time_20"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/badge_show_up_on_time_20"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+
+                                android:layout_marginBottom="10dp"
+                                android:layout_gravity="center_horizontal"
+                                android:id="@+id/ImageView_show_up_on_time_50"
+                                android:src="@drawable/badge_show_up_on_time_50"/>
+
+                            <ImageView
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_gravity="center_horizontal"
+                                android:id="@+id/ImageView_show_up_on_time_100"
+                                android:src="@drawable/badge_show_up_on_time_100"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="20dp"
+                        android:visibility="gone"
+                        android:id="@+id/perfectShiftLayout"
+                        android:layout_below="@+id/onTimeShiftLayout">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Perfect"
+                            android:textSize="@dimen/text_19"
+                            android:layout_gravity="center_horizontal"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_gravity="center_horizontal"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:id="@+id/ImageView_perfect_week"
+                                android:layout_marginBottom="10dp"
+
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/badge_perfect_week"/>
+
+                            <ImageView
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:id="@+id/ImageView_perfect_month"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/badge_perfect_month"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="20dp"
+                        android:visibility="gone"
+                        android:id="@+id/recommendShiftLayout"
+                        android:layout_below="@+id/perfectShiftLayout">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Picked up recommended shift"
+                            android:textSize="@dimen/text_19"
+                            android:layout_gravity="center_horizontal"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_gravity="center_horizontal"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:id="@+id/ImageView_recommended_shift_1"
+                                android:layout_marginBottom="10dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/badge_picked_up_recommended_shifts"/>
+
+                            <ImageView
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_marginLeft="20dp"
+                                android:id="@+id/ImageView_recommended_shift_5"
+                                android:layout_marginBottom="10dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/badge_rec_5"/>
+
+                            <ImageView
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginBottom="10dp"
+                                android:id="@+id/ImageView_recommended_shift_10"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/badge_rec_10"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </RelativeLayout>
+                <!--<LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
@@ -166,7 +387,7 @@
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/normal_text_minus" />
 
-                </LinearLayout>
+                </LinearLayout>-->
 
             </android.support.v7.widget.CardView>
 

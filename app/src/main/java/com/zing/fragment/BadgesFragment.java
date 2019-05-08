@@ -130,11 +130,11 @@ public class BadgesFragment extends BaseFragment implements View.OnClickListener
     @Override
     public void onResume() {
         super.onResume();
-        if (NetworkUtils.isNetworkConnected(getActivity()))
-        statsDetails();
+        /*if (NetworkUtils.isNetworkConnected(getActivity()))
+        statsDetails();*/
     }
 
-    private void statsDetails() {
+    /*private void statsDetails() {
 
         progressDialog = CommonUtils.getProgressBar(getActivity());
         ZinglabsApi api = ApiClient.getClient().create(ZinglabsApi.class);
@@ -165,11 +165,11 @@ public class BadgesFragment extends BaseFragment implements View.OnClickListener
                             int first_shift_completed = badgesObj.optInt("first_shift_completed");
                             int show_up_on_time = badgesObj.optInt("show_up_on_time");
                             int perfect_week = badgesObj.optInt("perfect_week");
-                            int perfect_month = show_rate.optInt("perfect_month");
+                            int perfect_month = badgesObj.optInt("perfect_month");
                             int recommended_shift_picked = badgesObj.optInt("recommended_shift_picked");
 
 
-                            if(first_shift_completed==0 && show_up_on_time==0
+                            if(first_shift_completed==0 && show_up_on_time<5
 
                             && perfect_week==0 && perfect_month==0
                                     && recommended_shift_picked==0
@@ -212,7 +212,16 @@ public class BadgesFragment extends BaseFragment implements View.OnClickListener
                             imageView_show_up_on_time_50.setVisibility(View.GONE);
                             imageView_show_up_on_time_100.setVisibility(View.GONE);
 
-                            if(show_up_on_time < 10)
+                            if(show_up_on_time<5){
+                                onTimeShiftLayout.setVisibility(View.GONE);
+                                imageView_show_up_on_time_5.setVisibility(View.GONE);
+                                imageView_show_up_on_time_10.setVisibility(View.GONE);
+                                imageView_show_up_on_time_20.setVisibility(View.GONE);
+                                imageView_show_up_on_time_50.setVisibility(View.GONE);
+                                imageView_show_up_on_time_100.setVisibility(View.GONE);
+                            }
+
+                            else if(show_up_on_time>=5 && show_up_on_time < 10)
                                 imageView_show_up_on_time_5.setVisibility(View.VISIBLE);
 
                             else if(show_up_on_time >=10 && show_up_on_time <= 20) {
@@ -259,7 +268,7 @@ public class BadgesFragment extends BaseFragment implements View.OnClickListener
                             }
 
 
-                           /*JSONArray badgeArr = jsonObject.optJSONArray("badges");
+                           *//*JSONArray badgeArr = jsonObject.optJSONArray("badges");
                             for (int i = 0; i < badgeArr.length(); i++) {
                                 JSONObject badgesObj = badgeArr.optJSONObject(i);
                                 Badge badge = new Badge();
@@ -270,7 +279,7 @@ public class BadgesFragment extends BaseFragment implements View.OnClickListener
                                 badge.setName(badgesObj.optString("name"));
 
                                 badgesList.add(badge);
-                            }*/
+                            }*//*
 
                             //myAdapter.notifyDataSetChanged();
 
@@ -292,7 +301,7 @@ public class BadgesFragment extends BaseFragment implements View.OnClickListener
             progressDialog.dismiss();
             e.printStackTrace();
         }
-    }
+    }*/
 
     @OnClick({R.id.firstShiftLayout, R.id.ImageView_show_up_on_time_5,R.id.ImageView_show_up_on_time_10
               ,R.id.ImageView_show_up_on_time_20,R.id.ImageView_show_up_on_time_50,

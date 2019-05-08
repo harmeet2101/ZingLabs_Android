@@ -20,6 +20,7 @@ import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.util.Patterns;
 import android.view.Display;
@@ -52,10 +53,12 @@ import static android.content.Context.INPUT_METHOD_SERVICE;
 public class CommonUtils {
     private static int screenWidth = 0;
     public static AlertDialog dialog;
+
     public static void showSnakBar(View view, String message) {
         Snackbar snackbar = Snackbar.make(view, message, Snackbar.LENGTH_LONG);
         snackbar.show();
     }
+
     public static ProgressDialog getProgressBar(Context context) {
         final ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setIndeterminate(false);
@@ -77,6 +80,7 @@ public class CommonUtils {
 
         return screenWidth;
     }
+
     public static void hideSoftKeyboard(Context context, View currentFocus) {
         if (currentFocus != null) {
             InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(INPUT_METHOD_SERVICE);
@@ -158,6 +162,7 @@ public class CommonUtils {
 
     /**
      * hasPermissions method used to check permissions is granted or not
+     *
      * @param context
      * @param permissions
      * @return
@@ -197,15 +202,15 @@ public class CommonUtils {
     }
 
     /*
-    * isValidMobile method check mobile number validation
-    **/
+     * isValidMobile method check mobile number validation
+     **/
     public static boolean isValidMobile(String phone) {
         return Patterns.PHONE.matcher(phone).matches();
     }
 
     /*
-    * isValidEmail method check email validation
-    **/
+     * isValidEmail method check email validation
+     **/
     public static boolean isValidEmail(String email) {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
@@ -359,7 +364,8 @@ public class CommonUtils {
 
 
         if (((isDateEqual(calstart.getTime(), calsearch.getTime())) || (calstart.getTime().before(calsearch.getTime()))) &&
-                ((isDateEqual(calend.getTime(), calsearch.getTime())) || (calend.getTime().after(calsearch.getTime())))) return true;
+                ((isDateEqual(calend.getTime(), calsearch.getTime())) || (calend.getTime().after(calsearch.getTime()))))
+            return true;
         else return false;
     }
 
@@ -369,8 +375,8 @@ public class CommonUtils {
         Calendar cal2 = Calendar.getInstance();
         cal1.setTime(date1);
         cal2.setTime(date2);
-        if ((cal1.get(Calendar.MONTH) == cal2.get(Calendar.MONTH)) && (cal1.get(Calendar.DATE) == cal2.get(Calendar.DATE)) && (cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR))) return true;
+        if ((cal1.get(Calendar.MONTH) == cal2.get(Calendar.MONTH)) && (cal1.get(Calendar.DATE) == cal2.get(Calendar.DATE)) && (cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)))
+            return true;
         else return false;
     }
-
 }

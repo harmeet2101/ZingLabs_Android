@@ -2,22 +2,27 @@ package com.zing.fragment;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.JsonElement;
 import com.zing.R;
+import com.zing.activity.BadgeDetailsActivity;
 import com.zing.adapter.BadgesAdapter;
 import com.zing.model.response.StatsResponse.Badge;
+import com.zing.model.response.StatsResponse.StatsResponse;
 import com.zing.util.AppTypeface;
 import com.zing.util.CommonUtils;
 import com.zing.util.Constants;
@@ -41,29 +46,52 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class MyStatsFragment extends BaseFragment {
+public class MyStatsFragment extends BaseFragment implements View.OnClickListener{
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    @BindView(R.id.rvBadges)
-    RecyclerView rvBadges;
-    @BindView(R.id.btnShowAllBadges)
-    Button btnShowAllBadges;
     Unbinder unbinder;
 
     @BindView(R.id.tvShowUpRate)
     TextView tvShowUpRate;
     @BindView(R.id.tvShowUpDescription)
     TextView tvShowUpDescription;
-    @BindView(R.id.tvBadges)
-    TextView tvBadges;
-    @BindView(R.id.tvBadgesDescription)
-    TextView tvBadgesDescription;
     @BindView(R.id.tvRate)
     TextView tvRate;
-    ArrayList<Badge> badgesList;
     @BindView(R.id.tvShowUpRateHeading)
     TextView tvShowUpRateHeading;
-    private BadgesAdapter myAdapter;
+
+    @BindView(R.id.firstShiftLayout)
+    ViewGroup firstShiftLayout;
+    @BindView(R.id.onTimeShiftLayout)
+    ViewGroup onTimeShiftLayout;
+    @BindView(R.id.perfectShiftLayout)
+    ViewGroup perfectShiftLayout;
+    @BindView(R.id.recommendShiftLayout)
+    ViewGroup recommendShiftLayout;
+    @BindView(R.id.ImageView_show_up_on_time_5)
+    ImageView imageView_show_up_on_time_5;
+    @BindView(R.id.ImageView_show_up_on_time_10)
+    ImageView imageView_show_up_on_time_10;
+    @BindView(R.id.ImageView_show_up_on_time_20)
+    ImageView imageView_show_up_on_time_20;
+    @BindView(R.id.ImageView_show_up_on_time_50)
+    ImageView imageView_show_up_on_time_50;
+    @BindView(R.id.ImageView_show_up_on_time_100)
+    ImageView imageView_show_up_on_time_100;
+    @BindView(R.id.ImageView_perfect_week)
+    ImageView imageView_perfect_week;
+    @BindView(R.id.ImageView_perfect_month)
+    ImageView imageView_perfect_month;
+
+    @BindView(R.id.ImageView_recommended_shift_1)
+    ImageView imageView_recommended_shift_1;
+    @BindView(R.id.ImageView_recommended_shift_5)
+    ImageView imageView_recommended_shift_5;
+    @BindView(R.id.ImageView_recommended_shift_10)
+    ImageView imageView_recommended_shift_10;
+
+    @BindView(R.id.tvHeading)
+    TextView tvBadges;
 
     private String mParam1;
     private String mParam2;
@@ -100,24 +128,12 @@ public class MyStatsFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         AppTypeface.getTypeFace(getActivity());
-        badgesList = new ArrayList<>();
-        badgesList.clear();
+
         session = new SessionManagement(getActivity());
-        tvBadges.setTypeface(AppTypeface.avenieNext_medium);
         tvShowUpRate.setTypeface(AppTypeface.avenieNext_medium);
         tvShowUpRateHeading.setTypeface(AppTypeface.avenieNext_medium);
         tvRate.setTypeface(AppTypeface.avenieNext_medium);
-
         tvShowUpDescription.setTypeface(AppTypeface.avenieNext_regular);
-        tvBadgesDescription.setTypeface(AppTypeface.avenieNext_regular);
-        btnShowAllBadges.setTypeface(AppTypeface.avenieNext_demibold);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),
-                LinearLayoutManager.HORIZONTAL, false);
-        rvBadges.setLayoutManager(linearLayoutManager);
-
-        myAdapter = new BadgesAdapter(getActivity(), badgesList);
-        rvBadges.setAdapter(myAdapter);
     }
 
     @Override
@@ -139,60 +155,142 @@ public class MyStatsFragment extends BaseFragment {
         ZinglabsApi api = ApiClient.getClient().create(ZinglabsApi.class);
         try {
 
-            Call<JsonElement> call = api.statsDetailApi("Bearer " + session.getUserToken());
-            call.enqueue(new Callback<JsonElement>() {
+            Call<StatsResponse> call = api.statsDetailApi("Bearer " + session.getUserToken());
+            call.enqueue(new Callback<StatsResponse>() {
                 @Override
-                public void onResponse(@NonNull Call<JsonElement> call,
-                                       @NonNull Response<JsonElement> response) {
+                public void onResponse(@NonNull Call<StatsResponse> call,
+                                       @NonNull Response<StatsResponse> response) {
                     progressDialog.dismiss();
                     if (response.code() == 200) {
                         try {
-                            JSONObject responseObject = new JSONObject(response.body().toString());
-                            JSONObject jsonObject = responseObject.optJSONObject("response");
-                            String code = jsonObject.optString("code");
-                            String message = jsonObject.optString("message");
+                            StatsResponse statsResponse = response.body();
+                            tvRate.setText(statsResponse.getResponse().getShow_rate().getRate()+"%");
+                            tvShowUpDescription.setText(statsResponse.getResponse().getShow_rate().getDescription());
+                            tvShowUpRate.setText(statsResponse.getResponse().getShow_rate().getLabel());
 
-                            if (code.equalsIgnoreCase("200")) {
 
-                                JSONObject rateObj = jsonObject.optJSONObject("show_rate");
-                                String rateLabel = rateObj.optString("label");
-                                String rateDesc = rateObj.optString("description");
-                                String ratePercentage = rateObj.optString("rate");
-                                if (ratePercentage!=null && !ratePercentage.isEmpty()){
-                                    tvRate.setText(ratePercentage+"%");
-                                    tvShowUpRate.setText(rateLabel);
-                                    tvShowUpDescription.setText(rateDesc);
-                                }
-                                badgesList.clear();
-                                JSONArray badgeArr = jsonObject.optJSONArray("badges");
-                                for (int i = 0; i < badgeArr.length(); i++) {
-                                    JSONObject badgesObj = badgeArr.optJSONObject(i);
-                                    Badge badge = new Badge();
-                                    badge.setBadgeId(badgesObj.optString("badge_id"));
-                                    badge.setBadgeImgUrl(badgesObj.optString("badge_img_url"));
-                                    badge.setBadgeStatus(badgesObj.optString("badge_status"));
-                                    badge.setDescription(badgesObj.optString("description"));
-                                    badge.setName(badgesObj.optString("name"));
+                            if(statsResponse.getResponse().getBadges().getFirst_shift_completed()
+                                ==0 && statsResponse.getResponse().getBadges().getShow_up_on_time()<5
 
-                                    badgesList.add(badge);
-                                }
+                                    && statsResponse.getResponse().getBadges().getPerfect_week()==0
+                                    && statsResponse.getResponse().getBadges().getPerfect_month()==0
+                                    && statsResponse.getResponse().getBadges().getRecommended_shift_picked()==0
 
-                                myAdapter.notifyDataSetChanged();
-                            } else {
-                                CommonUtils.showSnackbar(tvBadges, message);
+                            ){
+                                tvBadges.setText("No Badges Found");
                             }
+                            if(statsResponse.getResponse().getBadges().getFirst_shift_completed()==0)
+                                firstShiftLayout.setVisibility(View.GONE);
+                            else
+                                firstShiftLayout.setVisibility(View.VISIBLE);
+
+                            if(statsResponse.getResponse().getBadges().getShow_up_on_time()==0)
+                                onTimeShiftLayout.setVisibility(View.GONE);
+                            else
+                                onTimeShiftLayout.setVisibility(View.VISIBLE);
+
+                            if(statsResponse.getResponse().getBadges().getRecommended_shift_picked()==0)
+                                recommendShiftLayout.setVisibility(View.GONE);
+                            else
+                                recommendShiftLayout.setVisibility(View.VISIBLE);
+
+                            if(statsResponse.getResponse().getBadges().getPerfect_week()==0
+                                    && statsResponse.getResponse().getBadges().getPerfect_month() ==0)
+                                perfectShiftLayout.setVisibility(View.GONE);
+                            else if(statsResponse.getResponse().getBadges().getPerfect_week()==0
+                                    && statsResponse.getResponse().getBadges().getPerfect_month()!=0){
+                                perfectShiftLayout.setVisibility(View.VISIBLE);
+                                imageView_perfect_week.setVisibility(View.GONE);
+                                imageView_perfect_month.setVisibility(View.VISIBLE);
+
+                            }else if(statsResponse.getResponse().getBadges().getPerfect_month()==0
+                                    && statsResponse.getResponse().getBadges().getPerfect_week()!=0){
+                                perfectShiftLayout.setVisibility(View.VISIBLE);
+                                imageView_perfect_month.setVisibility(View.GONE);
+                                imageView_perfect_week.setVisibility(View.VISIBLE);
+                            }
+
+
+                            imageView_show_up_on_time_5.setVisibility(View.GONE);
+                            imageView_show_up_on_time_10.setVisibility(View.GONE);
+                            imageView_show_up_on_time_20.setVisibility(View.GONE);
+                            imageView_show_up_on_time_50.setVisibility(View.GONE);
+                            imageView_show_up_on_time_100.setVisibility(View.GONE);
+
+                            if(statsResponse.getResponse().getBadges().getShow_up_on_time()<5){
+                                onTimeShiftLayout.setVisibility(View.GONE);
+                                imageView_show_up_on_time_5.setVisibility(View.GONE);
+                                imageView_show_up_on_time_10.setVisibility(View.GONE);
+                                imageView_show_up_on_time_20.setVisibility(View.GONE);
+                                imageView_show_up_on_time_50.setVisibility(View.GONE);
+                                imageView_show_up_on_time_100.setVisibility(View.GONE);
+                            }
+
+                            else if(statsResponse.getResponse().getBadges().getShow_up_on_time()>=5
+                                    && statsResponse.getResponse().getBadges().getShow_up_on_time() < 10)
+                                imageView_show_up_on_time_5.setVisibility(View.VISIBLE);
+
+                            else if(statsResponse.getResponse().getBadges().getShow_up_on_time() >=10
+                                    && statsResponse.getResponse().getBadges().getShow_up_on_time() <= 20) {
+                                imageView_show_up_on_time_5.setVisibility(View.VISIBLE);
+                                imageView_show_up_on_time_10.setVisibility(View.VISIBLE);
+                            }
+                            else if(statsResponse.getResponse().getBadges().getShow_up_on_time() >21
+                                    && statsResponse.getResponse().getBadges().getShow_up_on_time() <49) {
+                                imageView_show_up_on_time_5.setVisibility(View.VISIBLE);
+                                imageView_show_up_on_time_10.setVisibility(View.VISIBLE);
+                                imageView_show_up_on_time_20.setVisibility(View.VISIBLE);
+                            }
+                            else  if(statsResponse.getResponse().getBadges().getShow_up_on_time() >= 50
+                                    &&  statsResponse.getResponse().getBadges().getShow_up_on_time() < 100) {
+                                imageView_show_up_on_time_5.setVisibility(View.VISIBLE);
+                                imageView_show_up_on_time_10.setVisibility(View.VISIBLE);
+                                imageView_show_up_on_time_20.setVisibility(View.VISIBLE);
+                                imageView_show_up_on_time_50.setVisibility(View.VISIBLE);
+                            }
+                            else  {
+                                imageView_show_up_on_time_5.setVisibility(View.VISIBLE);
+                                imageView_show_up_on_time_10.setVisibility(View.VISIBLE);
+                                imageView_show_up_on_time_20.setVisibility(View.VISIBLE);
+                                imageView_show_up_on_time_50.setVisibility(View.VISIBLE);
+                                imageView_show_up_on_time_100.setVisibility(View.VISIBLE);
+                            }
+
+
+                            imageView_recommended_shift_1.setVisibility(View.GONE);
+                            imageView_recommended_shift_5.setVisibility(View.GONE);
+                            imageView_recommended_shift_10.setVisibility(View.GONE);
+
+
+
+                            if(statsResponse.getResponse().getBadges().getRecommended_shift_picked() > 0
+                                    && statsResponse.getResponse().getBadges().getRecommended_shift_picked() < 5)
+                                imageView_recommended_shift_1.setVisibility(View.VISIBLE);
+
+                            else if(statsResponse.getResponse().getBadges().getRecommended_shift_picked() >=5
+                                    && statsResponse.getResponse().getBadges().getRecommended_shift_picked() <10) {
+                                imageView_recommended_shift_1.setVisibility(View.VISIBLE);
+                                imageView_recommended_shift_5.setVisibility(View.VISIBLE);
+                            }
+                            else if(statsResponse.getResponse().getBadges().getRecommended_shift_picked() >=10) {
+                                imageView_recommended_shift_1.setVisibility(View.VISIBLE);
+                                imageView_recommended_shift_5.setVisibility(View.VISIBLE);
+                                imageView_recommended_shift_10.setVisibility(View.VISIBLE);
+                            }
+
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     } else {
-                        CommonUtils.showSnackbar(tvBadges, response.message());
+                        CommonUtils.showSnackbar(tvRate, response.message());
                     }
                 }
 
                 @Override
-                public void onFailure(@NonNull Call<JsonElement> call, @NonNull Throwable t) {
+                public void onFailure(@NonNull Call<StatsResponse> call, @NonNull Throwable t) {
                     progressDialog.dismiss();
-                    CommonUtils.showSnakBar(tvBadges, t.getMessage());
+                    CommonUtils.showSnakBar(tvRate, t.getMessage());
                 }
             });
         } catch (Exception e) {
@@ -201,9 +299,78 @@ public class MyStatsFragment extends BaseFragment {
         }
     }
 
-    @OnClick(R.id.btnShowAllBadges)
-    public void onViewClicked() {
-        Fragment fragment = BadgesFragment.newInstance("", "");
-        fragmentInterface.fragmentResult(fragment, "");
+
+
+    @OnClick({R.id.firstShiftLayout, R.id.ImageView_show_up_on_time_5,R.id.ImageView_show_up_on_time_10
+            ,R.id.ImageView_show_up_on_time_20,R.id.ImageView_show_up_on_time_50,
+            R.id.ImageView_show_up_on_time_100,R.id.ImageView_perfect_week,R.id.ImageView_perfect_month,
+            R.id.ImageView_recommended_shift_1,R.id.ImageView_recommended_shift_5,R.id.ImageView_recommended_shift_10
+
+    })
+    @Override
+    public void onClick(View v) {
+
+        Intent intent = new Intent(getActivity(), BadgeDetailsActivity.class);
+        Bundle bundle = new Bundle();
+        switch (v.getId()){
+
+            case R.id.firstShiftLayout:
+                bundle.putString("badgeType","Completed");
+                intent.putExtras(bundle);
+                getContext().startActivity(intent);
+                break;
+            case  R.id.ImageView_show_up_on_time_5:
+                bundle.putString("badgeType","OnTime_5");
+                intent.putExtras(bundle);
+                getContext().startActivity(intent);
+                break;
+            case  R.id.ImageView_show_up_on_time_10:
+                bundle.putString("badgeType","OnTime_10");
+                intent.putExtras(bundle);
+                getContext().startActivity(intent);
+                break;
+            case  R.id.ImageView_show_up_on_time_20:
+                bundle.putString("badgeType","OnTime_20");
+                intent.putExtras(bundle);
+                getContext().startActivity(intent);
+                break;
+            case  R.id.ImageView_show_up_on_time_50:
+                bundle.putString("badgeType","OnTime_50");
+                intent.putExtras(bundle);
+                getContext().startActivity(intent);
+                break;
+            case  R.id.ImageView_show_up_on_time_100:
+                bundle.putString("badgeType","OnTime_100");
+                intent.putExtras(bundle);
+                getContext().startActivity(intent);
+                break;
+
+            case R.id.ImageView_perfect_week:
+                bundle.putString("badgeType","Perfect_w");
+                intent.putExtras(bundle);
+                getContext().startActivity(intent);
+                break;
+            case R.id.ImageView_perfect_month:
+                bundle.putString("badgeType","Perfect_m");
+                intent.putExtras(bundle);
+                getContext().startActivity(intent);
+                break;
+            case R.id.ImageView_recommended_shift_1:
+                bundle.putString("badgeType","Recommended_1");
+                intent.putExtras(bundle);
+                getContext().startActivity(intent);
+                break;
+            case R.id.ImageView_recommended_shift_5:
+                bundle.putString("badgeType","Recommended_5");
+                intent.putExtras(bundle);
+                getContext().startActivity(intent);
+                break;
+            case R.id.ImageView_recommended_shift_10:
+                bundle.putString("badgeType","Recommended_10");
+                intent.putExtras(bundle);
+                getContext().startActivity(intent);
+
+                break;
+        }
     }
 }

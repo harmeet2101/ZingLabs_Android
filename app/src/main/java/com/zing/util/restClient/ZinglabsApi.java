@@ -31,6 +31,7 @@ import com.zing.model.response.GetTimePreferenceResponse.GetTimePreferenceRespon
 import com.zing.model.response.HomeResponse.HomeResponse;
 import com.zing.model.response.LoginResponse.LoginResponse;
 import com.zing.model.response.RegisterResponse.RegisterResponse;
+import com.zing.model.response.StatsResponse.StatsResponse;
 import com.zing.model.response.breakShift.ShiftBreakResponse;
 import com.zing.model.response.ShiftDetailResponse.ShiftDetailResponse;
 import com.zing.model.response.WeekPreference.WeekPreference;
@@ -99,7 +100,7 @@ public interface ZinglabsApi {
                                             @Body LeaveCancelRequest leaveCancelRequest);
 
     @GET("my_stats")
-    Call<JsonElement> statsDetailApi(@Header("Authorization") String userToken);
+    Call<StatsResponse> statsDetailApi(@Header("Authorization") String userToken);
 
    /* @POST("check_in")
     Call<JsonElement> checkInShiftApi(@Header("Authorization") String userToken,

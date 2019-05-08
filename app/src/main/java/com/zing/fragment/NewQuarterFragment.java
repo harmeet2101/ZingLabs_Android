@@ -12,6 +12,7 @@ import android.support.annotation.ColorLong;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -48,6 +49,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -110,6 +113,7 @@ public class NewQuarterFragment extends BaseFragment implements
         super.onViewCreated(view, savedInstanceState);
         session = new SessionManagement(getActivity());
 
+        setQuarter();
         quarterList = new ArrayList<>();
         dashWeekList = new ArrayList<>();
         mChart.setOnChartGestureListener(this);
@@ -406,5 +410,50 @@ public class NewQuarterFragment extends BaseFragment implements
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+
+    private void setQuarter(){
+
+        Date c = Calendar.getInstance().getTime();
+        String monthString = (String) DateFormat.format("MMM", c); // Jun
+        switch (monthString) {
+            case "Jan":
+                tvMonth.setText("Jan to Mar");
+                break;
+            case "Feb":
+                tvMonth.setText("Jan to Mar");
+                break;
+            case "Mar":
+                tvMonth.setText("Jan to Mar");
+                break;
+            case "Apr":
+                tvMonth.setText("Apr to Jun");
+                break;
+            case "May":
+                tvMonth.setText("Apr to Jun");
+                break;
+            case "Jun":
+                tvMonth.setText("Apr to Jun");
+                break;
+            case "Jul":
+                tvMonth.setText("Jul to Sep");
+                break;
+            case "Aug":
+                tvMonth.setText("Jul to Sep");
+                break;
+            case "Sep":
+                tvMonth.setText("Jul to Sep");
+                break;
+            case "Oct":
+                tvMonth.setText("Oct to Dec");
+                break;
+            case "Nov":
+                tvMonth.setText("Oct to Dec");
+                break;
+            case "Dec":
+                tvMonth.setText("Oct to Dec");
+                break;
+        }
     }
 }

@@ -18,4 +18,11 @@ public class StatsResponse {
         this.response = response;
     }
 
+
+    @Override
+    public String toString() {
+        return "StatsResponse{" +
+                "response=" + response +
+                '}';
+    }
 }

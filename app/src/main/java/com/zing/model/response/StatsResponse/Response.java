@@ -9,22 +9,31 @@ public class Response {
 
     @SerializedName("code")
     @Expose
-    private String code;
+    private Integer code;
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("rate")
+
+    public RateInfo getShow_rate() {
+        return show_rate;
+    }
+
+    public void setShow_rate(RateInfo show_rate) {
+        this.show_rate = show_rate;
+    }
+
+    @SerializedName("show_rate")
     @Expose
-    private String rate;
+    private RateInfo show_rate;
     @SerializedName("badges")
     @Expose
-    private List<Badge> badges = null;
+    private Badges badges = null;
 
-    public String getCode() {
+    public Integer getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(Integer code) {
         this.code = code;
     }
 
@@ -36,20 +45,23 @@ public class Response {
         this.message = message;
     }
 
-    public String getRate() {
-        return rate;
-    }
 
-    public void setRate(String rate) {
-        this.rate = rate;
-    }
 
-    public List<Badge> getBadges() {
+    public Badges getBadges() {
         return badges;
     }
 
-    public void setBadges(List<Badge> badges) {
+    public void setBadges(Badges badges) {
         this.badges = badges;
     }
 
+    @Override
+    public String toString() {
+        return "Response{" +
+                "code='" + code + '\'' +
+                ", message='" + message + '\'' +
+                ", rate='" + show_rate + '\'' +
+                ", badges=" + badges +
+                '}';
+    }
 }

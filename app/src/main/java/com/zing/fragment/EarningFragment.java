@@ -97,7 +97,7 @@ public class EarningFragment extends BaseFragment {
     private String mParam1;
     private String mParam2;
 
-    private String startWeek = "", endWeek = "";
+    private String startWeek = "", endWeek = "",typeSelection;
 
     public static EarningFragment newInstance(String param1, String param2) {
         EarningFragment fragment = new EarningFragment();
@@ -264,7 +264,6 @@ public class EarningFragment extends BaseFragment {
                         break;
                     case 2:
                         addFragment(new NewQuarterFragment(), "Quarter");
-
                         break;
                 }
                /* if (tab.getPosition() == 0) {

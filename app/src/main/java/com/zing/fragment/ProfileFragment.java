@@ -124,8 +124,8 @@ public class ProfileFragment extends BaseFragment {
         }
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
-        adapter.addFragment(new AccountFragment(), "Account");
-        adapter.addFragment(new MyStatsFragment(), "My Stats ");
+        adapter.addFragment(new AccountFragment(), "ACCOUNT");
+        adapter.addFragment(new MyStatsFragment(), "STATS");
         vpProfile.setAdapter(adapter);
         tlProfile.setupWithViewPager(vpProfile);
     }
