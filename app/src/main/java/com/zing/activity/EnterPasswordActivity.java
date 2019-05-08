@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.JsonElement;
 import com.zing.R;
@@ -49,6 +50,16 @@ public class EnterPasswordActivity extends BaseActivity {
     EditText etPassword;
     @BindView(R.id.viewMobile)
     View viewMobile;
+
+
+    @BindView(R.id.tvConfirmPassword)
+    TextView tvConfirmPassword;
+    @BindView(R.id.etConfirmPassword)
+    EditText etConfirmPassword;
+    @BindView(R.id.viewConfirmMobile)
+    View viewConfirmMobile;
+
+
     @BindView(R.id.btnSubmit)
     Button btnSubmit;
     @BindView(R.id.tvBack)
@@ -58,6 +69,9 @@ public class EnterPasswordActivity extends BaseActivity {
 
     @BindView(R.id.tvErrorDetail)
     TextView tvErrorDetail;
+
+    @BindView(R.id.tvConfirmErrorDetail)
+    TextView tvConfirmErrorDetail;
     private ProgressDialog progressDialog;
 
     private String from = "", phone;
@@ -66,15 +80,21 @@ public class EnterPasswordActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.enter_password);
+        setContentView(R.layout.reset_password);
         ButterKnife.bind(this);
 
         tvWelcome.setTypeface(AppTypeface.avenieNext_demibold);
         tvHeading.setTypeface(AppTypeface.avenieNext_demibold);
         tvPassword.setTypeface(AppTypeface.avenieNext_demibold);
         etPassword.setTypeface(AppTypeface.avenieNext_medium);
-        btnSubmit.setTypeface(AppTypeface.avenieNext_demibold);
         tvErrorDetail.setTypeface(AppTypeface.avenieNext_medium);
+
+        tvConfirmPassword.setTypeface(AppTypeface.avenieNext_demibold);
+        etConfirmPassword.setTypeface(AppTypeface.avenieNext_medium);
+        tvConfirmErrorDetail.setTypeface(AppTypeface.avenieNext_medium);
+
+        btnSubmit.setTypeface(AppTypeface.avenieNext_demibold);
+
         tvBack.setTypeface(AppTypeface.avenieNext_medium);
 
         from = getIntent().getStringExtra("from");
@@ -116,7 +136,19 @@ public class EnterPasswordActivity extends BaseActivity {
                     viewMobile.setBackgroundColor(getResources().getColor(R.color.red));
                     etPassword.setTextColor(getResources().getColor(R.color.red));
                     tvErrorDetail.setText(R.string.password_validation);
-                } else {
+                }if(etConfirmPassword.getText().length() < 8){
+
+                viewConfirmMobile.setBackgroundColor(getResources().getColor(R.color.red));
+                etConfirmPassword.setTextColor(getResources().getColor(R.color.red));
+                tvConfirmErrorDetail.setText(R.string.password_validation);
+                }
+
+                else if(!etPassword.getText().toString().equalsIgnoreCase(etConfirmPassword.getText().toString())){
+
+                    Toast.makeText(getBaseContext(),"Passwords doesnot match",Toast.LENGTH_SHORT).show();
+                }
+
+                else {
                     if (from.equalsIgnoreCase("forgotPassword")) {
                         if (NetworkUtils.isNetworkConnected(this))
                             changePassword();
