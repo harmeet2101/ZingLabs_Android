@@ -97,52 +97,50 @@ public class GridAdapter extends ArrayAdapter {
         cellNumber.setText(String.valueOf(dayValue));
 
         //Add events to the calendar
-        ImageView eventIndicator = view.findViewById(R.id.event_id);
+        ImageView eventOne = view.findViewById(R.id.event_id);
         ImageView eventTwo = view.findViewById(R.id.event_two);
         ImageView eventThree = view.findViewById(R.id.event_three);
 
         llDate = view.findViewById(R.id.llDate);
-
-        if (displayMonth == currentMonth && displayYear == currentYear) {
-            view.setBackgroundColor(Color.parseColor("#ffffff"));
-            cellNumber.setTextColor(Color.GRAY);
-            eventIndicator.setVisibility(View.VISIBLE);
-        } else {
-            view.setBackgroundColor(Color.parseColor("#ffffff"));
-            cellNumber.setTextColor(Color.WHITE);
-            eventIndicator.setVisibility(View.INVISIBLE);
-        }
-
         DateFormat targetFormat = new SimpleDateFormat("yyyy-MM-dd");
         final String formattedDate = targetFormat.format(mDate);
-
-        eventIndicator.setVisibility(View.GONE);
-        eventTwo.setVisibility(View.GONE);
-        eventThree.setVisibility(View.GONE);
 
         if (calendarData.get(formattedDate) != null) {
             ArrayList<CalendarDataModel> dataModel = calendarData.get(formattedDate);
             switch (dataModel.size()) {
                 case 1:
-                    setColorDot(dataModel.get(0).getEventColor(), eventIndicator);
+                    setColorDot(dataModel.get(0).getEventColor(), eventOne);
                     break;
                 case 2:
-                    setColorDot(dataModel.get(0).getEventColor(), eventIndicator);
+                    setColorDot(dataModel.get(0).getEventColor(), eventOne);
                     setColorDot(dataModel.get(1).getEventColor(), eventTwo);
                     break;
                 case 3:
-                    setColorDot(dataModel.get(0).getEventColor(), eventIndicator);
+                    setColorDot(dataModel.get(0).getEventColor(), eventOne);
                     setColorDot(dataModel.get(1).getEventColor(), eventTwo);
                     setColorDot(dataModel.get(2).getEventColor(), eventThree);
                     break;
             }
 
             if (dataModel.size() > 3) {
-                setColorDot(dataModel.get(0).getEventColor(), eventIndicator);
+                setColorDot(dataModel.get(0).getEventColor(), eventOne);
                 setColorDot(dataModel.get(1).getEventColor(), eventTwo);
                 setColorDot(dataModel.get(2).getEventColor(), eventThree);
             }
         }
+
+        if (displayMonth == currentMonth && displayYear == currentYear) {
+            view.setBackgroundColor(Color.parseColor("#ffffff"));
+            cellNumber.setTextColor(Color.GRAY);
+        } else {
+            view.setBackgroundColor(Color.parseColor("#ffffff"));
+            cellNumber.setTextColor(Color.WHITE);
+            eventOne.setVisibility(View.INVISIBLE);
+            eventTwo.setVisibility(View.INVISIBLE);
+            eventThree.setVisibility(View.INVISIBLE);
+        }
+
+
 
         llDate.setOnClickListener(new View.OnClickListener() {
             @Override

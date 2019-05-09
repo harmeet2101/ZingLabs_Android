@@ -27,6 +27,7 @@
         <ImageView
             android:id="@+id/event_id"
             android:layout_width="@dimen/default_margin"
+            android:visibility="gone"
             android:layout_height="@dimen/default_margin"
             android:paddingBottom="@dimen/default_margin_2"
             android:src="@drawable/blue_circle" />
@@ -34,6 +35,7 @@
         <ImageView
             android:id="@+id/event_two"
             android:layout_width="@dimen/default_margin"
+            android:visibility="gone"
             android:layout_height="@dimen/default_margin"
             android:paddingBottom="@dimen/default_margin_2"
             android:src="@drawable/blue_circle" />
@@ -41,6 +43,7 @@
         <ImageView
             android:id="@+id/event_three"
             android:layout_width="@dimen/default_margin"
+            android:visibility="gone"
             android:layout_height="@dimen/default_margin"
             android:paddingBottom="@dimen/default_margin_2"
             android:src="@drawable/blue_circle" />
