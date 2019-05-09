@@ -141,13 +141,27 @@
                         android:id="@+id/firstShiftLayout"
                         android:layout_below="@+id/tvHeading">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="First Shift Completed"
-                            android:textSize="@dimen/text_19"
-                            android:layout_gravity="center_horizontal"
-                            />
+                            android:orientation="horizontal"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginLeft="30dp"
+                            android:background="@drawable/badges_heading_bg">
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="First Shift Completed"
+                                android:textSize="@dimen/text_15"
+                                android:padding="5dp"
+                                android:textColor="@color/light_black"
+                                android:layout_centerInParent="true"
+                                />
+                        </RelativeLayout>
+
 
                         <ImageView
                             android:layout_width="70dp"
@@ -167,13 +181,27 @@
                         android:id="@+id/onTimeShiftLayout"
                         android:layout_below="@+id/firstShiftLayout">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Show up on time"
-                            android:textSize="@dimen/text_19"
-                            android:layout_gravity="center_horizontal"
-                            />
+                            android:orientation="horizontal"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginLeft="30dp"
+                            android:background="@drawable/badges_heading_bg">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Show up on time"
+                                android:padding="5dp"
+                                android:textColor="@color/light_black"
+                                android:textSize="@dimen/text_15"
+                                android:layout_centerInParent="true"
+                                />
+
+                        </RelativeLayout>
+
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -242,17 +270,28 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_marginTop="20dp"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:id="@+id/perfectShiftLayout"
                         android:layout_below="@+id/onTimeShiftLayout">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <RelativeLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Perfect"
-                            android:textSize="@dimen/text_19"
-                            android:layout_gravity="center_horizontal"
-                            />
+                            android:orientation="horizontal"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginLeft="30dp"
+                            android:background="@drawable/badges_heading_bg">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:text="Perfect"
+                                android:textColor="@color/light_black"
+                                android:padding="5dp"
+                                android:textSize="@dimen/text_15"
+                                />
+                        </RelativeLayout>
+
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -261,23 +300,50 @@
                             android:layout_gravity="center_horizontal"
                             android:orientation="horizontal">
 
-                            <ImageView
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"
-                                android:id="@+id/ImageView_perfect_week"
-                                android:layout_marginBottom="10dp"
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
 
-                                android:layout_gravity="center_horizontal"
-                                android:src="@drawable/badge_perfect_week"/>
+                                <ImageView
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:id="@+id/ImageView_perfect_week"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:src="@drawable/badge_perfect_week"/>
 
-                            <ImageView
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"
-                                android:id="@+id/ImageView_perfect_month"
+                                <include layout="@layout/badges_count"
+                                    android:id="@+id/weekView"
+                                    android:layout_gravity="end|bottom"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+
+
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:layout_width="wrap_content"
                                 android:layout_marginLeft="20dp"
-                                android:layout_marginBottom="10dp"
-                                android:layout_gravity="center_horizontal"
-                                android:src="@drawable/badge_perfect_month"/>
+                                android:layout_height="wrap_content">
+
+                                <ImageView
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:id="@+id/ImageView_perfect_month"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:src="@drawable/badge_perfect_month"/>
+
+                                <include layout="@layout/badges_count"
+                                    android:id="@+id/monthView"
+                                    android:layout_gravity="end|bottom"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                            </FrameLayout>
+
+
 
                         </LinearLayout>
 
@@ -292,13 +358,26 @@
                         android:id="@+id/recommendShiftLayout"
                         android:layout_below="@+id/perfectShiftLayout">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <RelativeLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Picked up recommended shift"
-                            android:textSize="@dimen/text_19"
-                            android:layout_gravity="center_horizontal"
-                            />
+                            android:orientation="horizontal"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginLeft="30dp"
+                            android:background="@drawable/badges_heading_bg">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Picked up recommended shift"
+                                android:textSize="@dimen/text_15"
+                                android:padding="5dp"
+                                android:textColor="@color/light_black"
+                                android:layout_centerInParent="true"
+                                />
+                        </RelativeLayout>
+
+
 
                         <LinearLayout
                             android:layout_width="wrap_content"
