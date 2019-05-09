@@ -28,6 +28,19 @@ public class Data {
     @Expose
     private String location;
 
+
+    public String getStore_name() {
+        return store_name;
+    }
+
+    public void setStore_name(String store_name) {
+        this.store_name = store_name;
+    }
+
+    @SerializedName("store_name")
+    @Expose
+    private String store_name;
+
     public String getDay() {
         return day;
     }

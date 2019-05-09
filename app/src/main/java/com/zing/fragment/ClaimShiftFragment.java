@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.JsonElement;
 import com.zing.R;
@@ -39,6 +40,7 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.StringTokenizer;
 
@@ -110,6 +112,7 @@ public class ClaimShiftFragment extends BaseFragment {
     private static final String ARG_PARAM9 = "param9";
 
     private ProgressDialog progressDialog;
+    private boolean isWithin24hrs;
     SessionManagement session;
 
     public static ClaimShiftFragment newInstance(String param1, String param2) {
@@ -164,15 +167,23 @@ public class ClaimShiftFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_claim_shift, container, false);
         unbinder = ButterKnife.bind(this, view);
+
+
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
+
+
         (getActivity().findViewById(R.id.rvFooter)).setVisibility(View.GONE);
         if (NetworkUtils.isNetworkConnected(getActivity()))
             getShiftDetails();
+
+
+
     }
 
     private void getShiftDetails() {
@@ -198,7 +209,7 @@ public class ClaimShiftFragment extends BaseFragment {
                                // tvTimeDetail.setText(shiftDetailResponse.getResponse().getData().getTimeSlot());
                                // tvRoleDetail.setText(shiftDetailResponse.getResponse().getData().getRole());
                                 tvEarningAmount.setText(/*"$" + */shiftDetailResponse.getResponse().getData().getExpectedEarning());
-                               // tvLocationDetail.setText(shiftDetailResponse.getResponse().getData().getLocation());
+                                tvLocationDetail.setText(shiftDetailResponse.getResponse().getData().getStore_name());
                                 shift_id = shiftDetailResponse.getResponse().getData().getShiftId();
 
                                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -223,6 +234,41 @@ public class ClaimShiftFragment extends BaseFragment {
                                 if(from.equalsIgnoreCase("true")){
                                     btnClaimShift.setVisibility(View.GONE);
                                    // tvUnclaimed.setText("claimed");
+                                }
+
+
+
+                                try {
+
+                                    Date currentDate = new Date();
+                                    String pattern = "yyyy-MM-dd hh:mm a";
+                                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+                                    StringTokenizer tokenizer = new StringTokenizer(shiftDetailResponse.getResponse().getData().getTimeSlot(), "-");
+                                    String startTime = tokenizer.nextToken();
+                                    String endTime = tokenizer.nextToken();
+
+                                    String mDateString = shiftDetailResponse.getResponse().getData().getDate() + " " + startTime.toUpperCase();
+                                    Calendar cal = Calendar.getInstance();
+                                    cal.setTime(currentDate);
+                                    cal.add(Calendar.DATE, 1);
+                                    Date nxtDate = cal.getTime();
+                                    String nextDateString = simpleDateFormat.format(nxtDate);
+                                    Date nextDate = simpleDateFormat.parse(nextDateString);
+                                    Date nextShiftDate = simpleDateFormat.parse(mDateString);
+
+                                    if (nextShiftDate.compareTo(nextDate) < 0) {
+                                        isWithin24hrs = true;
+                                    }
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                                }
+
+                                if (isWithin24hrs) {
+                                    btnClaimShift.setVisibility(View.GONE);
+                                } else {
+                                    btnClaimShift.setVisibility(View.VISIBLE);
                                 }
 
                             } else {

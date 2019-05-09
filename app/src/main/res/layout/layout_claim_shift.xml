@@ -103,7 +103,7 @@
                     android:layout_height="16dp"
                     android:layout_marginLeft="12dp"
                     android:layout_marginTop="@dimen/default_margin_40"
-                    android:background="@color/white"/>
+                    android:background="@color/black"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -147,7 +147,7 @@
                         android:padding="10dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="12dp"
-                        android:background="@drawable/outline_account_balance_white_18"/>
+                        android:background="@drawable/outline_account_balance_black_18dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -175,7 +175,7 @@
                         android:padding="10dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="12dp"
-                        android:background="@drawable/outline_monetization_on_white_18"/>
+                        android:background="@drawable/outline_monetization_on_black_18dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -206,7 +206,7 @@
                     android:layout_gravity="center_vertical|left"
                     android:paddingTop="10dp"
                     android:paddingLeft="10dp"
-                    android:background="@drawable/outline_location_on_white_18"/>
+                    android:background="@drawable/outline_location_on_black_18dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
