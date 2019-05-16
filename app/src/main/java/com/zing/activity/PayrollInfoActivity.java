@@ -19,6 +19,8 @@ import android.widget.Toast;
 import com.zing.R;
 import com.zing.base.BaseActivity;
 import com.zing.model.request.CompleteProfileRequest;
+import com.zing.model.request.LoginRequest;
+import com.zing.model.response.LoginResponse.LoginResponse;
 import com.zing.model.response.RegisterResponse.RegisterResponse;
 import com.zing.model.response.otpVerifyResponse.BasicInfo;
 import com.zing.model.response.otpVerifyResponse.PreferenceInfo;
@@ -227,6 +229,8 @@ public class PayrollInfoActivity extends BaseActivity {
                                         password,
                                         registerResponse.getResponse().getData().getCountryName(),
                                         registerResponse.getResponse().getData().getCountryId() );
+
+                                loginData();
                                // Toast.makeText( mContext, registerResponse.getResponse().getData().getCountryName(), Toast.LENGTH_LONG ).show();
                                 Intent intent = new Intent( PayrollInfoActivity.this, TimePreferencesActivity.class );
                                 //intent.putExtra("preferences",preferenceInfo);
@@ -254,5 +258,66 @@ public class PayrollInfoActivity extends BaseActivity {
             e.printStackTrace();
         }
 
+    }
+
+
+    private void loginData() {
+        progressDialog = CommonUtils.getProgressBar(this);
+        ZinglabsApi api = ApiClient.getClient().create(ZinglabsApi.class);
+        try {
+            String deviceOs = String.valueOf(android.os.Build.VERSION.SDK_INT);
+
+            LoginRequest loginRequest = new LoginRequest();
+            loginRequest.setPhone(phone);
+            loginRequest.setPassword(password);
+            loginRequest.setDeviceOSversion(deviceOs);
+            loginRequest.setDeviceType("Android");
+            loginRequest.setDeviceToken(session.getDeviceToken());
+
+            Call<LoginResponse> call = api.loginApi(loginRequest);
+            call.enqueue(new Callback<LoginResponse>() {
+                @Override
+                public void onResponse(@NonNull Call<LoginResponse> call,
+                                       @NonNull Response<LoginResponse> response) {
+                    progressDialog.dismiss();
+                    if (response.code() == 200) {
+
+                        try {
+                            LoginResponse loginResponse = response.body();
+                            if (loginResponse != null && loginResponse.getResponse().getCode() == 200) {
+                                session.setUserData(loginResponse.getResponse().getData().getUserId(),
+                                        loginResponse.getResponse().getData().getFirstName(),
+                                        loginResponse.getResponse().getData().getLastName(),
+                                        loginResponse.getResponse().getData().getPhone(),
+                                        loginResponse.getResponse().getData().getDataUpdated(),
+                                        loginResponse.getResponse().getData().getUserToken(),
+                                        loginResponse.getResponse().getData().getStatus(),
+                                        loginResponse.getResponse().getData().getApt(),
+                                        loginResponse.getResponse().getData().getStreetAddress(),
+                                        loginResponse.getResponse().getData().getState(),
+                                        loginResponse.getResponse().getData().getZipCode(),
+                                        loginResponse.getResponse().getData().getSsn(),
+                                        loginResponse.getResponse().getData().getProfilePic(),
+                                        password, loginResponse.getResponse().getData().getCountryName(),
+                                        loginResponse.getResponse().getData().getCountryId());
+
+
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
+                    progressDialog.dismiss();
+                    CommonUtils.showSnakBar(etSsn, t.getMessage());
+                }
+            });
+        } catch (Exception e) {
+            progressDialog.dismiss();
+            e.printStackTrace();
+        }
     }
 }

@@ -107,6 +107,8 @@ public class EnterPasswordActivity extends BaseActivity {
             tvHeading.setText(getResources().getString(R.string.small_password));
             tvPassword.setText(getResources().getString(R.string.new_password));
             tvBack.setVisibility(View.GONE);
+        }else{
+            tvPassword.setText(getResources().getString(R.string.small_password));
         }
 
         etPassword.addTextChangedListener(new TextWatcher() {

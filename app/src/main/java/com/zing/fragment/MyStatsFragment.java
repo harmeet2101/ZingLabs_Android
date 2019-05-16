@@ -177,7 +177,7 @@ public class MyStatsFragment extends BaseFragment implements View.OnClickListene
                             ((TextView)weekView.findViewById(R.id.counterTextview)).setText(""+statsResponse.getResponse().getBadges().getPerfect_week());
                             ((TextView)monthView.findViewById(R.id.counterTextview)).setText(""+statsResponse.getResponse().getBadges().getPerfect_month());
 
-                            /*if(statsResponse.getResponse().getBadges().getFirst_shift_completed()
+                            if(statsResponse.getResponse().getBadges().getFirst_shift_completed()
                                 ==0 && statsResponse.getResponse().getBadges().getShow_up_on_time()<5
 
                                     && statsResponse.getResponse().getBadges().getPerfect_week()==0
@@ -186,7 +186,7 @@ public class MyStatsFragment extends BaseFragment implements View.OnClickListene
 
                             ){
                                 tvBadges.setText("No Badges Found");
-                            }*/
+                            }
                             if(statsResponse.getResponse().getBadges().getFirst_shift_completed()==0)
                                 firstShiftLayout.setVisibility(View.GONE);
                             else
@@ -202,7 +202,7 @@ public class MyStatsFragment extends BaseFragment implements View.OnClickListene
                             else
                                 recommendShiftLayout.setVisibility(View.VISIBLE);
 
-                            /*if(statsResponse.getResponse().getBadges().getPerfect_week()==0
+                            if(statsResponse.getResponse().getBadges().getPerfect_week()==0
                                     && statsResponse.getResponse().getBadges().getPerfect_month() ==0)
                                 perfectShiftLayout.setVisibility(View.GONE);
                             else if(statsResponse.getResponse().getBadges().getPerfect_week()==0
@@ -216,7 +216,7 @@ public class MyStatsFragment extends BaseFragment implements View.OnClickListene
                                 perfectShiftLayout.setVisibility(View.VISIBLE);
                                 imageView_perfect_month.setVisibility(View.GONE);
                                 imageView_perfect_week.setVisibility(View.VISIBLE);
-                            }*/
+                            }
 
 
                             imageView_show_up_on_time_5.setVisibility(View.GONE);

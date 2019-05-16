@@ -12,18 +12,24 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.google.gson.JsonElement;
 import com.zing.R;
+import com.zing.adapter.CompletedShiftAdapter;
 import com.zing.adapter.PaystubAdapter;
 import com.zing.model.request.BankTransferRequest;
+import com.zing.model.request.UpcomingShiftRequest;
+import com.zing.model.response.CalendarScheduledShiftResponse.CalendarScheduledShiftResponse;
+import com.zing.model.response.CalendarSlotResponse.RecommendedShift;
 import com.zing.model.response.PreviousPaystubResponse.PreviousPaystub;
 import com.zing.util.AppTypeface;
 import com.zing.util.CommonUtils;
@@ -89,6 +95,15 @@ public class EarningFragment extends BaseFragment {
     @BindView(R.id.tvEarning)
     TextView tvEarning;
 
+
+
+    @BindView(R.id.tvCompletedShift)
+    TextView tvCompletedShift;
+    @BindView(R.id.rvCompletedShift)
+    RecyclerView rvCompletedShift;
+    @BindView(R.id.cvCompletedShiftList)
+    CardView cvCompletedShiftList;
+    private CompletedShiftAdapter completedAdapter;
     private ProgressDialog progressDialog;
     SessionManagement session;
     ArrayList<PreviousPaystub> paystubList;
@@ -98,7 +113,7 @@ public class EarningFragment extends BaseFragment {
     private String mParam2;
 
     private String startWeek = "", endWeek = "",typeSelection;
-
+    private String startDate="",endDate="";
     public static EarningFragment newInstance(String param1, String param2) {
         EarningFragment fragment = new EarningFragment();
         Bundle args = new Bundle();
@@ -131,6 +146,8 @@ public class EarningFragment extends BaseFragment {
         int month1 = c1.get(Calendar.MONTH) + 1;
         int day1 = c1.get(Calendar.DAY_OF_MONTH);
         startWeek = getMonth(month1);
+        startDate = year1+"-"+month1+"-"+day1;
+        //Log.d("start",year1+"-"+month1+"-"+day1);
         //last day of week
         c1.set(Calendar.DAY_OF_WEEK, 7);
 
@@ -138,10 +155,14 @@ public class EarningFragment extends BaseFragment {
         int month7 = c1.get(Calendar.MONTH) + 1;
         int day7 = c1.get(Calendar.DAY_OF_MONTH);
         endWeek = getMonth(month7);
-
+        endDate = year7+"-"+month7+"-"+day7;
+        //Log.d("end",year7+"-"+month7+"-"+day7);
         tvMonth.setText(startWeek + " " + day1 + " - " + endWeek + " " + day7);
-        if (NetworkUtils.isNetworkConnected(getActivity()))
+        if (NetworkUtils.isNetworkConnected(getActivity())){
             getPreviousPaystub();
+            fetchCalenderDetails(startDate,endDate);
+        }
+
     }
 
     private String getMonth(int month1) {
@@ -217,6 +238,9 @@ public class EarningFragment extends BaseFragment {
         tvSetPayHeading.setTypeface(AppTypeface.avenieNext_medium);
         tvSetPayDescription.setTypeface(AppTypeface.avenieNext_regular);
 
+
+        tvCompletedShift.setTypeface(AppTypeface.avenieNext_demibold);
+
       /*  AppBarLayout mAppBarLayout = (AppBarLayout) view.findViewById(R.id.app_bar);
         mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             boolean isShow = false;
@@ -258,12 +282,39 @@ public class EarningFragment extends BaseFragment {
                 switch (tab.getPosition()) {
                     case 0:
                         addFragment(new WeekFragment(), "Week");
+                        fetchCalenderDetails(startDate,endDate);
                         break;
                     case 1:
                         addFragment(new MonthFragment(), "Month");
+                        Calendar c = Calendar.getInstance();
+                        String start = c.get(Calendar.YEAR)+"-" +
+                                (c.get(Calendar.MONTH)+1)+
+                                "-" +
+                                c.getActualMinimum(Calendar.DAY_OF_MONTH);
+
+                        String end = c.get(Calendar.YEAR)+"-" +
+                                (c.get(Calendar.MONTH)+1)+
+                                "-" +
+                                c.getActualMaximum(Calendar.DAY_OF_MONTH);
+                        fetchCalenderDetails(start,end);
                         break;
                     case 2:
                         addFragment(new NewQuarterFragment(), "Quarter");
+                        Calendar c1 = Calendar.getInstance();
+                        String[] qrtr = CommonUtils.getQuarter();
+
+                        int sMonth = CommonUtils.getMonthInInt(qrtr[0]);
+                        int eMonth = CommonUtils.getMonthInInt(qrtr[1]);
+                        String start1 = c1.get(Calendar.YEAR)+"-" +
+                                (sMonth+1)+
+                                "-" +
+                                c1.getActualMinimum(Calendar.DAY_OF_MONTH);
+
+                        String end1= c1.get(Calendar.YEAR)+"-" +
+                                (eMonth+1)+
+                                "-" +
+                                c1.getActualMaximum(Calendar.DAY_OF_MONTH);
+                        fetchCalenderDetails(start1,end1);
                         break;
                 }
                /* if (tab.getPosition() == 0) {
@@ -297,6 +348,19 @@ public class EarningFragment extends BaseFragment {
         rvPreviousPaystubs.setLayoutManager(lManager);
         paystubAdapter = new PaystubAdapter(getActivity(), fragmentInterface, paystubList);
         rvPreviousPaystubs.setAdapter(paystubAdapter);
+        rvCompletedShift.setLayoutManager(new LinearLayoutManager(getActivity()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+
+            @Override
+            public boolean canScrollHorizontally() {
+                return false;
+            }
+        });
+        completedAdapter = new CompletedShiftAdapter(getActivity(), fragmentInterface, completedShiftList);
+        rvCompletedShift.setAdapter(completedAdapter);
     }
 
     private void addFragment(Fragment fragment, String title) {
@@ -327,11 +391,11 @@ public class EarningFragment extends BaseFragment {
                             String upcoming_payment = responseObj.optString("upcoming_payment");
                             String bank_detail = responseObj.optString("bank_detail");
 
-                            if (bank_detail.equalsIgnoreCase("0")) {
+                          /*  if (bank_detail.equalsIgnoreCase("0")) {
                                 cvSetUpPay.setVisibility(View.VISIBLE);
                             } else {
                                 cvSetUpPay.setVisibility(View.GONE);
-                            }
+                            }*/
 
                             paystubList.clear();
                             JSONArray previous_paystubsArr = responseObj.optJSONArray("previous_paystubs");
@@ -457,6 +521,77 @@ public class EarningFragment extends BaseFragment {
                         "", "", "earning");
                 fragmentInterface.fragmentResult(fragment, "+");
                 break;
+        }
+    }
+
+
+    ArrayList<RecommendedShift> completedShiftList = new ArrayList<>();
+
+
+    private void fetchCalenderDetails(String start_date, String end_date) {
+
+        progressDialog = CommonUtils.getProgressBar(getActivity());
+        ZinglabsApi api = ApiClient.getClient().create(ZinglabsApi.class);
+        try {
+            UpcomingShiftRequest upcomingShiftRequest = new UpcomingShiftRequest();
+            upcomingShiftRequest.setStartDate(start_date);
+            upcomingShiftRequest.setEndDate(end_date);
+
+            Call<CalendarScheduledShiftResponse> call = api.calendarDetailApi("Bearer " +
+                    session.getUserToken(), upcomingShiftRequest);
+            call.enqueue(new Callback<CalendarScheduledShiftResponse>() {
+                @Override
+                public void onResponse(@NonNull Call<CalendarScheduledShiftResponse> call,
+                                       @NonNull Response<CalendarScheduledShiftResponse> response) {
+                    progressDialog.dismiss();
+                    if (response.code() == 200) {
+                        try {
+                            CalendarScheduledShiftResponse calendarSheduledShiftResponse = response.body();
+                            if (calendarSheduledShiftResponse != null && calendarSheduledShiftResponse.
+                                    getResponse().getCode() == 200) {
+
+
+                                completedShiftList.clear();
+                                //llLayout.setVisibility(View.VISIBLE);
+                                for (int i = 0; i < calendarSheduledShiftResponse.getResponse().
+                                        getCompletedShiftList().size(); i++) {
+                                    completedShiftList.add(calendarSheduledShiftResponse.getResponse().
+                                            getCompletedShiftList().get(i));
+                                }
+
+                                if (completedShiftList.size() != 0) {
+                                    tvCompletedShift.setText("Completed Shift");
+                                    cvCompletedShiftList.setVisibility(View.VISIBLE);
+                                } else {
+                                    cvCompletedShiftList.setVisibility(View.VISIBLE);
+                                    tvCompletedShift.setText("No Shifts Available");
+                                }
+
+
+                            }
+                            else {
+                                Toast.makeText(getContext(),calendarSheduledShiftResponse.getResponse().getMessage(),Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }finally {
+
+                            completedAdapter.notifyDataSetChanged();
+                        }
+                    } else {
+                        Toast.makeText(getContext(),response.message(),Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<CalendarScheduledShiftResponse> call, @NonNull Throwable t) {
+                    progressDialog.dismiss();
+                    Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (Exception e) {
+            progressDialog.dismiss();
+            e.printStackTrace();
         }
     }
 }

@@ -136,43 +136,45 @@
                 <LinearLayout
                     android:id="@+id/lay01"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_marginTop="20dp"
                     android:background="@color/light_grey"
                     android:orientation="horizontal">
 
                     <View
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:padding="10dp"
+                        android:layout_width="19dp"
+                        android:layout_height="16dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="12dp"
-                        android:background="@drawable/outline_account_balance_black_18dp"/>
+                        android:background="@drawable/outline_account_balance_black_18dp"
+                        android:padding="10dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
+                        android:layout_gravity="center_vertical"
                         android:textColor="@color/black"
                         android:textSize="14sp"
-                        android:padding="10dp"
-                        android:alpha=".60"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:alpha="1"
                         android:text="Cashier"
+                        android:id="@+id/tvRoleDetail"
                         />
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/lay02"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_marginTop="20dp"
                     android:background="@color/light_grey"
                     android:layout_marginLeft="10dp"
                     android:orientation="horizontal">
 
                     <View
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:padding="10dp"
+                        android:layout_width="19dp"
+                        android:layout_height="19dp"
+
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="12dp"
                         android:background="@drawable/outline_monetization_on_black_18dp"/>
@@ -180,11 +182,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:padding="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
                         android:textColor="@color/black"
                         android:textSize="14sp"
-                        android:alpha=".60"
+                        android:layout_gravity="center_vertical"
+                        android:alpha="1"
                         android:text="$ 150"
                         android:id="@+id/tvEarningAmount"
                         />
@@ -194,29 +197,31 @@
             <LinearLayout
                 android:id="@+id/lay03"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:background="@color/light_grey"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="20dp"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
                     android:layout_gravity="center_vertical|left"
                     android:paddingTop="10dp"
                     android:paddingLeft="10dp"
+                    android:layout_marginLeft="10dp"
                     android:background="@drawable/outline_location_on_black_18dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:padding="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     android:id="@+id/tvLocationDetail"
-                    android:alpha=".60"
+                    android:alpha="1"
                     android:text="Blue Bottle Coffee"
                     />
             </LinearLayout>
@@ -241,14 +246,14 @@
                     android:layout_gravity="right"
                     android:layout_marginEnd="@dimen/default_margin_extra_large"
                     android:layout_marginRight="@dimen/default_margin_extra_large"
-                    android:src="@drawable/add_calendar" />
+                    android:src="@drawable/outline_calendar_today_black_24" />
 
                 <ImageView
                     android:id="@+id/ivDiamond"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:src="@drawable/navigator" />
+                    android:src="@drawable/baseline_near_me_black_24" />
 
             </LinearLayout>
 

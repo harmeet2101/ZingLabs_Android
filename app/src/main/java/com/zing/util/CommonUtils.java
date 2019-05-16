@@ -22,6 +22,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
+import android.util.Pair;
 import android.util.Patterns;
 import android.view.Display;
 import android.view.Gravity;
@@ -378,5 +379,105 @@ public class CommonUtils {
         if ((cal1.get(Calendar.MONTH) == cal2.get(Calendar.MONTH)) && (cal1.get(Calendar.DATE) == cal2.get(Calendar.DATE)) && (cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)))
             return true;
         else return false;
+    }
+
+
+    public static String[] getQuarter(){
+
+        String startMonth = null,endMonth = null;
+
+        Date c = Calendar.getInstance().getTime();
+        String monthString = (String) DateFormat.format("MMM", c); // Jun
+        switch (monthString) {
+            case "Jan":
+                startMonth = "Jan";
+                endMonth = "Mar";
+                break;
+            case "Feb":
+
+                startMonth = "Jan";
+                endMonth = "Mar";
+                break;
+            case "Mar":
+                startMonth = "Jan";
+                endMonth = "Mar";
+                break;
+            case "Apr":
+                startMonth = "Apr";
+                endMonth = "Jun";
+                break;
+            case "May":
+                startMonth = "Apr";
+                endMonth = "Jun";
+
+                break;
+            case "Jun":
+                startMonth = "Apr";
+                endMonth = "Jun";
+
+                break;
+            case "Jul":
+                startMonth = "Jul";
+                endMonth = "Sep";
+
+                break;
+            case "Aug":
+                startMonth = "Jul";
+                endMonth = "Sep";
+
+                break;
+            case "Sep":
+                startMonth = "Jul";
+                endMonth = "Sep";
+
+                break;
+            case "Oct":
+                startMonth = "Oct";
+                endMonth = "Dec";
+
+                break;
+            case "Nov":
+                startMonth = "Oct";
+                endMonth = "Dec";
+                break;
+            case "Dec":
+
+                startMonth = "Oct";
+                endMonth = "Dec";
+                break;
+        }
+        return new String[]{startMonth,endMonth};
+    }
+
+    public static int getMonthInInt(String month){
+
+        switch (month) {
+            case "Jan":
+                return  0;
+            case "Feb":
+                return  1;
+            case "Mar":
+                return  2;
+            case "Apr":
+                return  3;
+            case "May":
+                return  4;
+            case "Jun":
+                return  5;
+            case "Jul":
+                return  6;
+            case "Aug":
+                return  7;
+            case "Sep":
+                return  8;
+            case "Oct":
+                return  9;
+            case "Nov":
+                return  10;
+            case "Dec":
+                return  11;
+        }
+
+        return 0;
     }
 }

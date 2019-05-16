@@ -285,10 +285,10 @@ public class RateShiftFragment extends BaseFragment {
         textviewshiftType.setText("Ongoing Shift");
 
         if(breakStatus.equalsIgnoreCase("0")){
-            btnbreakShift.setText("Break In");
+            btnbreakShift.setText("Take a break");
         }else if(breakStatus.equalsIgnoreCase("1")){
 
-            btnbreakShift.setText("Break Out");
+            btnbreakShift.setText("End break");
         }
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {

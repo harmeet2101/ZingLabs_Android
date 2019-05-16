@@ -115,6 +115,8 @@ public class ShiftDialogFragment extends BaseFragment {
     @BindView(R.id.lay04)
     ViewGroup lay04;
 
+    @BindView(R.id.tvRoleDetail)
+    TextView tvRoleDetail;
 
     @BindView(R.id.rv_shift_calendar_data)
     RecyclerView rvShiftCalendarData;
@@ -197,7 +199,7 @@ public class ShiftDialogFragment extends BaseFragment {
 
         tvEarningAmount.setText(/*"$" +*/ expectedEarning);
         tvLocationDetail.setText(location);
-
+        tvRoleDetail.setText(role);
         nextShiftId = session.getNextShift();
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");

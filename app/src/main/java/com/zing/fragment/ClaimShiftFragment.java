@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,25 +16,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonElement;
 import com.zing.R;
 import com.zing.model.request.ShiftCheckInRequest;
-import com.zing.model.response.BroadcastResponse.BroadcastList;
-import com.zing.model.response.BroadcastResponse.BroadcastResponse;
 import com.zing.model.response.ShiftDetailResponse.ShiftDetailResponse;
 import com.zing.util.AppTypeface;
 import com.zing.util.CommonUtils;
-import com.zing.util.Constants;
 import com.zing.util.NetworkUtils;
 import com.zing.util.SessionManagement;
 import com.zing.util.restClient.ApiClient;
 import com.zing.util.restClient.ZinglabsApi;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.ParseException;
@@ -98,6 +92,9 @@ public class ClaimShiftFragment extends BaseFragment {
     TextView tvStartTime;
     @BindView(R.id.tvEndTime)
     TextView tvEndTime;
+
+    @BindView(R.id.tvRoleDetail)
+    TextView tvRoleDetail;
 
     private String shift_id, date, day, expectedEarning, timeSlot, location, role, release = "";
     private String from;
@@ -207,7 +204,7 @@ public class ClaimShiftFragment extends BaseFragment {
                             if (shiftDetailResponse != null && shiftDetailResponse.getResponse().getCode() == 200) {
 
                                // tvTimeDetail.setText(shiftDetailResponse.getResponse().getData().getTimeSlot());
-                               // tvRoleDetail.setText(shiftDetailResponse.getResponse().getData().getRole());
+                                tvRoleDetail.setText(shiftDetailResponse.getResponse().getData().getRole());
                                 tvEarningAmount.setText(/*"$" + */shiftDetailResponse.getResponse().getData().getExpectedEarning());
                                 tvLocationDetail.setText(shiftDetailResponse.getResponse().getData().getStore_name());
                                 shift_id = shiftDetailResponse.getResponse().getData().getShiftId();

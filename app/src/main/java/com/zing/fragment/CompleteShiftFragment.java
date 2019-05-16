@@ -88,6 +88,9 @@ public class CompleteShiftFragment extends BaseFragment {
     @BindView(R.id.checkoutTime)
     TextView tvcheckoutTime;
 
+    @BindView(R.id.tvRoleDetail)
+    TextView tvRoleDetail;
+
     private String shift_id, location;
     private String mParam2,shiftType,checkInTime,checkOutTime,earningAmount;
     float rating = 0;
@@ -155,7 +158,7 @@ public class CompleteShiftFragment extends BaseFragment {
                             if (shiftDetailResponse != null && shiftDetailResponse.getResponse().getCode() == 200) {
 
                                 // tvTimeDetail.setText(shiftDetailResponse.getResponse().getData().getTimeSlot());
-                                //tvRoleDetail.setText(shiftDetailResponse.getResponse().getData().getRole());
+                                tvRoleDetail.setText(shiftDetailResponse.getResponse().getData().getRole());
 
                                 try {
 
