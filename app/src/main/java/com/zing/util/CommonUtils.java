@@ -8,15 +8,20 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.ExifInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.MediaStore;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -34,6 +39,7 @@ import android.widget.Toast;
 
 import com.zing.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -479,5 +485,65 @@ public class CommonUtils {
         }
 
         return 0;
+    }
+
+
+
+    public static int getImageRotation(final File imageFile) {
+
+        ExifInterface exif = null;
+        int exifRotation = 0;
+
+        try {
+            exif = new ExifInterface(imageFile.getPath());
+            exifRotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (exif == null)
+            return 0;
+        else
+            return exifToDegrees(exifRotation);
+    }
+
+    public static int exifToDegrees(int rotation) {
+        if (rotation == ExifInterface.ORIENTATION_ROTATE_90)
+            return 90;
+        else if (rotation == ExifInterface.ORIENTATION_ROTATE_180)
+            return 180;
+        else if (rotation == ExifInterface.ORIENTATION_ROTATE_270)
+            return 270;
+
+        return 0;
+    }
+
+    public static Bitmap getBitmapRotatedByDegree(Bitmap bitmap, int rotationDegree) {
+        Matrix matrix = new Matrix();
+        matrix.preRotate(rotationDegree);
+
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+    }
+
+
+    public static Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public static String getRealPathFromURI(Uri uri,Context context) {
+        String path = "";
+        if (context.getContentResolver() != null) {
+            Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                path = cursor.getString(idx);
+                cursor.close();
+            }
+        }
+        return path;
     }
 }

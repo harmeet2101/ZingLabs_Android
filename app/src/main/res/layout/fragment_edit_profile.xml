@@ -279,6 +279,7 @@
                     android:layout_marginTop="@dimen/default_margin_extra_large"
                     android:text="@string/ssn"
                     android:textAllCaps="true"
+                    android:visibility="gone"
                     android:textSize="@dimen/normal_text" />
 
                 <EditText
@@ -293,6 +294,7 @@
                     android:paddingBottom="@dimen/default_margin"
                     android:paddingTop="@dimen/default_margin"
                     android:singleLine="true"
+                    android:visibility="gone"
                     android:textColor="@color/blue"
                     android:textSize="@dimen/normal_text" />
 
@@ -301,6 +303,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/default_margin_2"
                     android:layout_marginTop="@dimen/default_margin_half"
+                    android:visibility="gone"
                     android:background="@color/blue" />
                 <TextView
                     android:id="@+id/tvCountry"

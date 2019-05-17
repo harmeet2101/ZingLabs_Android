@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -208,7 +209,6 @@ public class DashboardActivity extends BaseActivity implements FragmentInterface
     @Override
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-//          btmNavigation.setVisibility(View.VISIBLE);
             rvFooter.setVisibility(View.VISIBLE);
             super.onBackPressed();
         } else if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
@@ -229,6 +229,13 @@ public class DashboardActivity extends BaseActivity implements FragmentInterface
         } else if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
             rvFooter.setVisibility(View.GONE);
             super.onBackPressed();
+        }
+
+        if(pos==0){
+
+
+        }if(pos==1){
+
         }
     }
 

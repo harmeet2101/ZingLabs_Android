@@ -212,6 +212,14 @@ public class RateShiftFragment extends BaseFragment {
                                 //tvLocationDetail.setText(shiftDetailResponse.getResponse().getData().getLocation());
                                 shift_id = shiftDetailResponse.getResponse().getData().getShiftId();
                                 location = shiftDetailResponse.getResponse().getData().getLocation();
+
+                                String mBreak = String.valueOf(shiftDetailResponse.getResponse().getData().getIs_on_break());
+                                if(mBreak.equalsIgnoreCase("0")){
+                                    btnbreakShift.setText("Take a break");
+                                }else if(mBreak.equalsIgnoreCase("1")){
+
+                                    btnbreakShift.setText("End break");
+                                }
                                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                                 try {
                                     Date date1 = format.parse(shiftDetailResponse.getResponse().getData().getDate());
@@ -470,10 +478,10 @@ public class RateShiftFragment extends BaseFragment {
                             CommonUtils.showSnackbar(tvClose, response.body().getResponse().getMessage());
                             if(breakStatus.equalsIgnoreCase("0")){
                                 breakStatus = "1";
-                                btnbreakShift.setText("Break Out");
+                                btnbreakShift.setText("End break");
                             }else {
                                 breakStatus = "0";
-                                btnbreakShift.setText("Break In");
+                                btnbreakShift.setText("Take a break");
                             }
 
 

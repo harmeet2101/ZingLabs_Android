@@ -47,6 +47,7 @@ import com.zing.util.restClient.ApiClient;
 import com.zing.util.restClient.ZinglabsApi;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -236,7 +237,7 @@ public class EditProfileFragment extends BaseFragment {
         etStreetAddress.setText( session.getUserAddress() );
         etPassword.setText( session.getPassword() );
         imgString = session.getProfilePic();
-        etSsn.setText( session.getSsn() );
+        //etSsn.setText( session.getSsn() );
 
         etCountry.setText( session.getCountryName() );
         is_new_image = "0";
@@ -270,21 +271,21 @@ public class EditProfileFragment extends BaseFragment {
                 break;
             case R.id.btnSave:
                 if (etFirstName.getText().toString().isEmpty()) {
-                    CommonUtils.showSnackbar( etSsn, getActivity().getString( R.string.validate_emptyField ) );
+                    CommonUtils.showSnackbar( etFirstName, getActivity().getString( R.string.validate_emptyField ) );
                 } else if (etLastName.getText().toString().isEmpty()) {
-                    CommonUtils.showSnackbar( etSsn, getActivity().getString( R.string.validate_emptyField ) );
+                    CommonUtils.showSnackbar( etFirstName, getActivity().getString( R.string.validate_emptyField ) );
                 } else if (etPhone.getText().toString().isEmpty()) {
-                    CommonUtils.showSnackbar( etSsn, getActivity().getString( R.string.validate_emptyField ) );
+                    CommonUtils.showSnackbar( etFirstName, getActivity().getString( R.string.validate_emptyField ) );
                 } else if (etPassword.getText().toString().isEmpty()) {
-                    CommonUtils.showSnackbar( etSsn, getActivity().getString( R.string.validate_emptyField ) );
+                    CommonUtils.showSnackbar( etFirstName, getActivity().getString( R.string.validate_emptyField ) );
                 } else if (etStreetAddress.getText().toString().isEmpty()) {
-                    CommonUtils.showSnackbar( etSsn, getActivity().getString( R.string.validate_emptyField ) );
-                } else if (etSsn.getText().toString().isEmpty()) {
-                    CommonUtils.showSnackbar( etSsn, getActivity().getString( R.string.validate_emptyField ) );
-                } else if (etState.getText().toString().isEmpty()) {
-                    CommonUtils.showSnackbar( etSsn, getActivity().getString( R.string.validate_emptyField ) );
+                    CommonUtils.showSnackbar( etFirstName, getActivity().getString( R.string.validate_emptyField ) );
+                } /*else if (etSsn.getText().toString().isEmpty()) {
+                    CommonUtils.showSnackbar( etFirstName, getActivity().getString( R.string.validate_emptyField ) );
+                }*/ else if (etState.getText().toString().isEmpty()) {
+                    CommonUtils.showSnackbar( etFirstName, getActivity().getString( R.string.validate_emptyField ) );
                 } else if (etZipCode.getText().toString().isEmpty()) {
-                    CommonUtils.showSnackbar( etSsn, getActivity().getString( R.string.validate_emptyField ) );
+                    CommonUtils.showSnackbar( etFirstName, getActivity().getString( R.string.validate_emptyField ) );
 //                    tvErrorDetail.setText(getActivity().getString(R.string.validate_emptyField));
 //                    viewFirstName.setBackgroundColor(getResources().getColor(R.color.red));
                 } else if (NetworkUtils.isNetworkConnected( getActivity() ))
@@ -379,6 +380,16 @@ public class EditProfileFragment extends BaseFragment {
 
         if (requestCode == CAMERA) {
             Bitmap bitmap = (Bitmap) data.getExtras().get( "data" );
+
+            Uri tempUri = CommonUtils.getImageUri(getActivity(), bitmap);
+
+            // CALL THIS METHOD TO GET THE ACTUAL PATH
+            File finalFile = new File( CommonUtils.getRealPathFromURI(tempUri,getActivity()));
+            int imageRotation = CommonUtils.getImageRotation(finalFile);
+
+            if (imageRotation != 0)
+                bitmap = CommonUtils.getBitmapRotatedByDegree(bitmap, imageRotation);
+
             loadImage( bitmap );
         }
     }
@@ -420,7 +431,7 @@ public class EditProfileFragment extends BaseFragment {
             completeProfileRequest.setProfileImage(Constants.imageType + imgString.replace( "\n", "" ) );
             completeProfileRequest.setApt( etApt.getText().toString() );
             completeProfileRequest.setPhone( etPhone.getText().toString() );
-            completeProfileRequest.setSsn( etSsn.getText().toString() );
+            //completeProfileRequest.setSsn( etSsn.getText().toString() );
             completeProfileRequest.setState( etState.getText().toString() );
             completeProfileRequest.setStreetAddress( etStreetAddress.getText().toString() );
             completeProfileRequest.setZipCode( etZipCode.getText().toString() );
@@ -461,20 +472,20 @@ public class EditProfileFragment extends BaseFragment {
                                 fragment = ProfileFragment.newInstance( "", "" );
                                 fragmentInterface.fragmentResult( fragment, "" );
                             } else {
-                                CommonUtils.showSnackbar( etSsn, registerResponse.getResponse().getMessage() );
+                                CommonUtils.showSnackbar( etApt, registerResponse.getResponse().getMessage() );
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     } else {
-                        CommonUtils.showSnackbar( etSsn, response.message() );
+                        CommonUtils.showSnackbar( etApt, response.message() );
                     }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<RegisterResponse> call, @NonNull Throwable t) {
                     progressDialog.dismiss();
-                    CommonUtils.showSnakBar( etSsn, t.getMessage() );
+                    CommonUtils.showSnakBar( etApt, t.getMessage() );
                 }
             } );
         } catch (Exception e) {
@@ -511,14 +522,14 @@ public class EditProfileFragment extends BaseFragment {
 
 
                 } else {
-//                        CommonUtils.showSnackbar(etSsn, response.message());
+//                        CommonUtils.showSnackbar(etApt, response.message());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<CountryResponse> call, @NonNull Throwable t) {
                 progressDialog.dismiss();
-//                    CommonUtils.showSnakBar(etSsn, t.getMessage());
+//                    CommonUtils.showSnakBar(etApt, t.getMessage());
             }
         } );
 

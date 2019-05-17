@@ -127,14 +127,14 @@
             <LinearLayout
                 android:id="@+id/lay01"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/dark_blue"
                 android:orientation="horizontal">
 
                 <View
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="12dp"
                     android:background="@drawable/outline_account_balance_white_18"
@@ -143,9 +143,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
+
                     android:alpha=".60"
-                    android:padding="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:id="@+id/tvRoleDetail"
+                    android:layout_gravity="center_vertical"
                     android:text="Cashier"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
@@ -154,15 +157,15 @@
             <LinearLayout
                 android:id="@+id/lay02"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/dark_blue"
                 android:orientation="horizontal">
 
                 <View
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="12dp"
                     android:background="@drawable/outline_monetization_on_white_18"
@@ -172,9 +175,10 @@
                     android:id="@+id/tvEarningAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
                     android:alpha=".60"
-                    android:padding="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:layout_gravity="center_vertical"
                     android:text="$ 150"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
@@ -184,15 +188,16 @@
         <LinearLayout
             android:id="@+id/lay03"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:background="@color/dark_blue"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="18dp"
-                android:layout_height="20dp"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:layout_marginLeft="10dp"
                 android:layout_gravity="center_vertical|left"
                 android:background="@drawable/outline_location_on_white_18"
                 android:paddingLeft="10dp"
@@ -201,8 +206,10 @@
             <TextView
                 android:id="@+id/tvLocationDetail"
                 android:layout_width="wrap_content"
-
                 android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_gravity="center_vertical"
                 android:alpha=".60"
                 android:padding="10dp"
                 android:text="Blue Bottle Coffee"
@@ -231,14 +238,14 @@
                 android:layout_gravity="right"
                 android:layout_marginEnd="@dimen/default_margin_extra_large"
                 android:layout_marginRight="@dimen/default_margin_extra_large"
-                android:src="@drawable/add_calendar" />
+                android:src="@drawable/baseline_calendar_today_white_24" />
 
             <ImageView
                 android:id="@+id/ivDiamond"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:src="@drawable/navigator" />
+                android:src="@drawable/baseline_near_me_white_24" />
 
         </LinearLayout>
 

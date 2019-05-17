@@ -202,6 +202,9 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
         @BindView(R.id.counterTextview)
         TextView counterTextview;
 
+        @BindView(R.id.tvRoleDetail)
+        TextView tvRoleDetail;
+
         UpcomingViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -236,7 +239,7 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
 
             tvEarningAmount.setText(""+shift.getExpectedEarning());
             tvLocationDetail.setText(shift.getStoreName());
-
+            tvRoleDetail.setText(shift.getRole());
             nextShiftId = session.getNextShift();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             try {
@@ -502,6 +505,9 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
         @BindView(R.id.counterTextview)
         TextView counterTextview;
 
+        @BindView(R.id.tvRoleDetail)
+        TextView tvRoleDetail;
+
         OnGoingViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -530,13 +536,13 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
             checkinTime.setText(shift.getCheckinTime());
             checkoutTime.setText("-");
             textviewshiftType.setText("Ongoing Shift");
-
+            tvRoleDetail.setText(shift.getRole());
             if(shift.getIsOnBreak().toString().equalsIgnoreCase("0")){
-                btnbreakShift.setText("Break In");
+                btnbreakShift.setText("Take a break");
                 breakStatus = "0";
             }else if(shift.getIsOnBreak().toString().equalsIgnoreCase("1")){
 
-                btnbreakShift.setText("Break Out");
+                btnbreakShift.setText("End break");
                 breakStatus = "1";
             }
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -674,10 +680,10 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
                                 CommonUtils.showSnackbar(tvClose, response.body().getResponse().getMessage());
                                 if(shf.getIsOnBreak().toString().equalsIgnoreCase("0")){
                                     breakStatus = "1";
-                                    btnbreakShift.setText("Break Out");
+                                    btnbreakShift.setText("End break");
                                 }else {
                                     breakStatus = "0";
-                                    btnbreakShift.setText("Break In");
+                                    btnbreakShift.setText("Take a break");
                                 }
 
 
@@ -735,6 +741,9 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
         @BindView(R.id.counterTextview)
         TextView counterTextview;
 
+        @BindView(R.id.tvRoleDetail)
+        TextView tvRoleDetail;
+
         CompletedViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -783,6 +792,7 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
             tvcheckinTime.setText(shift.getCheckinTime());
             tvcheckoutTime.setText(shift.getCheckoutTime());
             tvLocationDetail.setText(shift.getStoreName());
+            tvRoleDetail.setText(shift.getRole());
         }
 
         @Override
@@ -855,6 +865,9 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
         @BindView(R.id.counterTextview)
         TextView counterTextview;
 
+        @BindView(R.id.tvRoleDetail)
+        TextView tvRoleDetail;
+
         NoShowViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -918,6 +931,7 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
             }
 
             textviewshiftType.setText("No Show");
+            tvRoleDetail.setText(shift.getRole());
 
         }
         @Override

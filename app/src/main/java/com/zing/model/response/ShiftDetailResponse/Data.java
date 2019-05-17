@@ -28,6 +28,17 @@ public class Data {
     @Expose
     private String location;
 
+    public Integer getIs_on_break() {
+        return is_on_break;
+    }
+
+    public void setIs_on_break(Integer is_on_break) {
+        this.is_on_break = is_on_break;
+    }
+
+    @SerializedName("is_on_break")
+    private  Integer is_on_break;
+
 
     public String getStore_name() {
         return store_name;

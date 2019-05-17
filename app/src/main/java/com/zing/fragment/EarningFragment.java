@@ -564,7 +564,7 @@ public class EarningFragment extends BaseFragment {
                                     cvCompletedShiftList.setVisibility(View.VISIBLE);
                                 } else {
                                     cvCompletedShiftList.setVisibility(View.VISIBLE);
-                                    tvCompletedShift.setText("No Shifts Available");
+                                    tvCompletedShift.setText("No Completed Shifts Available");
                                 }
 
 
