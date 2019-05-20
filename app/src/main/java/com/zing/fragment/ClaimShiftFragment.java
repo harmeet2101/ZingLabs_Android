@@ -235,7 +235,7 @@ public class ClaimShiftFragment extends BaseFragment {
 
 
 
-                                try {
+                                /*try {
 
                                     Date currentDate = new Date();
                                     String pattern = "yyyy-MM-dd hh:mm a";
@@ -266,7 +266,7 @@ public class ClaimShiftFragment extends BaseFragment {
                                     btnClaimShift.setVisibility(View.GONE);
                                 } else {
                                     btnClaimShift.setVisibility(View.VISIBLE);
-                                }
+                                }*/
 
                             } else {
                                 CommonUtils.showSnackbar(tvClose, shiftDetailResponse.getResponse().getMessage());

@@ -14,6 +14,7 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -351,7 +352,7 @@ public class HomeFragment extends BaseFragment {
                                     }
                                 }
 
-                                shiftAdapter.updateDataSource(upcomingShiftsList);
+                                    shiftAdapter.updateDataSource(upcomingShiftsList);
 
                                 if (upcomingShiftsList.size() == 0) {
                                     cvUpcomingShift.setVisibility(View.VISIBLE);

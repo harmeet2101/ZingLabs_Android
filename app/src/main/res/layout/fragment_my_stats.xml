@@ -137,7 +137,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_marginTop="10dp"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:id="@+id/firstShiftLayout"
                         android:layout_below="@+id/tvHeading">
 
@@ -177,7 +177,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_marginTop="20dp"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:id="@+id/onTimeShiftLayout"
                         android:layout_below="@+id/firstShiftLayout">
 
@@ -317,6 +317,7 @@
                                     android:id="@+id/weekView"
                                     android:layout_gravity="end|bottom"
                                     android:layout_marginBottom="10dp"
+                                    android:visibility="invisible"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
 
@@ -340,6 +341,7 @@
                                     android:id="@+id/monthView"
                                     android:layout_gravity="end|bottom"
                                     android:layout_marginBottom="10dp"
+                                    android:visibility="invisible"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                             </FrameLayout>
@@ -355,7 +357,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_marginTop="20dp"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:id="@+id/recommendShiftLayout"
                         android:layout_below="@+id/perfectShiftLayout">
 

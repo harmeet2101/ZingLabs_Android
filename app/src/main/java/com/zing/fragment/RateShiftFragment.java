@@ -119,7 +119,8 @@ public class RateShiftFragment extends BaseFragment {
     TextView checkinTime;
     @BindView(R.id.checkoutTime)
     TextView checkoutTime;
-
+    @BindView(R.id.tvRoleDetail)
+    TextView tvRoleDetail;
 
     private String shift_id, location,checkinTimeText,checkoutTimeText,breakStatus,from;
     private String mParam2,shiftType;
@@ -212,6 +213,7 @@ public class RateShiftFragment extends BaseFragment {
                                 //tvLocationDetail.setText(shiftDetailResponse.getResponse().getData().getLocation());
                                 shift_id = shiftDetailResponse.getResponse().getData().getShiftId();
                                 location = shiftDetailResponse.getResponse().getData().getLocation();
+                                tvRoleDetail.setText(shiftDetailResponse.getResponse().getData().getRole());
 
                                 String mBreak = String.valueOf(shiftDetailResponse.getResponse().getData().getIs_on_break());
                                 if(mBreak.equalsIgnoreCase("0")){

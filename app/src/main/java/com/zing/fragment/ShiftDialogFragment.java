@@ -41,6 +41,9 @@ import com.zing.adapter.RecomendedShiftAdapter;
 import com.zing.adapter.ShiftCalendarAdapter;
 import com.zing.model.CalendarDataModel;
 import com.zing.model.request.ReleaseShiftRequest;
+import com.zing.model.request.ShiftCheckInRequest;
+import com.zing.model.response.ShiftDetailResponse.Data;
+import com.zing.model.response.ShiftDetailResponse.ShiftDetailResponse;
 import com.zing.util.AppTypeface;
 import com.zing.util.CommonUtils;
 import com.zing.util.GeocodingLocation;
@@ -156,6 +159,7 @@ public class ShiftDialogFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        session = new SessionManagement(getActivity());
         if (getArguments() != null) {
             from = getArguments().getString(ARG_PARAM1);
             shift_id = getArguments().getString(ARG_PARAM2);
@@ -169,6 +173,7 @@ public class ShiftDialogFragment extends BaseFragment {
             shiftType = getArguments().getString(ARG_PARAM10);
 //            calendarDataModel = (ArrayList<CalendarDataModel>) getArguments().getSerializable(ARG_PARAM11);
         }
+        getShiftDetail();
     }
 
     @Override
@@ -196,13 +201,15 @@ public class ShiftDialogFragment extends BaseFragment {
         tvDay.setTypeface(AppTypeface.avenieNext_medium);
         tvStartTime.setTypeface(AppTypeface.avenieNext_regular);
         tvEndTime.setTypeface(AppTypeface.avenieNext_regular);
-
-        tvEarningAmount.setText(/*"$" +*/ expectedEarning);
-        tvLocationDetail.setText(location);
-        tvRoleDetail.setText(role);
         nextShiftId = session.getNextShift();
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+
+        /*SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        tvEarningAmount.setText(expectedEarning);
+        tvLocationDetail.setText(location);
+        tvRoleDetail.setText(role);
         try {
             Date date1 = format.parse(date);
             String day_no = (String) DateFormat.format("dd", date1); // 20
@@ -253,16 +260,10 @@ public class ShiftDialogFragment extends BaseFragment {
             btnReleaseShift.setVisibility(View.VISIBLE);
         }
         if (from.equalsIgnoreCase("home")) {
-//            if (release.equalsIgnoreCase("0")) {
-//                btnReleaseShift.setText("RELEASE SHIFT");
-//            } else if (release.equalsIgnoreCase("1")) {
-//                btnReleaseShift.setText("UNDO RELEASE");
-//                btnReleaseShift.setBackgroundColor(getResources().getColor(R.color.blue));
-//            } else {
+
             btnReleaseShift.setVisibility(View.VISIBLE);
             btnReleaseShift.setText(getResources().getString(R.string.check_in));
             btnReleaseShift.setBackgroundColor(getResources().getColor(R.color.blue));
-//            }
         } else if (from.equalsIgnoreCase("calendar")) {
             btnReleaseShift.setVisibility(View.GONE);
             btnCallManager.setVisibility(View.GONE);
@@ -286,7 +287,7 @@ public class ShiftDialogFragment extends BaseFragment {
             textviewshiftType.setText("Next Shift");
             btnReleaseShift.setText(getResources().getString(R.string.check_in));
             btnReleaseShift.setBackgroundColor(getResources().getColor(R.color.blue));
-        }
+        }*/
 
 
         switch (shiftType) {
@@ -594,6 +595,176 @@ public class ShiftDialogFragment extends BaseFragment {
             e.printStackTrace();
         }
 
+    }
+
+
+
+    private void getShiftDetail() {
+        progressDialog = CommonUtils.getProgressBar(getActivity());
+        ZinglabsApi api = ApiClient.getClient().create(ZinglabsApi.class);
+
+        try {
+            ShiftCheckInRequest shiftCheckInRequest = new ShiftCheckInRequest();
+            shiftCheckInRequest.setShiftId(shift_id);
+
+            Call<ShiftDetailResponse> call = api.shiftDetailApi("Bearer " +
+                    session.getUserToken(), shiftCheckInRequest);
+            call.enqueue(new Callback<ShiftDetailResponse>() {
+                @Override
+                public void onResponse(@NonNull Call<ShiftDetailResponse> call,
+                                       @NonNull Response<ShiftDetailResponse> response) {
+                    progressDialog.dismiss();
+                    if (response.code() == 200) {
+                        try {
+                            ShiftDetailResponse shiftDetailResponse = response.body();
+                            if (shiftDetailResponse != null && shiftDetailResponse.getResponse().getCode() == 200) {
+                               // release = String.valueOf(shiftDetailResponse.getResponse().getData().getRelease());
+
+
+                                 updateView(shiftDetailResponse.getResponse().getData());
+
+
+
+                            } else {
+                                CommonUtils.showSnackbar(tvClose, shiftDetailResponse.getResponse().getMessage());
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        CommonUtils.showSnackbar(tvClose, response.message());
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<ShiftDetailResponse> call, @NonNull Throwable t) {
+                    progressDialog.dismiss();
+                    CommonUtils.showSnakBar(tvClose, t.getMessage());
+                }
+            });
+        } catch (Exception e) {
+            progressDialog.dismiss();
+            e.printStackTrace();
+        }
+    }
+
+
+    private  void updateView(Data response){
+
+
+        tvEarningAmount.setText(/*"$" +*/ response.getExpectedEarning());
+        tvLocationDetail.setText(response.getStore_name());
+        tvRoleDetail.setText(response.getRole());
+        nextShiftId = session.getNextShift();
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date1 = format.parse(response.getDate());
+            String day_no = (String) DateFormat.format("dd", date1); // 20
+            String monthString = (String) DateFormat.format("MMM", date1); // Jun
+            day = (String) DateFormat.format("EEE", date1); // Thursday
+
+            tvDay.setText(monthString + " " + day_no + ", " + day);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+
+            Date currentDate = new Date();
+            String pattern = "yyyy-MM-dd hh:mm a";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            StringTokenizer tokenizer = new StringTokenizer(response.getTimeSlot(), "-");
+            String startTime = tokenizer.nextToken();
+            String endTime = tokenizer.nextToken();
+
+            tvStartTime.setText(startTime);
+            tvEndTime.setText(endTime);
+
+            String mDateString = response.getDate() + " " + startTime.toUpperCase();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(currentDate);
+            cal.add(Calendar.DATE, 1);
+            Date nxtDate = cal.getTime();
+            String nextDateString = simpleDateFormat.format(nxtDate);
+            Date nextDate = simpleDateFormat.parse(nextDateString);
+            Date nextShiftDate = simpleDateFormat.parse(mDateString);
+
+            if (nextShiftDate.compareTo(nextDate) < 0) {
+                isWithin24hrs = true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        session.setDialogData(from, response.getShiftId(), response.getDate(), response.getDay(),
+                response.getExpectedEarning(), response.getTimeSlot(), response.getStore_name(), response.getRole());
+
+        if (isWithin24hrs) {
+            btnReleaseShift.setVisibility(View.GONE);
+        } else {
+            btnReleaseShift.setVisibility(View.VISIBLE);
+        }
+        if (from.equalsIgnoreCase("home")) {
+//            if (release.equalsIgnoreCase("0")) {
+//                btnReleaseShift.setText("RELEASE SHIFT");
+//            } else if (release.equalsIgnoreCase("1")) {
+//                btnReleaseShift.setText("UNDO RELEASE");
+//                btnReleaseShift.setBackgroundColor(getResources().getColor(R.color.blue));
+//            } else {
+            btnReleaseShift.setVisibility(View.VISIBLE);
+            btnReleaseShift.setText(getResources().getString(R.string.check_in));
+            btnReleaseShift.setBackgroundColor(getResources().getColor(R.color.blue));
+//            }
+        } else if (from.equalsIgnoreCase("calendar")) {
+            btnReleaseShift.setVisibility(View.GONE);
+            btnCallManager.setVisibility(View.GONE);
+        } else {
+            if (response.getRelease()==0) {
+
+                btnReleaseShift.setText("RELEASE SHIFT");
+            } else if (response.getRelease()==1) {
+
+                btnReleaseShift.setText("UNDO RELEASE");
+                btnReleaseShift.setBackgroundColor(getResources().getColor(R.color.blue));
+            } else {
+
+                btnReleaseShift.setText(getResources().getString(R.string.check_in));
+                btnReleaseShift.setBackgroundColor(getResources().getColor(R.color.blue));
+            }
+        }
+        if (response.getShiftId().equalsIgnoreCase(nextShiftId)) {
+
+            btnReleaseShift.setVisibility(View.VISIBLE);
+            textviewshiftType.setText("Next Shift");
+            btnReleaseShift.setText(getResources().getString(R.string.check_in));
+            btnReleaseShift.setBackgroundColor(getResources().getColor(R.color.blue));
+        }
+
+
+        switch (response.getShift_status()) {
+
+            case "NOSHOW":
+                textviewshiftType.setText("No Show");
+                btnReleaseShift.setVisibility(View.GONE);
+                rlDialog.setBackgroundColor(getResources().getColor(R.color.now_show_bg));
+                lay01.setBackgroundColor(getResources().getColor(R.color.now_show_bg_dark));
+                lay02.setBackgroundColor(getResources().getColor(R.color.now_show_bg_dark));
+                lay03.setBackgroundColor(getResources().getColor(R.color.now_show_bg_dark));
+                lay04.setBackgroundColor(getResources().getColor(R.color.now_show_bg_dark));
+                break;
+
+            case "COMPLETED":
+                textviewshiftType.setText("Completed Shift");
+                break;
+            case "UPCOMING":
+                textviewshiftType.setText("Upcoming Shift");
+                break;
+        }
     }
 
 }

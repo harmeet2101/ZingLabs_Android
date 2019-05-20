@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
@@ -48,6 +49,7 @@ import java.util.StringTokenizer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Optional;
 import butterknife.Unbinder;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -498,16 +500,13 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
         TextView checkinTime;
         @BindView(R.id.checkoutTime)
         TextView checkoutTime;
-
-        private  Shift shf;
-        private String breakStatus;
-
         @BindView(R.id.counterTextview)
         TextView counterTextview;
-
         @BindView(R.id.tvRoleDetail)
         TextView tvRoleDetail;
 
+        private  Shift shf;
+        private String breakStatus;
         OnGoingViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

@@ -90,6 +90,8 @@ public class MyStatsFragment extends BaseFragment implements View.OnClickListene
     @BindView(R.id.ImageView_recommended_shift_10)
     ImageView imageView_recommended_shift_10;
 
+    @BindView(R.id.ImageView_shift_completed)
+    ImageView imageView_shift_completed;
     @BindView(R.id.tvHeading)
     TextView tvBadges;
 
@@ -177,7 +179,7 @@ public class MyStatsFragment extends BaseFragment implements View.OnClickListene
                             ((TextView)weekView.findViewById(R.id.counterTextview)).setText(""+statsResponse.getResponse().getBadges().getPerfect_week());
                             ((TextView)monthView.findViewById(R.id.counterTextview)).setText(""+statsResponse.getResponse().getBadges().getPerfect_month());
 
-                            if(statsResponse.getResponse().getBadges().getFirst_shift_completed()
+                           /* if(statsResponse.getResponse().getBadges().getFirst_shift_completed()
                                 ==0 && statsResponse.getResponse().getBadges().getShow_up_on_time()<5
 
                                     && statsResponse.getResponse().getBadges().getPerfect_week()==0
@@ -186,104 +188,127 @@ public class MyStatsFragment extends BaseFragment implements View.OnClickListene
 
                             ){
                                 tvBadges.setText("No Badges Found");
-                            }
+                            }*/
                             if(statsResponse.getResponse().getBadges().getFirst_shift_completed()==0)
-                                firstShiftLayout.setVisibility(View.GONE);
-                            else
-                                firstShiftLayout.setVisibility(View.VISIBLE);
+                                imageView_shift_completed.setImageResource(R.drawable.badge_first_shift_completed_grey);
 
-                            if(statsResponse.getResponse().getBadges().getShow_up_on_time()==0)
+                            else
+                                imageView_shift_completed.setImageResource(R.drawable.badge_first_shift_completed);
+
+                            /*if(statsResponse.getResponse().getBadges().getShow_up_on_time()==0)
                                 onTimeShiftLayout.setVisibility(View.GONE);
                             else
-                                onTimeShiftLayout.setVisibility(View.VISIBLE);
+                                onTimeShiftLayout.setVisibility(View.VISIBLE);*/
 
-                            if(statsResponse.getResponse().getBadges().getRecommended_shift_picked()==0)
+                           /* if(statsResponse.getResponse().getBadges().getRecommended_shift_picked()==0)
                                 recommendShiftLayout.setVisibility(View.GONE);
                             else
-                                recommendShiftLayout.setVisibility(View.VISIBLE);
+                                recommendShiftLayout.setVisibility(View.VISIBLE);*/
 
                             if(statsResponse.getResponse().getBadges().getPerfect_week()==0
-                                    && statsResponse.getResponse().getBadges().getPerfect_month() ==0)
-                                perfectShiftLayout.setVisibility(View.GONE);
+                                    && statsResponse.getResponse().getBadges().getPerfect_month() ==0){
+
+                                imageView_perfect_week.setImageResource(R.drawable.badge_perfect_week_grey);
+                                imageView_perfect_month.setImageResource(R.drawable.badge_perfect_month_grey);
+                            }
+
                             else if(statsResponse.getResponse().getBadges().getPerfect_week()==0
                                     && statsResponse.getResponse().getBadges().getPerfect_month()!=0){
-                                perfectShiftLayout.setVisibility(View.VISIBLE);
-                                imageView_perfect_week.setVisibility(View.GONE);
-                                imageView_perfect_month.setVisibility(View.VISIBLE);
+
+                                imageView_perfect_week.setImageResource(R.drawable.badge_perfect_week_grey);
+                                imageView_perfect_month.setImageResource(R.drawable.badge_perfect_month);
 
                             }else if(statsResponse.getResponse().getBadges().getPerfect_month()==0
                                     && statsResponse.getResponse().getBadges().getPerfect_week()!=0){
-                                perfectShiftLayout.setVisibility(View.VISIBLE);
-                                imageView_perfect_month.setVisibility(View.GONE);
-                                imageView_perfect_week.setVisibility(View.VISIBLE);
+                                imageView_perfect_month.setImageResource(R.drawable.badge_perfect_month_grey);
+                                imageView_perfect_week.setImageResource(R.drawable.badge_perfect_week);
                             }
 
 
-                            imageView_show_up_on_time_5.setVisibility(View.GONE);
-                            imageView_show_up_on_time_10.setVisibility(View.GONE);
-                            imageView_show_up_on_time_20.setVisibility(View.GONE);
-                            imageView_show_up_on_time_50.setVisibility(View.GONE);
-                            imageView_show_up_on_time_100.setVisibility(View.GONE);
+                            imageView_show_up_on_time_5.setImageResource(R.drawable.badge_show_up_on_time_5_grey);
+                            imageView_show_up_on_time_10.setImageResource(R.drawable.badge_show_up_on_time_10_grey);
+                            imageView_show_up_on_time_20.setImageResource(R.drawable.badge_show_up_on_time_20_grey);
+                            imageView_show_up_on_time_50.setImageResource(R.drawable.badge_show_up_on_time_50_grey);
+                            imageView_show_up_on_time_100.setImageResource(R.drawable.badge_show_up_on_time_100_grey);
 
                             if(statsResponse.getResponse().getBadges().getShow_up_on_time()<5){
-                                onTimeShiftLayout.setVisibility(View.GONE);
-                                imageView_show_up_on_time_5.setVisibility(View.GONE);
-                                imageView_show_up_on_time_10.setVisibility(View.GONE);
-                                imageView_show_up_on_time_20.setVisibility(View.GONE);
-                                imageView_show_up_on_time_50.setVisibility(View.GONE);
-                                imageView_show_up_on_time_100.setVisibility(View.GONE);
+
+                                imageView_show_up_on_time_5.setImageResource(R.drawable.badge_show_up_on_time_5_grey);
+                                imageView_show_up_on_time_10.setImageResource(R.drawable.badge_show_up_on_time_10_grey);
+                                imageView_show_up_on_time_20.setImageResource(R.drawable.badge_show_up_on_time_20_grey);
+                                imageView_show_up_on_time_50.setImageResource(R.drawable.badge_show_up_on_time_50_grey);
+                                imageView_show_up_on_time_100.setImageResource(R.drawable.badge_show_up_on_time_100_grey);
                             }
 
                             else if(statsResponse.getResponse().getBadges().getShow_up_on_time()>=5
-                                    && statsResponse.getResponse().getBadges().getShow_up_on_time() < 10)
-                                imageView_show_up_on_time_5.setVisibility(View.VISIBLE);
-
-                            else if(statsResponse.getResponse().getBadges().getShow_up_on_time() >=10
-                                    && statsResponse.getResponse().getBadges().getShow_up_on_time() <= 20) {
-                                imageView_show_up_on_time_5.setVisibility(View.VISIBLE);
-                                imageView_show_up_on_time_10.setVisibility(View.VISIBLE);
+                                    && statsResponse.getResponse().getBadges().getShow_up_on_time() < 10) {
+                                imageView_show_up_on_time_5.setImageResource(R.drawable.badge_show_up_on_time_5);
+                                imageView_show_up_on_time_10.setImageResource(R.drawable.badge_show_up_on_time_10_grey);
+                                imageView_show_up_on_time_20.setImageResource(R.drawable.badge_show_up_on_time_20_grey);
+                                imageView_show_up_on_time_50.setImageResource(R.drawable.badge_show_up_on_time_50_grey);
+                                imageView_show_up_on_time_100.setImageResource(R.drawable.badge_show_up_on_time_100_grey);
                             }
-                            else if(statsResponse.getResponse().getBadges().getShow_up_on_time() >21
+                            else if(statsResponse.getResponse().getBadges().getShow_up_on_time() >=10
+                                    && statsResponse.getResponse().getBadges().getShow_up_on_time() <= 19) {
+
+                                imageView_show_up_on_time_5.setImageResource(R.drawable.badge_show_up_on_time_5);
+                                imageView_show_up_on_time_10.setImageResource(R.drawable.badge_show_up_on_time_10);
+                                imageView_show_up_on_time_20.setImageResource(R.drawable.badge_show_up_on_time_20_grey);
+                                imageView_show_up_on_time_50.setImageResource(R.drawable.badge_show_up_on_time_50_grey);
+                                imageView_show_up_on_time_100.setImageResource(R.drawable.badge_show_up_on_time_100_grey);
+
+                            }
+                            else if(statsResponse.getResponse().getBadges().getShow_up_on_time() >=20
                                     && statsResponse.getResponse().getBadges().getShow_up_on_time() <49) {
-                                imageView_show_up_on_time_5.setVisibility(View.VISIBLE);
-                                imageView_show_up_on_time_10.setVisibility(View.VISIBLE);
-                                imageView_show_up_on_time_20.setVisibility(View.VISIBLE);
+
+                                imageView_show_up_on_time_5.setImageResource(R.drawable.badge_show_up_on_time_5);
+                                imageView_show_up_on_time_10.setImageResource(R.drawable.badge_show_up_on_time_10);
+                                imageView_show_up_on_time_20.setImageResource(R.drawable.badge_show_up_on_time_20);
+                                imageView_show_up_on_time_50.setImageResource(R.drawable.badge_show_up_on_time_50_grey);
+                                imageView_show_up_on_time_100.setImageResource(R.drawable.badge_show_up_on_time_100_grey);
+
                             }
                             else  if(statsResponse.getResponse().getBadges().getShow_up_on_time() >= 50
                                     &&  statsResponse.getResponse().getBadges().getShow_up_on_time() < 100) {
-                                imageView_show_up_on_time_5.setVisibility(View.VISIBLE);
-                                imageView_show_up_on_time_10.setVisibility(View.VISIBLE);
-                                imageView_show_up_on_time_20.setVisibility(View.VISIBLE);
-                                imageView_show_up_on_time_50.setVisibility(View.VISIBLE);
+                                imageView_show_up_on_time_5.setImageResource(R.drawable.badge_show_up_on_time_5);
+                                imageView_show_up_on_time_10.setImageResource(R.drawable.badge_show_up_on_time_10);
+                                imageView_show_up_on_time_20.setImageResource(R.drawable.badge_show_up_on_time_20);
+                                imageView_show_up_on_time_50.setImageResource(R.drawable.badge_show_up_on_time_50);
+                                imageView_show_up_on_time_100.setImageResource(R.drawable.badge_show_up_on_time_100_grey);
+
                             }
                             else  {
-                                imageView_show_up_on_time_5.setVisibility(View.VISIBLE);
-                                imageView_show_up_on_time_10.setVisibility(View.VISIBLE);
-                                imageView_show_up_on_time_20.setVisibility(View.VISIBLE);
-                                imageView_show_up_on_time_50.setVisibility(View.VISIBLE);
-                                imageView_show_up_on_time_100.setVisibility(View.VISIBLE);
+                                imageView_show_up_on_time_5.setImageResource(R.drawable.badge_show_up_on_time_5);
+                                imageView_show_up_on_time_10.setImageResource(R.drawable.badge_show_up_on_time_10);
+                                imageView_show_up_on_time_20.setImageResource(R.drawable.badge_show_up_on_time_20);
+                                imageView_show_up_on_time_50.setImageResource(R.drawable.badge_show_up_on_time_50);
+                                imageView_show_up_on_time_100.setImageResource(R.drawable.badge_show_up_on_time_100);
                             }
 
 
-                            imageView_recommended_shift_1.setVisibility(View.GONE);
-                            imageView_recommended_shift_5.setVisibility(View.GONE);
-                            imageView_recommended_shift_10.setVisibility(View.GONE);
 
-
+                            imageView_recommended_shift_1.setImageResource(R.drawable.badge_picked_up_recommended_shifts_1_grey);
+                            imageView_recommended_shift_5.setImageResource(R.drawable.badge_rec_5_grey);
+                            imageView_recommended_shift_10.setImageResource(R.drawable.badge_rec_10_grey);
 
                             if(statsResponse.getResponse().getBadges().getRecommended_shift_picked() > 0
-                                    && statsResponse.getResponse().getBadges().getRecommended_shift_picked() < 5)
-                                imageView_recommended_shift_1.setVisibility(View.VISIBLE);
+                                    && statsResponse.getResponse().getBadges().getRecommended_shift_picked() < 5) {
+                                imageView_recommended_shift_1.setImageResource(R.drawable.badge_picked_up_recommended_shifts);
+                                imageView_recommended_shift_5.setImageResource(R.drawable.badge_rec_5_grey);
+                                imageView_recommended_shift_10.setImageResource(R.drawable.badge_rec_10_grey);
+                            }
 
                             else if(statsResponse.getResponse().getBadges().getRecommended_shift_picked() >=5
                                     && statsResponse.getResponse().getBadges().getRecommended_shift_picked() <10) {
-                                imageView_recommended_shift_1.setVisibility(View.VISIBLE);
-                                imageView_recommended_shift_5.setVisibility(View.VISIBLE);
+
+                                imageView_recommended_shift_1.setImageResource(R.drawable.badge_picked_up_recommended_shifts);
+                                imageView_recommended_shift_5.setImageResource(R.drawable.badge_rec_5);
+                                imageView_recommended_shift_10.setImageResource(R.drawable.badge_rec_10_grey);
                             }
                             else if(statsResponse.getResponse().getBadges().getRecommended_shift_picked() >=10) {
-                                imageView_recommended_shift_1.setVisibility(View.VISIBLE);
-                                imageView_recommended_shift_5.setVisibility(View.VISIBLE);
-                                imageView_recommended_shift_10.setVisibility(View.VISIBLE);
+                                imageView_recommended_shift_1.setImageResource(R.drawable.badge_picked_up_recommended_shifts);
+                                imageView_recommended_shift_5.setImageResource(R.drawable.badge_rec_5);
+                                imageView_recommended_shift_10.setImageResource(R.drawable.badge_rec_10);
                             }
 
 

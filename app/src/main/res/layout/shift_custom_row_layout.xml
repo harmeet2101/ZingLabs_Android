@@ -141,13 +141,12 @@
                     android:padding="10dp" />
 
                 <TextView
+                    android:id="@+id/tvRoleDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:alpha=".60"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:id="@+id/tvRoleDetail"
                     android:layout_gravity="center_vertical"
                     android:text="Cashier"
                     android:textColor="@color/white"
