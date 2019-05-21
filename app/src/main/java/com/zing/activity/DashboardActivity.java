@@ -76,11 +76,11 @@ public class DashboardActivity extends BaseActivity implements FragmentInterface
     boolean exit = false;
     private FooterAdapter adapter;
     public static int n = 0;
-    private int icons[] = {R.drawable.home, R.drawable.cal, R.drawable.pay, R.drawable.bell,
-            R.drawable.account};
+    private int icons[] = {R.drawable.ic_home_24px, R.drawable.ic_cal_24px, R.drawable.ic_payment_filled_24px, R.drawable.ic_bell_24px,
+            R.drawable.ic_person_24px};
 
-    private int icons_selected[] = {R.drawable.home_select, R.drawable.cal_select, R.drawable.pay_selected,
-            R.drawable.bell_select, R.drawable.account_selected};
+    private int icons_selected[] = {R.drawable.ic_home_24px_filled, R.drawable.ic_cal_filled_24px, R.drawable.ic_payment_24px,
+            R.drawable.ic_bell_filled_24px, R.drawable.ic_person_filled_24px};
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

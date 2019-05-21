@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/broadcast_bg"
+    android:background="@drawable/empty_state"
     android:orientation="vertical">
 
     <TextView
@@ -39,7 +39,7 @@
             android:paddingLeft="@dimen/default_margin_large"
             android:paddingRight="@dimen/default_margin_large"
             android:text="@string/receive_messages_from_your_store_manager"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/black"
             android:textSize="@dimen/text_24" />
 
         <TextView
@@ -51,7 +51,7 @@
             android:layout_marginLeft="@dimen/default_margin_large"
             android:layout_marginRight="@dimen/default_margin_large"
             android:text="@string/make_sure_you_have_your_pay_details_set_up_so_that_we_can_show_you_all_your_earnings"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/black"
             android:textSize="@dimen/normal_text_plus"/>
 
     </LinearLayout>

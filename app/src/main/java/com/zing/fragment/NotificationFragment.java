@@ -86,7 +86,7 @@ public class NotificationFragment extends BaseFragment {
         AppTypeface.getTypeFace(getActivity());
         tvBroadcast.setTypeface(AppTypeface.avenieNext_demibold);
         tvBroadcastHeading.setTypeface(AppTypeface.avenieNext_medium);
-        tvBroadcastDescription.setTypeface(AppTypeface.avenieNext_regular);
+        tvBroadcastDescription.setTypeface(AppTypeface.avenieNext_medium);
     }
 
     @Override
