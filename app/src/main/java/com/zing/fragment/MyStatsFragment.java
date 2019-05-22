@@ -189,12 +189,14 @@ public class MyStatsFragment extends BaseFragment implements View.OnClickListene
                             ){
                                 tvBadges.setText("No Badges Found");
                             }*/
-                            if(statsResponse.getResponse().getBadges().getFirst_shift_completed()==0)
+                            if(statsResponse.getResponse().getBadges().getFirst_shift_completed()==0) {
                                 imageView_shift_completed.setImageResource(R.drawable.badge_first_shift_completed_grey);
-
-                            else
+                                imageView_shift_completed.setClickable(true);
+                            }
+                            else {
                                 imageView_shift_completed.setImageResource(R.drawable.badge_first_shift_completed);
-
+                                imageView_shift_completed.setClickable(false);
+                            }
                             /*if(statsResponse.getResponse().getBadges().getShow_up_on_time()==0)
                                 onTimeShiftLayout.setVisibility(View.GONE);
                             else
@@ -210,6 +212,9 @@ public class MyStatsFragment extends BaseFragment implements View.OnClickListene
 
                                 imageView_perfect_week.setImageResource(R.drawable.badge_perfect_week_grey);
                                 imageView_perfect_month.setImageResource(R.drawable.badge_perfect_month_grey);
+                                imageView_perfect_week.setClickable(false);
+                                imageView_perfect_month.setClickable(false);
+
                             }
 
                             else if(statsResponse.getResponse().getBadges().getPerfect_week()==0
@@ -218,10 +223,16 @@ public class MyStatsFragment extends BaseFragment implements View.OnClickListene
                                 imageView_perfect_week.setImageResource(R.drawable.badge_perfect_week_grey);
                                 imageView_perfect_month.setImageResource(R.drawable.badge_perfect_month);
 
+                                imageView_perfect_week.setClickable(false);
+                                imageView_perfect_month.setClickable(true);
+
                             }else if(statsResponse.getResponse().getBadges().getPerfect_month()==0
                                     && statsResponse.getResponse().getBadges().getPerfect_week()!=0){
                                 imageView_perfect_month.setImageResource(R.drawable.badge_perfect_month_grey);
                                 imageView_perfect_week.setImageResource(R.drawable.badge_perfect_week);
+
+                                imageView_perfect_week.setClickable(true);
+                                imageView_perfect_month.setClickable(false);
                             }
 
 
@@ -238,6 +249,13 @@ public class MyStatsFragment extends BaseFragment implements View.OnClickListene
                                 imageView_show_up_on_time_20.setImageResource(R.drawable.badge_show_up_on_time_20_grey);
                                 imageView_show_up_on_time_50.setImageResource(R.drawable.badge_show_up_on_time_50_grey);
                                 imageView_show_up_on_time_100.setImageResource(R.drawable.badge_show_up_on_time_100_grey);
+
+                                imageView_show_up_on_time_5.setClickable(false);
+                                imageView_show_up_on_time_10.setClickable(false);
+                                imageView_show_up_on_time_20.setClickable(false);
+                                imageView_show_up_on_time_50.setClickable(false);
+                                imageView_show_up_on_time_100.setClickable(false);
+
                             }
 
                             else if(statsResponse.getResponse().getBadges().getShow_up_on_time()>=5
@@ -247,6 +265,13 @@ public class MyStatsFragment extends BaseFragment implements View.OnClickListene
                                 imageView_show_up_on_time_20.setImageResource(R.drawable.badge_show_up_on_time_20_grey);
                                 imageView_show_up_on_time_50.setImageResource(R.drawable.badge_show_up_on_time_50_grey);
                                 imageView_show_up_on_time_100.setImageResource(R.drawable.badge_show_up_on_time_100_grey);
+
+                                imageView_show_up_on_time_5.setClickable(true);
+                                imageView_show_up_on_time_10.setClickable(false);
+                                imageView_show_up_on_time_20.setClickable(false);
+                                imageView_show_up_on_time_50.setClickable(false);
+                                imageView_show_up_on_time_100.setClickable(false);
+
                             }
                             else if(statsResponse.getResponse().getBadges().getShow_up_on_time() >=10
                                     && statsResponse.getResponse().getBadges().getShow_up_on_time() <= 19) {
@@ -257,6 +282,11 @@ public class MyStatsFragment extends BaseFragment implements View.OnClickListene
                                 imageView_show_up_on_time_50.setImageResource(R.drawable.badge_show_up_on_time_50_grey);
                                 imageView_show_up_on_time_100.setImageResource(R.drawable.badge_show_up_on_time_100_grey);
 
+                                imageView_show_up_on_time_5.setClickable(true);
+                                imageView_show_up_on_time_10.setClickable(true);
+                                imageView_show_up_on_time_20.setClickable(false);
+                                imageView_show_up_on_time_50.setClickable(false);
+                                imageView_show_up_on_time_100.setClickable(false);
                             }
                             else if(statsResponse.getResponse().getBadges().getShow_up_on_time() >=20
                                     && statsResponse.getResponse().getBadges().getShow_up_on_time() <49) {
@@ -267,6 +297,12 @@ public class MyStatsFragment extends BaseFragment implements View.OnClickListene
                                 imageView_show_up_on_time_50.setImageResource(R.drawable.badge_show_up_on_time_50_grey);
                                 imageView_show_up_on_time_100.setImageResource(R.drawable.badge_show_up_on_time_100_grey);
 
+                                imageView_show_up_on_time_5.setClickable(true);
+                                imageView_show_up_on_time_10.setClickable(true);
+                                imageView_show_up_on_time_20.setClickable(true);
+                                imageView_show_up_on_time_50.setClickable(false);
+                                imageView_show_up_on_time_100.setClickable(false);
+
                             }
                             else  if(statsResponse.getResponse().getBadges().getShow_up_on_time() >= 50
                                     &&  statsResponse.getResponse().getBadges().getShow_up_on_time() < 100) {
@@ -276,6 +312,12 @@ public class MyStatsFragment extends BaseFragment implements View.OnClickListene
                                 imageView_show_up_on_time_50.setImageResource(R.drawable.badge_show_up_on_time_50);
                                 imageView_show_up_on_time_100.setImageResource(R.drawable.badge_show_up_on_time_100_grey);
 
+                                imageView_show_up_on_time_5.setClickable(true);
+                                imageView_show_up_on_time_10.setClickable(true);
+                                imageView_show_up_on_time_20.setClickable(true);
+                                imageView_show_up_on_time_50.setClickable(true);
+                                imageView_show_up_on_time_100.setClickable(false);
+
                             }
                             else  {
                                 imageView_show_up_on_time_5.setImageResource(R.drawable.badge_show_up_on_time_5);
@@ -283,6 +325,12 @@ public class MyStatsFragment extends BaseFragment implements View.OnClickListene
                                 imageView_show_up_on_time_20.setImageResource(R.drawable.badge_show_up_on_time_20);
                                 imageView_show_up_on_time_50.setImageResource(R.drawable.badge_show_up_on_time_50);
                                 imageView_show_up_on_time_100.setImageResource(R.drawable.badge_show_up_on_time_100);
+
+                                imageView_show_up_on_time_5.setClickable(true);
+                                imageView_show_up_on_time_10.setClickable(true);
+                                imageView_show_up_on_time_20.setClickable(true);
+                                imageView_show_up_on_time_50.setClickable(true);
+                                imageView_show_up_on_time_100.setClickable(true);
                             }
 
 
@@ -291,11 +339,18 @@ public class MyStatsFragment extends BaseFragment implements View.OnClickListene
                             imageView_recommended_shift_5.setImageResource(R.drawable.badge_rec_5_grey);
                             imageView_recommended_shift_10.setImageResource(R.drawable.badge_rec_10_grey);
 
+                            imageView_recommended_shift_1.setClickable(false);
+                            imageView_recommended_shift_5.setClickable(false);
+                            imageView_recommended_shift_10.setClickable(false);
                             if(statsResponse.getResponse().getBadges().getRecommended_shift_picked() > 0
                                     && statsResponse.getResponse().getBadges().getRecommended_shift_picked() < 5) {
                                 imageView_recommended_shift_1.setImageResource(R.drawable.badge_picked_up_recommended_shifts);
                                 imageView_recommended_shift_5.setImageResource(R.drawable.badge_rec_5_grey);
                                 imageView_recommended_shift_10.setImageResource(R.drawable.badge_rec_10_grey);
+
+                                imageView_recommended_shift_1.setClickable(true);
+                                imageView_recommended_shift_5.setClickable(false);
+                                imageView_recommended_shift_10.setClickable(false);
                             }
 
                             else if(statsResponse.getResponse().getBadges().getRecommended_shift_picked() >=5
@@ -304,11 +359,18 @@ public class MyStatsFragment extends BaseFragment implements View.OnClickListene
                                 imageView_recommended_shift_1.setImageResource(R.drawable.badge_picked_up_recommended_shifts);
                                 imageView_recommended_shift_5.setImageResource(R.drawable.badge_rec_5);
                                 imageView_recommended_shift_10.setImageResource(R.drawable.badge_rec_10_grey);
+                                imageView_recommended_shift_1.setClickable(true);
+                                imageView_recommended_shift_5.setClickable(true);
+                                imageView_recommended_shift_10.setClickable(false);
                             }
                             else if(statsResponse.getResponse().getBadges().getRecommended_shift_picked() >=10) {
                                 imageView_recommended_shift_1.setImageResource(R.drawable.badge_picked_up_recommended_shifts);
                                 imageView_recommended_shift_5.setImageResource(R.drawable.badge_rec_5);
                                 imageView_recommended_shift_10.setImageResource(R.drawable.badge_rec_10);
+
+                                imageView_recommended_shift_1.setClickable(true);
+                                imageView_recommended_shift_5.setClickable(true);
+                                imageView_recommended_shift_10.setClickable(true);
                             }
 
 

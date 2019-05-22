@@ -45,7 +45,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PreferenceCalenderActivity extends BaseActivity implements WeekDaysAdapter.ClickListner {
+public class  PreferenceCalenderActivity extends BaseActivity implements WeekDaysAdapter.ClickListner {
     @BindView(R.id.tvTime)
     TextView tvTime;
     @BindView(R.id.tvPreferences)
@@ -62,7 +62,7 @@ public class PreferenceCalenderActivity extends BaseActivity implements WeekDays
 
     TimeBean timeBean;
     ArrayList<TimeBean> timeList;
-    String time[] = {"06am","07am", "08am","09am","10am", "11am","12pm", "01pm","02pm","03pm", "04pm","05pm", "06pm","07pm", "08pm","09pm", "10pm", "11pm","12am"};
+    String time[] = {"12am", "01am","02am","03am", "04am","05am","06am","07am", "08am","09am","10am", "11am","12pm", "01pm","02pm","03pm", "04pm","05pm", "06pm","07pm", "08pm","09pm", "10pm", "11pm","12am"};
 
     @BindView(R.id.tvSkipStep)
     TextView tvSkipStep;
@@ -123,12 +123,12 @@ public class PreferenceCalenderActivity extends BaseActivity implements WeekDays
         }
 
         timeList = new ArrayList<>();
-       /* timeList.clear();
+        timeList.clear();
 
         for (int i = 0; i < time.length; i++) {
             timeBean = new TimeBean(time[i], false, false);
             timeList.add(timeBean);
-        }*/
+        }
 
         rvWeekDays.setLayoutManager(new LinearLayoutManager(this) {
             @Override
@@ -358,7 +358,7 @@ public class PreferenceCalenderActivity extends BaseActivity implements WeekDays
                             e.printStackTrace();
                         }
 
-                        adapter = new TimeAdapter(PreferenceCalenderActivity.this, dayBusinessHourMatch.get(day[0]),
+                        adapter = new TimeAdapter(PreferenceCalenderActivity.this, timeList/*dayBusinessHourMatch.get(day[0])*/,
                                 0, btnDone, from);
                         rvTime.setAdapter(adapter);
                         adapter.setClickListener(new TimeAdapter.ItemClickListener() {
@@ -421,7 +421,7 @@ public class PreferenceCalenderActivity extends BaseActivity implements WeekDays
         clickedPos = position;
 
         TimeAdapter.setData();
-        adapter = new TimeAdapter(this, dayBusinessHourMatch.get(day[clickedPos]), position, btnDone, from);
+        adapter = new TimeAdapter(this, timeList/*dayBusinessHourMatch.get(day[clickedPos])*/, position, btnDone, from);
         rvTime.setAdapter(adapter);
         adapter.setClickListener(new TimeAdapter.ItemClickListener() {
             @Override

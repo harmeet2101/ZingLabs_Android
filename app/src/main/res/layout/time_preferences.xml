@@ -1,7 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@drawable/empty_state_vd"
     android:orientation="vertical">
 
     <LinearLayout
@@ -28,6 +29,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/default_margin"
             android:gravity="center"
+            android:textColor="@color/black"
             android:text="@string/take_control_of_your_schedule"
             android:textSize="@dimen/text_19" />
 
@@ -61,7 +63,7 @@
             android:gravity="center"
             android:paddingTop="@dimen/default_margin_extra_large"
             android:text="@string/skip_for_now"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/black"
             android:textSize="@dimen/normal_text_minus" />
 
     </LinearLayout>

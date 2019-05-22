@@ -11,8 +11,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -41,12 +39,10 @@ import com.zing.util.SessionManagement;
 import com.zing.util.restClient.ApiClient;
 import com.zing.util.restClient.ZinglabsApi;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import java.util.StringTokenizer;
 import java.util.TimeZone;
 
 import butterknife.BindView;
@@ -76,11 +72,11 @@ public class DashboardActivity extends BaseActivity implements FragmentInterface
     boolean exit = false;
     private FooterAdapter adapter;
     public static int n = 0;
-    private int icons[] = {R.drawable.ic_home_24px, R.drawable.ic_cal_24px, R.drawable.ic_payment_filled_24px, R.drawable.ic_bell_24px,
-            R.drawable.ic_person_24px};
+    private int icons[] = {R.drawable.ic_home, R.drawable.ic_cal, R.drawable.ic_payment_filled, R.drawable.ic_bell,
+            R.drawable.ic_person};
 
-    private int icons_selected[] = {R.drawable.ic_home_24px_filled, R.drawable.ic_cal_filled_24px, R.drawable.ic_payment_24px,
-            R.drawable.ic_bell_filled_24px, R.drawable.ic_person_filled_24px};
+    private int icons_selected[] = {R.drawable.ic_home_filled, R.drawable.ic_cal_filled, R.drawable.ic_payment,
+            R.drawable.ic_bell_filled, R.drawable.ic_person_filled};
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
