@@ -62,9 +62,9 @@ public class  PreferenceCalenderActivity extends BaseActivity implements WeekDay
 
     TimeBean timeBean;
     ArrayList<TimeBean> timeList;
-    String time[] = {"12 am", "01 am","02 am","03 am", "04 am","05 am","06 am","07 am", "08 am","09 am","10 am",
-            "11 am","12 pm", "01 pm","02 pm","03 pm", "04 pm","05 pm", "06 pm","07 pm", "08 pm","09 pm", "10 pm",
-            "11 pm","12 am"};
+    String time[] = {"12am", "01am","02am","03am", "04am","05am","06am","07am", "08am","09am","10am",
+            "11am","12pm", "01pm","02pm","03pm", "04pm","05pm", "06pm","07pm", "08pm","09pm", "10pm",
+            "11pm","12am"};
 
     @BindView(R.id.tvSkipStep)
     TextView tvSkipStep;
@@ -128,7 +128,7 @@ public class  PreferenceCalenderActivity extends BaseActivity implements WeekDay
         timeList.clear();
 
         for (int i = 0; i < time.length; i++) {
-            timeBean = new TimeBean(time[i].toUpperCase(), false, false);
+            timeBean = new TimeBean(time[i], false, false);
             timeList.add(timeBean);
         }
 
