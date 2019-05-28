@@ -8,6 +8,8 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -234,7 +236,14 @@ public class MainActivity extends BaseActivity {
                 mBitmap = BitmapFactory.decodeFile(out.getAbsolutePath());
 
 
+                try {
+                    ExifInterface exifObject = new ExifInterface(out.getAbsolutePath());
+                    int orientation = exifObject.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
+                    mBitmap = CommonUtils.rotateBitmap(mBitmap,orientation);
 
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 ContextWrapper wrapper = new ContextWrapper(getApplicationContext());
                 File file = wrapper.getDir("Images",MODE_PRIVATE);
                 file = new File(file, "profile_pic"+".jpg");
@@ -289,4 +298,8 @@ public class MainActivity extends BaseActivity {
         cursor.moveToFirst();
         return cursor.getString(column_index);
     }
+
+
+
+
 }

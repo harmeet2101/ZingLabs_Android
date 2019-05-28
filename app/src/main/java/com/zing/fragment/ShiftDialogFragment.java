@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -42,6 +43,7 @@ import com.zing.adapter.ShiftCalendarAdapter;
 import com.zing.model.CalendarDataModel;
 import com.zing.model.request.ReleaseShiftRequest;
 import com.zing.model.request.ShiftCheckInRequest;
+import com.zing.model.request.VerifyCheckInRequest;
 import com.zing.model.response.ShiftDetailResponse.Data;
 import com.zing.model.response.ShiftDetailResponse.ShiftDetailResponse;
 import com.zing.util.AppTypeface;
@@ -131,7 +133,7 @@ public class ShiftDialogFragment extends BaseFragment {
     private String shift_id, date, day, expectedEarning, timeSlot, location, role, release = "", nextShiftId, shiftType;
     private String from;
     private int PERMISSION = 0;
-    private boolean isWithin24hrs;
+    private boolean isWithin24hrs ,autoCheckin;
 //    private ArrayList<CalendarDataModel> calendarDataModel;
 
     public static ShiftDialogFragment newInstance(String param1, String param2,
@@ -344,7 +346,7 @@ public class ShiftDialogFragment extends BaseFragment {
                                     Manifest.permission.WRITE_CALENDAR)
                                     != PackageManager.PERMISSION_GRANTED) {
 
-                        requestPermissions(new String[]{Manifest.permission.READ_CALENDAR,
+                        getActivity().requestPermissions(new String[]{Manifest.permission.READ_CALENDAR,
                                         Manifest.permission.WRITE_CALENDAR},
                                 PERMISSION);
                     } else {
@@ -378,7 +380,10 @@ public class ShiftDialogFragment extends BaseFragment {
                     release = "0";
                     if (NetworkUtils.isNetworkConnected(getActivity()))
                         releaseShift();
-                } else {
+                }else if(autoCheckin){
+                    completeCheckIn("",shift_id);
+                }
+                else {
                     Fragment fragment = VerifyOtpFragment.newInstance(shift_id, from);
                     fragmentInterface.fragmentResult(fragment, "");
                 }
@@ -393,14 +398,78 @@ public class ShiftDialogFragment extends BaseFragment {
     }
 
     private void syncCalendar() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        /*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date1 = sdf.parse(date);
             long startDate = date1.getTime();
-            addToCalendar(getActivity(), "add Event", startDate, startDate);
+            addToCalendar(getActivity(), "shift Event", startDate, startDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+
+        StringTokenizer tokenizer = new StringTokenizer(timeSlot,"-");
+        String startTime = tokenizer.nextToken().toUpperCase();
+        String endTme = tokenizer.nextToken().toUpperCase();
+
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date date1 = sdf.parse(date);
+            long startDate = date1.getTime();
+
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm a");
+            Date stestDate = sdf1.parse(date+" "+startTime);
+            Date eTestDate = sdf1.parse(date+" "+endTme);
+            Log.d("testDate: ",stestDate.toString()+" : "+eTestDate.toString());
+
+            Calendar beginTime = Calendar.getInstance();
+            beginTime.setTime(stestDate);
+            Calendar endTime = Calendar.getInstance();
+            endTime.setTime(eTestDate);
+            //addToCalendar(getActivity(), "shift Event", startDate, startDate);
+            Intent intent = new Intent(Intent.ACTION_INSERT)
+                    .setData(CalendarContract.Events.CONTENT_URI)
+                    .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
+                    .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
+                    .putExtra(CalendarContract.Events.TITLE, "Zira shift")
+                    .putExtra(CalendarContract.Events.ALLOWED_REMINDERS,CalendarContract.Reminders.METHOD_ALERT)
+                    .putExtra(CalendarContract.Events.HAS_ALARM,1)
+                    .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_TENTATIVE);
+
+            startActivity(intent);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void insertCalendarEntry(long startDate,long endDate) {
+
+        ContentResolver cr = getActivity().getContentResolver();
+        ContentValues values = new ContentValues();
+        values.put(CalendarContract.Events.TITLE, "Zira shift");
+        values.put(CalendarContract.Events.DTSTART, startDate);
+        values.put(CalendarContract.Events.DTEND, endDate);
+        /*values.put(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startDate.getTimeInMillis());
+        values.put(CalendarContract.EXTRA_EVENT_END_TIME, endDate.getTimeInMillis());*/
+        TimeZone timeZone = TimeZone.getDefault();
+        values.put(CalendarContract.Events.EVENT_TIMEZONE, timeZone.getID());
+
+        // default calendar
+        values.put(CalendarContract.Events.CALENDAR_ID, 1);
+
+        values.put(CalendarContract.Events.HAS_ALARM, 1);
+
+        // insert event to calendar
+        Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
+        long eventID = Long.parseLong(uri.getLastPathSegment());
+        ContentValues reminderContentvalues = new ContentValues();
+        reminderContentvalues.put(CalendarContract.Reminders.MINUTES, 30 * 24 * 60);
+        reminderContentvalues.put(CalendarContract.Reminders.EVENT_ID, eventID);
+        reminderContentvalues.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT);
+        cr.insert(CalendarContract.Reminders.CONTENT_URI, reminderContentvalues);
+
+        Intent LaunchIntent = getActivity().getPackageManager().getLaunchIntentForPackage("com.google.android.calendar");
+        startActivity(LaunchIntent);
     }
 
     @Override
@@ -427,7 +496,6 @@ public class ShiftDialogFragment extends BaseFragment {
                 calNames[i] = cursor.getString(1);
                 cursor.moveToNext();
             }
-
             AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
             builder.setSingleChoiceItems(calNames, -1, new DialogInterface.OnClickListener() {
                 @Override
@@ -657,7 +725,7 @@ public class ShiftDialogFragment extends BaseFragment {
         tvLocationDetail.setText(response.getStore_name());
         tvRoleDetail.setText(response.getRole());
         nextShiftId = session.getNextShift();
-
+        autoCheckin = response.getAuto_checkin();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date1 = format.parse(response.getDate());
@@ -764,6 +832,59 @@ public class ShiftDialogFragment extends BaseFragment {
             case "UPCOMING":
                 textviewshiftType.setText("Upcoming Shift");
                 break;
+        }
+    }
+
+
+    private void completeCheckIn(String pinValue, final String shift_id) {
+
+        progressDialog = CommonUtils.getProgressBar(getActivity());
+        ZinglabsApi api = ApiClient.getClient().create(ZinglabsApi.class);
+
+        try {
+            VerifyCheckInRequest verifyCheckInRequest = new VerifyCheckInRequest();
+            verifyCheckInRequest.setPin(pinValue);
+            verifyCheckInRequest.setShiftId(shift_id);
+
+            Call<JsonElement> call = api.checkInShiftApi("Bearer " + session.getUserToken(),
+                    verifyCheckInRequest);
+            call.enqueue(new Callback<JsonElement>() {
+                @Override
+                public void onResponse(@NonNull Call<JsonElement> call,
+                                       @NonNull Response<JsonElement> response) {
+                    progressDialog.dismiss();
+                    if (response.code() == 200) {
+
+                        try {
+                            JSONObject responseObj = new JSONObject(response.body().toString());
+                            JSONObject jsonObject = responseObj.optJSONObject("response");
+                            String code = jsonObject.optString("code");
+                            String message = jsonObject.optString("message");
+
+                            CommonUtils.showSnackbar(tvClose, message);
+
+                            if (code.equalsIgnoreCase("200")) {
+                                Fragment fragment = HomeFragment.newInstance("", "");
+                                fragmentInterface.fragmentResult(fragment,"");
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        CommonUtils.showSnackbar(tvClose, response.message());
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<JsonElement> call, @NonNull Throwable t) {
+                    progressDialog.dismiss();
+                    CommonUtils.showSnakBar(tvClose, t.getMessage());
+                }
+            });
+        } catch (Exception e) {
+            progressDialog.dismiss();
+            e.printStackTrace();
         }
     }
 

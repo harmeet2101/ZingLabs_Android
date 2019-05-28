@@ -1,17 +1,24 @@
 package com.zing.adapter;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
+import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,12 +72,12 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
     private static final int VIEW_TYPE_ONGOING = 1;
     private static final int VIEW_TYPE_NO_SHOW = 2;
     private static final int VIEW_TYPE_UPCOMING = 3;
-
     public ShiftCalendarAdapter(Context context, List<Shift> shiftsList,FragmentInterface fragmentInterface) {
         this.context = context;
         this.shiftsList = shiftsList;
         this.session = new SessionManagement(context);
         this.fragmentInterface = fragmentInterface;
+
     }
 
     @NonNull
@@ -206,7 +213,7 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         @BindView(R.id.tvRoleDetail)
         TextView tvRoleDetail;
-
+        private int PERMISSION = 0;
         UpcomingViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -345,9 +352,26 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
                     break;
 
                 case R.id.ivRectangle:
-                    Intent LaunchIntent = context.getPackageManager()
+                   /* Intent LaunchIntent = context.getPackageManager()
                             .getLaunchIntentForPackage("com.google.android.calendar");
-                    context.startActivity(LaunchIntent);
+                    context.startActivity(LaunchIntent);*/
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (ContextCompat.checkSelfPermission(context,
+                                Manifest.permission.READ_CALENDAR) != PackageManager.PERMISSION_GRANTED ||
+                                ContextCompat.checkSelfPermission(context,
+                                        Manifest.permission.WRITE_CALENDAR)
+                                        != PackageManager.PERMISSION_GRANTED) {
+
+
+                            ActivityCompat.requestPermissions((Activity)context, new String[]{Manifest.permission.READ_CALENDAR,
+                                            Manifest.permission.WRITE_CALENDAR},
+                                    PERMISSION);
+                        } else {
+                            syncCalendar(shf);
+                        }
+                    } else {
+                        syncCalendar(shf);
+                    }
                     break;
                 case R.id.ivDiamond:
                     new Handler().postDelayed(new Runnable() {
@@ -463,6 +487,42 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
                 e.printStackTrace();
             }
 
+        }
+
+        private void syncCalendar(Shift shift) {
+            StringTokenizer tokenizer = new StringTokenizer(shift.getTimeSlot(),"-");
+            String startTime = tokenizer.nextToken().toUpperCase();
+            String endTme = tokenizer.nextToken().toUpperCase();
+
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date date1 = sdf.parse(shift.getDate());
+                long startDate = date1.getTime();
+
+                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm a");
+                Date stestDate = sdf1.parse(shift.getDate()+" "+startTime);
+                Date eTestDate = sdf1.parse(shift.getDate()+" "+endTme);
+                Log.d("testDate: ",stestDate.toString()+" : "+eTestDate.toString());
+
+                Calendar beginTime = Calendar.getInstance();
+                beginTime.setTime(stestDate);
+                Calendar endTime = Calendar.getInstance();
+                endTime.setTime(eTestDate);
+                //addToCalendar(getActivity(), "shift Event", startDate, startDate);
+                Intent intent = new Intent(Intent.ACTION_INSERT)
+                        .setData(CalendarContract.Events.CONTENT_URI)
+                        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
+                        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
+                        .putExtra(CalendarContract.Events.TITLE, "Zira shift")
+                        .putExtra(CalendarContract.Events.ALLOWED_REMINDERS,CalendarContract.Reminders.METHOD_ALERT)
+                        .putExtra(CalendarContract.Events.HAS_ALARM,1)
+                        .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_TENTATIVE);
+
+                context.startActivity(intent);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
     class OnGoingViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener {
