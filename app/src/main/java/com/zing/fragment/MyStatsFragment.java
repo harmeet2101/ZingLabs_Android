@@ -411,57 +411,79 @@ public class MyStatsFragment extends BaseFragment implements View.OnClickListene
 
             case R.id.firstShiftLayout:
                 bundle.putString("badgeType","Completed");
+                bundle.putString("badgeInfo","Just Getting Started");
+                bundle.putString("badgeDetail","Congrats on completing your first shift on Zira.");
                 intent.putExtras(bundle);
                 getContext().startActivity(intent);
                 break;
             case  R.id.ImageView_show_up_on_time_5:
                 bundle.putString("badgeType","OnTime_5");
+                bundle.putString("badgeInfo","On Time Streak: 5x");
+                bundle.putString("badgeDetail","You’ve checked in on time for 5 shifts in a row!");
                 intent.putExtras(bundle);
                 getContext().startActivity(intent);
                 break;
             case  R.id.ImageView_show_up_on_time_10:
                 bundle.putString("badgeType","OnTime_10");
+                bundle.putString("badgeInfo","On Time Streak: 10x");
+                bundle.putString("badgeDetail","You’ve checked in on time for 10 shifts in a row! Keep that streak going!");
                 intent.putExtras(bundle);
                 getContext().startActivity(intent);
                 break;
             case  R.id.ImageView_show_up_on_time_20:
                 bundle.putString("badgeType","OnTime_20");
+                bundle.putString("badgeInfo","On Time Streak: 20x");
+                bundle.putString("badgeDetail","You’ve checked in on time for 20 shifts in a row! Keep that streak going!");
                 intent.putExtras(bundle);
                 getContext().startActivity(intent);
                 break;
             case  R.id.ImageView_show_up_on_time_50:
                 bundle.putString("badgeType","OnTime_50");
+                bundle.putString("badgeInfo","On Time Streak: 50x");
+                bundle.putString("badgeDetail","You’ve checked in on time for 50 shifts in a row! This is no joke, you are on fire, how long could this possibly go!");
                 intent.putExtras(bundle);
                 getContext().startActivity(intent);
                 break;
             case  R.id.ImageView_show_up_on_time_100:
                 bundle.putString("badgeType","OnTime_100");
+                bundle.putString("badgeInfo","Just Getting Started");
+                bundle.putString("badgeDetail","You’ve checked in on time for 100 shifts in a row! This is no joke, you are on fire, how long could this possibly go!");
                 intent.putExtras(bundle);
                 getContext().startActivity(intent);
                 break;
 
             case R.id.ImageView_perfect_week:
                 bundle.putString("badgeType","Perfect_w");
+                bundle.putString("badgeInfo","You just completed a perfect week");
+                bundle.putString("badgeDetail","They said it couldn’t be done! But you went and did it, with on time check ins for every shift this week.");
                 intent.putExtras(bundle);
                 getContext().startActivity(intent);
                 break;
             case R.id.ImageView_perfect_month:
                 bundle.putString("badgeType","Perfect_m");
+                bundle.putString("badgeInfo","You just completed a perfect month");
+                bundle.putString("badgeDetail","What kind of a machine shows up on time for every shift for an entire month! You that is who. Congrats on a perfect month. Truly one for the record books.");
                 intent.putExtras(bundle);
                 getContext().startActivity(intent);
                 break;
             case R.id.ImageView_recommended_shift_1:
                 bundle.putString("badgeType","Recommended_1");
+                bundle.putString("badgeInfo","You claimed your first shift");
+                bundle.putString("badgeDetail","Congrats on claiming your first shift. Claim more to earn more badges and help your team running smooth as butter.");
                 intent.putExtras(bundle);
                 getContext().startActivity(intent);
                 break;
             case R.id.ImageView_recommended_shift_5:
                 bundle.putString("badgeType","Recommended_5");
+                bundle.putString("badgeInfo","You claimed 5 shifts");
+                bundle.putString("badgeDetail","Ok shift master, we see you. Keep claiming shifts and your team will never have an uncovered shift.");
                 intent.putExtras(bundle);
                 getContext().startActivity(intent);
                 break;
             case R.id.ImageView_recommended_shift_10:
                 bundle.putString("badgeType","Recommended_10");
+                bundle.putString("badgeInfo","You claimed 10 shifts");
+                bundle.putString("badgeDetail","You really like picking up more shifts. You have proven yourself worthy of your team’s gratitude and praise. Keep it up!");
                 intent.putExtras(bundle);
                 getContext().startActivity(intent);
 

@@ -317,6 +317,10 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
 
             textviewshiftType.setText("Upcoming Shift");
 
+            if(shf.getAuto_checkin()){
+                btnReleaseShift.setVisibility(View.GONE);
+            }
+
         }
         @Override
         public void onClick(View v) {
@@ -513,7 +517,7 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
                         .setData(CalendarContract.Events.CONTENT_URI)
                         .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
                         .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
-                        .putExtra(CalendarContract.Events.TITLE, "Zira shift")
+                        .putExtra(CalendarContract.Events.TITLE, shift.getRole()+" shift - "+shift.getStoreName())
                         .putExtra(CalendarContract.Events.ALLOWED_REMINDERS,CalendarContract.Reminders.METHOD_ALERT)
                         .putExtra(CalendarContract.Events.HAS_ALARM,1)
                         .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_TENTATIVE);
@@ -603,6 +607,12 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
 
                 btnbreakShift.setText("End break");
                 breakStatus = "1";
+            }
+
+            boolean isMobileCheckedin = shift.getAuto_checkin();
+            if(isMobileCheckedin){
+                btnbreakShift.setVisibility(View.GONE);
+                btncheckoutShift.setVisibility(View.GONE);
             }
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             try {
@@ -927,6 +937,11 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
         @BindView(R.id.tvRoleDetail)
         TextView tvRoleDetail;
 
+        @BindView(R.id.llcheckin)
+        ViewGroup llCheckin;
+        @BindView(R.id.llcheckout)
+        ViewGroup llCheckout;
+
         NoShowViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -952,11 +967,9 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
             this.shf =shift;
 
 
-                counterTextview.setVisibility(View.VISIBLE);
-                counterTextview.setText((position+1)+" of "+shiftsList.size());
-
-
-            tvEarningAmount.setText(""+shift.getExpectedEarning());
+            counterTextview.setVisibility(View.VISIBLE);
+            counterTextview.setText((position+1)+" of "+shiftsList.size());
+            tvEarningAmount.setText("$0.00");
             tvLocationDetail.setText(shift.getStoreName());
             btnReleaseShift.setVisibility(View.GONE);
             btnCallManager.setVisibility(View.GONE);
@@ -984,6 +997,8 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
                 lay02.setBackgroundColor(context.getResources().getColor(R.color.now_show_bg_dark));
                 lay03.setBackgroundColor(context.getResources().getColor(R.color.now_show_bg_dark));
                 lay04.setBackgroundColor(context.getResources().getColor(R.color.now_show_bg_dark));
+                llCheckin.setVisibility(View.VISIBLE);
+                llCheckout.setVisibility(View.VISIBLE);
 
             } catch (Exception e) {
                 e.printStackTrace();

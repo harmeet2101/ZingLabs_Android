@@ -18,7 +18,7 @@ public class BadgeDetailsActivity extends BaseActivity implements View.OnClickLi
 
     ImageView closeImageview;
     ImageView badgeImageView;
-    TextView tvBadgeInfo;
+    TextView tvBadgeInfo,tvBadgeDetail;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +28,19 @@ public class BadgeDetailsActivity extends BaseActivity implements View.OnClickLi
         closeImageview = (ImageView)findViewById(R.id.close);
         badgeImageView = (ImageView)findViewById(R.id.badgeImage);
         tvBadgeInfo = (TextView)findViewById(R.id.tvBadgeInfo);
+        tvBadgeDetail = (TextView)findViewById(R.id.tvBadgeDetail);
         closeImageview.setOnClickListener(this);
 
         String badgeType = getIntent().getExtras().getString("badgeType");
+        String badgeInfo = getIntent().getExtras().getString("badgeInfo");
+        String badgeDetail = getIntent().getExtras().getString("badgeDetail");
+
         setUpData(badgeType);
+
+        tvBadgeInfo.setText(badgeInfo);
+        tvBadgeDetail.setText(badgeDetail);
+
+
     }
 
     @Override

@@ -61,6 +61,19 @@ public class Shift {
     @Expose
     private Integer release;
 
+    public Boolean getAuto_checkin() {
+        return auto_checkin;
+    }
+
+    public void setAuto_checkin(Boolean auto_checkin) {
+        this.auto_checkin = auto_checkin;
+    }
+
+    @SerializedName("auto_checkin")
+    @Expose
+    private Boolean auto_checkin;
+
+
     public String getShiftId() {
         return shiftId;
     }

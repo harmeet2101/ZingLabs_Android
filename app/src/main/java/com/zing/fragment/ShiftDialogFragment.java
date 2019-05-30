@@ -127,6 +127,11 @@ public class ShiftDialogFragment extends BaseFragment {
     RecyclerView rvShiftCalendarData;
 
 
+    @BindView(R.id.llcheckin)
+    ViewGroup llCheckin;
+    @BindView(R.id.llcheckout)
+    ViewGroup llCheckout;
+
     private ProgressDialog progressDialog;
     SessionManagement session;
 
@@ -302,6 +307,8 @@ public class ShiftDialogFragment extends BaseFragment {
                 lay02.setBackgroundColor(getResources().getColor(R.color.now_show_bg_dark));
                 lay03.setBackgroundColor(getResources().getColor(R.color.now_show_bg_dark));
                 lay04.setBackgroundColor(getResources().getColor(R.color.now_show_bg_dark));
+                llCheckin.setVisibility(View.VISIBLE);
+                llCheckout.setVisibility(View.VISIBLE);
                 break;
 
             case "COMPLETED":
@@ -380,8 +387,6 @@ public class ShiftDialogFragment extends BaseFragment {
                     release = "0";
                     if (NetworkUtils.isNetworkConnected(getActivity()))
                         releaseShift();
-                }else if(autoCheckin){
-                    completeCheckIn("",shift_id);
                 }
                 else {
                     Fragment fragment = VerifyOtpFragment.newInstance(shift_id, from);
@@ -430,7 +435,7 @@ public class ShiftDialogFragment extends BaseFragment {
                     .setData(CalendarContract.Events.CONTENT_URI)
                     .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
                     .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
-                    .putExtra(CalendarContract.Events.TITLE, "Zira shift")
+                    .putExtra(CalendarContract.Events.TITLE, role+" shift - "+location)
                     .putExtra(CalendarContract.Events.ALLOWED_REMINDERS,CalendarContract.Reminders.METHOD_ALERT)
                     .putExtra(CalendarContract.Events.HAS_ALARM,1)
                     .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_TENTATIVE);
@@ -721,6 +726,9 @@ public class ShiftDialogFragment extends BaseFragment {
     private  void updateView(Data response){
 
 
+        if(response.getShift_status().equalsIgnoreCase("NOSHOW")){
+            tvEarningAmount.setText("$0.00");
+        }else
         tvEarningAmount.setText(/*"$" +*/ response.getExpectedEarning());
         tvLocationDetail.setText(response.getStore_name());
         tvRoleDetail.setText(response.getRole());
@@ -805,6 +813,9 @@ public class ShiftDialogFragment extends BaseFragment {
                 btnReleaseShift.setBackgroundColor(getResources().getColor(R.color.blue));
             }
         }
+
+
+
         if (response.getShiftId().equalsIgnoreCase(nextShiftId)) {
 
             btnReleaseShift.setVisibility(View.VISIBLE);
@@ -812,7 +823,9 @@ public class ShiftDialogFragment extends BaseFragment {
             btnReleaseShift.setText(getResources().getString(R.string.check_in));
             btnReleaseShift.setBackgroundColor(getResources().getColor(R.color.blue));
         }
-
+        if(autoCheckin){
+            btnReleaseShift.setVisibility(View.GONE);
+        }
 
         switch (response.getShift_status()) {
 
@@ -836,7 +849,7 @@ public class ShiftDialogFragment extends BaseFragment {
     }
 
 
-    private void completeCheckIn(String pinValue, final String shift_id) {
+    /*private void completeCheckIn(String pinValue, final String shift_id) {
 
         progressDialog = CommonUtils.getProgressBar(getActivity());
         ZinglabsApi api = ApiClient.getClient().create(ZinglabsApi.class);
@@ -886,6 +899,6 @@ public class ShiftDialogFragment extends BaseFragment {
             progressDialog.dismiss();
             e.printStackTrace();
         }
-    }
+    }*/
 
 }

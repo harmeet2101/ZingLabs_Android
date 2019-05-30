@@ -222,6 +222,13 @@ public class RateShiftFragment extends BaseFragment {
 
                                     btnbreakShift.setText("End break");
                                 }
+
+                                boolean isMobileCheckedin = shiftDetailResponse.getResponse().getData().getAuto_checkin();
+                                if(isMobileCheckedin){
+                                    btnbreakShift.setVisibility(View.GONE);
+                                    btncheckoutShift.setVisibility(View.GONE);
+                                }
+
                                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                                 try {
                                     Date date1 = format.parse(shiftDetailResponse.getResponse().getData().getDate());
