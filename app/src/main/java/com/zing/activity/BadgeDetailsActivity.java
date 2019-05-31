@@ -59,49 +59,49 @@ public class BadgeDetailsActivity extends BaseActivity implements View.OnClickLi
 
             case "Completed":
                 tvBadgeInfo.setText("First Shift Completed");
-                badgeImageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_first_shift_completed));
+                badgeImageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_first_shift_completed_144x144));
                 break;
             case "OnTime_5":
                 tvBadgeInfo.setText("Show up on time");
-                badgeImageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_show_up_on_time_5));
+                badgeImageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_show_up_on_time_5_144x144));
                 break;
             case "OnTime_10":
                 tvBadgeInfo.setText("Show up on time");
-                badgeImageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_show_up_on_time_10));
+                badgeImageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_show_up_on_time_10_144x144));
                 break;
             case "OnTime_20":
                 tvBadgeInfo.setText("Show up on time");
-                badgeImageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_show_up_on_time_20));
+                badgeImageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_show_up_on_time_20_144x144));
                 break;
             case "OnTime_50":
                 tvBadgeInfo.setText("Show up on time");
-                badgeImageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_show_up_on_time_50));
+                badgeImageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_show_up_on_time_50_144x144));
                 break;
             case "OnTime_100":
                 tvBadgeInfo.setText("Show up on time");
-                badgeImageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_show_up_on_time_100));
+                badgeImageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_show_up_on_time_100_144x144));
                 break;
             case "Perfect_w":
                 tvBadgeInfo.setText("Perfect");
-                badgeImageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_perfect_week));
+                badgeImageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_perfect_week_144x144));
                 break;
 
             case "Perfect_m":
                 tvBadgeInfo.setText("Perfect");
-                badgeImageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_perfect_month));
+                badgeImageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_perfect_month_144x144));
                 break;
             case "Recommended_1":
                 tvBadgeInfo.setText("Recommended Shift");
-                badgeImageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_picked_up_recommended_shifts));
+                badgeImageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_picked_up_recommended_shifts_1_144x144));
                 break;
             case "Recommended_5":
                 tvBadgeInfo.setText("Recommended Shift");
-                badgeImageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_rec_5));
+                badgeImageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_rec_5_144x144));
                 break;
 
             case "Recommended_10":
                 tvBadgeInfo.setText("Recommended Shift");
-                badgeImageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_rec_10));
+                badgeImageView.setImageDrawable(getResources().getDrawable(R.drawable.badge_rec_10_144x144));
                 break;
         }
     }

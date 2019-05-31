@@ -169,7 +169,7 @@
                             android:layout_margin="20dp"
                             android:id="@+id/ImageView_shift_completed"
                             android:layout_gravity="center_horizontal"
-                            android:src="@drawable/badge_first_shift_completed"/>
+                            android:src="@drawable/badge_first_shift_completed_144x144"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -217,7 +217,7 @@
                                 android:id="@+id/ImageView_show_up_on_time_5"
                                 android:layout_marginBottom="10dp"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@drawable/badge_show_up_on_time_5"/>
+                                android:src="@drawable/badge_show_up_on_time_5_144x144"/>
 
                             <ImageView
                                 android:layout_width="70dp"
@@ -226,7 +226,7 @@
                                 android:layout_marginLeft="20dp"
                                 android:layout_marginBottom="10dp"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@drawable/badge_show_up_on_time_10"/>
+                                android:src="@drawable/badge_show_up_on_time_10_144x144"/>
                             <ImageView
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
@@ -234,7 +234,7 @@
                                 android:layout_marginBottom="10dp"
                                 android:id="@+id/ImageView_show_up_on_time_20"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@drawable/badge_show_up_on_time_20"/>
+                                android:src="@drawable/badge_show_up_on_time_20_144x144"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -250,7 +250,7 @@
                                 android:layout_marginBottom="10dp"
                                 android:layout_gravity="center_horizontal"
                                 android:id="@+id/ImageView_show_up_on_time_50"
-                                android:src="@drawable/badge_show_up_on_time_50"/>
+                                android:src="@drawable/badge_show_up_on_time_50_144x144"/>
 
                             <ImageView
                                 android:layout_width="70dp"
@@ -259,7 +259,7 @@
                                 android:layout_marginBottom="10dp"
                                 android:layout_gravity="center_horizontal"
                                 android:id="@+id/ImageView_show_up_on_time_100"
-                                android:src="@drawable/badge_show_up_on_time_100"/>
+                                android:src="@drawable/badge_show_up_on_time_100_144x144"/>
 
                         </LinearLayout>
 
@@ -311,7 +311,7 @@
                                     android:layout_marginBottom="10dp"
 
                                     android:layout_gravity="center_horizontal"
-                                    android:src="@drawable/badge_perfect_week"/>
+                                    android:src="@drawable/badge_perfect_week_144x144"/>
 
                                 <include layout="@layout/badges_count"
                                     android:id="@+id/weekView"
@@ -335,7 +335,7 @@
                                     android:id="@+id/ImageView_perfect_month"
                                     android:layout_marginBottom="10dp"
                                     android:layout_gravity="center_horizontal"
-                                    android:src="@drawable/badge_perfect_month"/>
+                                    android:src="@drawable/badge_perfect_month_144x144"/>
 
                                 <include layout="@layout/badges_count"
                                     android:id="@+id/monthView"
@@ -395,7 +395,7 @@
                                 android:id="@+id/ImageView_recommended_shift_1"
                                 android:layout_marginBottom="10dp"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@drawable/badge_picked_up_recommended_shifts"/>
+                                android:src="@drawable/badge_picked_up_recommended_shifts_1_144x144"/>
 
                             <ImageView
                                 android:layout_width="70dp"
@@ -404,7 +404,7 @@
                                 android:id="@+id/ImageView_recommended_shift_5"
                                 android:layout_marginBottom="10dp"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@drawable/badge_rec_5"/>
+                                android:src="@drawable/badge_rec_5_144x144"/>
 
                             <ImageView
                                 android:layout_width="70dp"
@@ -413,7 +413,7 @@
                                 android:layout_marginBottom="10dp"
                                 android:id="@+id/ImageView_recommended_shift_10"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@drawable/badge_rec_10"/>
+                                android:src="@drawable/badge_rec_10_144x144"/>
 
                         </LinearLayout>
 
