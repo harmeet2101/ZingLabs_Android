@@ -26,6 +26,7 @@ import com.zing.fragment.ClaimShiftFragment;
 import com.zing.fragment.EarningFragment;
 import com.zing.fragment.HomeFragment;
 import com.zing.fragment.NotificationFragment;
+import com.zing.fragment.PaymentFragment;
 import com.zing.fragment.ProfileFragment;
 import com.zing.interfaces.FragmentInterface;
 import com.zing.model.FooterBean;
@@ -257,7 +258,7 @@ public class DashboardActivity extends BaseActivity implements FragmentInterface
                 addFragment(fragment, "");
                 break;
             case 2:
-                fragment = EarningFragment.newInstance("", "");
+                fragment = PaymentFragment.newInstance("", "");
                 addFragment(fragment, "");
 //                getPreviousPaystub();
 //                menu.findItem(R.id.menu_pay).setIcon(icons_selected[2]);

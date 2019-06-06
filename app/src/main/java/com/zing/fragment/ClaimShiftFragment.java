@@ -229,7 +229,7 @@ public class ClaimShiftFragment extends BaseFragment {
                                 }
 
                                 if(from.equalsIgnoreCase("true")){
-                                    btnClaimShift.setVisibility(View.GONE);
+                                   // btnClaimShift.setVisibility(View.GONE);
                                    // tvUnclaimed.setText("claimed");
                                 }
 

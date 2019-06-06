@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Earning this week"
+                android:id="@+id/tvEarning"
+                android:layout_gravity="center_horizontal"
+                android:textSize="16sp"
+                android:textColor="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$ 0.0"
+                android:id="@+id/earningAmount"
+                android:layout_gravity="center_horizontal"
+                android:textSize="22sp"
+                android:textColor="@android:color/black"/>
+        </LinearLayout>
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@color/dark_grey"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Projected this week"
+                android:id="@+id/tvProjected"
+                android:layout_gravity="center_horizontal"
+                android:textSize="16sp"
+                android:textColor="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$ 0.0"
+                android:id="@+id/projectedAmount"
+                android:layout_gravity="center_horizontal"
+                android:textSize="22sp"
+                android:textColor="@android:color/black"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/dark_grey"/>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tlGraph"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:paddingBottom="20dp"
+        app:tabIndicatorColor="@color/blue"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/blue"
+        app:tabTextAppearance="@style/TabTextAppearance"
+        app:tabTextColor="@color/light_blue" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_margin_extra_large"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="@dimen/default_margin_extra_large"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cvCompletedShiftList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/default_margin_half"
+                android:layout_marginEnd="@dimen/default_margin_half"
+                android:layout_marginRight="@dimen/default_margin_half"
+                android:layout_marginTop="@dimen/default_margin_large"
+                android:background="@android:color/white"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:translationX="2dp"
+                android:translationY="2dp"
+                android:translationZ="2dp"
+                android:visibility="visible"
+                app:cardCornerRadius="@dimen/default_margin_3"
+                app:cardElevation="@dimen/default_margin_1"
+                app:cardPreventCornerOverlap="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:padding="@dimen/default_margin_large">
+
+                    <TextView
+                        android:id="@+id/tvCompletedShift"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/default_margin"
+                        android:text="@string/completed_shift"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="@dimen/normal_text_minus" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvCompletedShift"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+</LinearLayout>

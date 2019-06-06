@@ -321,6 +321,14 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
                 btnReleaseShift.setVisibility(View.GONE);
             }
 
+            if (shf.getShiftId().equalsIgnoreCase(nextShiftId)) {
+
+                btnReleaseShift.setVisibility(View.VISIBLE);
+                textviewshiftType.setText("Next Shift");
+                btnReleaseShift.setText(context.getResources().getString(R.string.check_in));
+                btnReleaseShift.setBackgroundColor(context.getResources().getColor(R.color.blue));
+            }
+
         }
         @Override
         public void onClick(View v) {

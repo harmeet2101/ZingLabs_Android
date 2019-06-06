@@ -11,26 +11,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zing.R;
-import com.zing.fragment.ClaimShiftFragment;
 import com.zing.fragment.CompleteShiftFragment;
-import com.zing.fragment.ShiftDialogFragment;
 import com.zing.interfaces.FragmentInterface;
 import com.zing.model.response.CalendarSlotResponse.RecommendedShift;
 import com.zing.util.AppTypeface;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
-/**
- * Created by abhishek on 13/11/18.
- */
-
-public class CompletedShiftAdapter extends RecyclerView.Adapter<CompletedShiftAdapter.MyViewHolder> {
+public class PayCompletedShiftAdapter extends RecyclerView.Adapter<PayCompletedShiftAdapter.MyViewHolder> {
     private Context context;
     private FragmentInterface fragmentInterface;
     private ArrayList<RecommendedShift> recomendedShiftList;
 
-    public CompletedShiftAdapter(Context context, FragmentInterface fragmentInterface,
-                                  ArrayList<RecommendedShift> completedShiftList) {
+    public PayCompletedShiftAdapter(Context context, FragmentInterface fragmentInterface,
+                                 ArrayList<RecommendedShift> completedShiftList) {
         this.context = context;
         this.fragmentInterface = fragmentInterface;
         this.recomendedShiftList = completedShiftList;
@@ -38,16 +35,26 @@ public class CompletedShiftAdapter extends RecyclerView.Adapter<CompletedShiftAd
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PayCompletedShiftAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.shift_row, parent, false);
-        return new MyViewHolder(itemView);
+        return new PayCompletedShiftAdapter.MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.tvDay.setText(recomendedShiftList.get(position).getDay());
-        //holder.tvTime.setText(recomendedShiftList.get(position).getTimeSlot());
+    public void onBindViewHolder(@NonNull PayCompletedShiftAdapter.MyViewHolder holder, int position) {
+
+
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format2 = new SimpleDateFormat("dd/MM/yy");
+        Date date = null;
+        try {
+            date = format1.parse(recomendedShiftList.get(position).getDate());
+            String date01 = format2.format(date);
+            holder.tvDay.setText(date01);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         holder.tvTime.setText(recomendedShiftList.get(position).getCheckInTime()+"-"+
                 recomendedShiftList.get(position).getCheckOutTime());
@@ -83,7 +90,7 @@ public class CompletedShiftAdapter extends RecyclerView.Adapter<CompletedShiftAd
                             ,recomendedShiftList.get(getLayoutPosition()) .getCheckInTime()
                             ,recomendedShiftList.get(getLayoutPosition()).getCheckOutTime()
                             ,recomendedShiftList.get(getLayoutPosition()).getEarningAmount()
-                            );
+                    );
                     fragmentInterface.fragmentResult(fragment, "+");
                 }
             });

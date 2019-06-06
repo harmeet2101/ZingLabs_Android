@@ -726,6 +726,7 @@ public class ShiftDialogFragment extends BaseFragment {
     private  void updateView(Data response){
 
 
+
         if(response.getShift_status().equalsIgnoreCase("NOSHOW")){
             tvEarningAmount.setText("$0.00");
         }else
@@ -813,16 +814,6 @@ public class ShiftDialogFragment extends BaseFragment {
                 btnReleaseShift.setBackgroundColor(getResources().getColor(R.color.blue));
             }
         }
-
-
-
-        if (response.getShiftId().equalsIgnoreCase(nextShiftId)) {
-
-            btnReleaseShift.setVisibility(View.VISIBLE);
-            textviewshiftType.setText("Next Shift");
-            btnReleaseShift.setText(getResources().getString(R.string.check_in));
-            btnReleaseShift.setBackgroundColor(getResources().getColor(R.color.blue));
-        }
         if(autoCheckin){
             btnReleaseShift.setVisibility(View.GONE);
         }
@@ -845,6 +836,14 @@ public class ShiftDialogFragment extends BaseFragment {
             case "UPCOMING":
                 textviewshiftType.setText("Upcoming Shift");
                 break;
+        }
+
+        if (response.getShiftId().equalsIgnoreCase(nextShiftId)) {
+
+            btnReleaseShift.setVisibility(View.VISIBLE);
+            textviewshiftType.setText("Next Shift");
+            btnReleaseShift.setText(getResources().getString(R.string.check_in));
+            btnReleaseShift.setBackgroundColor(getResources().getColor(R.color.blue));
         }
     }
 
