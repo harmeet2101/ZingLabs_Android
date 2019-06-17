@@ -16,7 +16,7 @@ import com.zing.interfaces.FragmentInterface;
 
 public class BaseFragment extends Fragment {
     public FragmentInterface fragmentInterface;
-
+    HomeFragment.IHomFragListner iHomFragListner;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -27,6 +27,7 @@ public class BaseFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         fragmentInterface = (FragmentInterface) getActivity();
+        iHomFragListner = (HomeFragment.IHomFragListner)getActivity();
     }
 
 }

@@ -2,6 +2,7 @@ package com.zing.fragment;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 
 import com.zing.R;
 import com.zing.activity.PreferenceCalenderActivity;
+import com.zing.activity.ShiftActivity;
 import com.zing.adapter.UpcomingShiftAdapter;
 import com.zing.model.CalendarDataModel;
 import com.zing.model.request.HomeRequest;
@@ -240,46 +242,13 @@ public class HomeFragment extends BaseFragment {
         // to get the time zone
         TimeZone tz = TimeZone.getDefault();
         System.out.println("TimeZone " + tz.getDisplayName(false, TimeZone.SHORT) + " Timezone id :: " + tz.getID());
-
         // to fetch the current date and time
         date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         if (NetworkUtils.isNetworkConnected(getActivity()))
             getShiftsAndEarnings(date, tz.getID());
-//        if (!starts_at.equalsIgnoreCase(""))
-//            updateTime();
     }
 
-//    private void updateTime() {
-//        Timer updateTimer = new Timer();
-//        updateTimer.schedule(new TimerTask() {
-//            public void run() {
-//
-//                try {
-//                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss aa");
-//                    Date date1 = format.parse(starts_at);
-//                    Date date2 = new Date();
-//
-//                    long mills = date1.getTime() - date2.getTime();
-//                    Log.v("Data1", "" + date1.getTime());
-//                    Log.v("Data2", "" + date2.getTime());
-//                    int hours = (int) (mills / (1000 * 60 * 60));
-//                    int mins = (int) (mills / (1000 * 60)) % 60;
-//
-//                    diff = hours + "hr:" + mins + "min"; // updated value every1 second
-//
-//                    getActivity().runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            tvStartTime.setText(diff.replace("-", ""));
-//                        }
-//                    });
-//
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }, 0, 20000);
-//    }
+
 
     private void getShiftsAndEarnings(final String todate, String displayName) {
 //        progressDialog = CommonUtils.getProgressBar(getActivity());
@@ -432,8 +401,9 @@ public class HomeFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tvViewCalendar:
-                fragment = CalenderFragment.newInstance("", "");
-                fragmentInterface.fragmentResult(fragment, "+");
+               /* fragment = CalenderFragment.newInstance("", "");
+                fragmentInterface.fragmentResult(fragment, "+");*/
+                iHomFragListner.onHomeCallback("Cal");
                 break;
             case R.id.llShift:
                 if (check_in_status.equalsIgnoreCase("0")) {
@@ -451,9 +421,11 @@ public class HomeFragment extends BaseFragment {
                 if (amount.equalsIgnoreCase("0.0")) {
                     CommonUtils.showSnackbar(tvViewEarning, "No Earnings Yet.");
                 } else {
-                    Fragment fragment1 = EarningFragment.newInstance("", "");
-                    fragmentInterface.fragmentResult(fragment1, "+");
+                   /* Fragment fragment1 = PaymentFragment.newInstance("", "");
+                    fragmentInterface.fragmentResult(fragment1, "+");*/
+                    iHomFragListner.onHomeCallback("Pay");
                 }
+
                 break;
             case R.id.tvSetPreference:
                 Intent intent = new Intent(getActivity(), PreferenceCalenderActivity.class);
@@ -474,5 +446,10 @@ public class HomeFragment extends BaseFragment {
                 }
                 break;
         }
+    }
+
+
+    public interface IHomFragListner{
+        void  onHomeCallback(String type);
     }
 }

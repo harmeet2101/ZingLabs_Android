@@ -26,6 +26,8 @@ import com.zing.util.SessionManagement;
 import com.zing.util.restClient.ApiClient;
 import com.zing.util.restClient.ZinglabsApi;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.StringTokenizer;
@@ -105,7 +107,7 @@ public class PaymentFragment extends BaseFragment {
 
         int year1 = c1.get(Calendar.YEAR);
         int month1 = c1.get(Calendar.MONTH) + 1;
-        int day1 = c1.get(Calendar.DAY_OF_MONTH);
+        int day1 = c1.get(Calendar.DAY_OF_MONTH)+1;
         startWeek = getMonth(month1);
         startDate = year1+"-"+month1+"-"+day1;
         //Log.d("start",year1+"-"+month1+"-"+day1);
@@ -114,7 +116,7 @@ public class PaymentFragment extends BaseFragment {
 
         int year7 = c1.get(Calendar.YEAR);
         int month7 = c1.get(Calendar.MONTH) + 1;
-        int day7 = c1.get(Calendar.DAY_OF_MONTH);
+        int day7 = c1.get(Calendar.DAY_OF_MONTH)+1;
         endWeek = getMonth(month7);
         endDate = year7+"-"+month7+"-"+day7;
 
@@ -232,8 +234,8 @@ public class PaymentFragment extends BaseFragment {
                             CalendarScheduledShiftResponse calendarSheduledShiftResponse = response.body();
                             if (calendarSheduledShiftResponse != null && calendarSheduledShiftResponse.
                                     getResponse().getCode() == 200) {
-
-
+                                DecimalFormat df2 = new DecimalFormat("#.##");
+                                df2.setRoundingMode(RoundingMode.DOWN);
                                 completedShiftList.clear();
                                 //llLayout.setVisibility(View.VISIBLE);
                                 for (int i = 0; i < calendarSheduledShiftResponse.getResponse().
@@ -247,14 +249,15 @@ public class PaymentFragment extends BaseFragment {
                                     StringTokenizer tokenizer_1 = new StringTokenizer(calendarSheduledShiftResponse.getResponse().
                                             getCompletedShiftList().get(i).getEarningAmount(),"$");
                                     prjAmount = prjAmount + Double.parseDouble(tokenizer.nextToken());
+
                                     expAmount = expAmount + Double.parseDouble(tokenizer_1.nextToken());
                                 }
 
                                 Log.d("EA",expAmount+"");
                                 Log.d("PA",prjAmount+"");
 
-                                earningAmount.setText("$ "+expAmount);
-                                projectedAmount.setText("$ "+prjAmount);
+                                earningAmount.setText("$ "+df2.format(expAmount));
+                                projectedAmount.setText("$ "+df2.format(prjAmount));
                                 if (completedShiftList.size() != 0) {
                                     tvCompletedShift.setText(getActivity().getResources().getText(R.string.completed_shift));
                                     cvCompletedShiftList.setVisibility(View.VISIBLE);

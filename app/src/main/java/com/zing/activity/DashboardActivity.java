@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -56,7 +57,7 @@ import retrofit2.Response;
  * Created by savita on 27/3/18.
  */
 
-public class DashboardActivity extends BaseActivity implements FragmentInterface, FooterAdapter.ClickListner {
+public class DashboardActivity extends BaseActivity implements FragmentInterface, FooterAdapter.ClickListner , HomeFragment.IHomFragListner {
     @BindView(R.id.rvFooter)
     RecyclerView rvFooter;
     FooterBean footerBean;
@@ -446,6 +447,27 @@ public class DashboardActivity extends BaseActivity implements FragmentInterface
         } catch (Exception e) {
 //            progressDialog.dismiss();
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onHomeCallback(String type) {
+
+        Log.d("Home","callback");
+
+        switch (type){
+
+            case "Pay":
+                itemClicked(getCurrentFocus(),2);
+/*                fragment = PaymentFragment.newInstance("", "");
+                addFragment(fragment, "+");*/
+
+                break;
+            case "Cal":
+                itemClicked(getCurrentFocus(),1);
+                /*fragment = CalenderFragment.newInstance("", "");
+                addFragment(fragment, "+");*/
+                break;
         }
     }
 }

@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="370dp"
     android:elevation="3dp"
+    android:clickable="true"
     android:layout_height="wrap_content">
 
     <TextView
