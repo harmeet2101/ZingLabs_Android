@@ -56,6 +56,9 @@ public class PayCompletedShiftAdapter extends RecyclerView.Adapter<PayCompletedS
             e.printStackTrace();
         }
 
+        if(recomendedShiftList.get(position).getShiftStatus().equalsIgnoreCase("NOSHOW"))
+            holder.tvTime.setText("No Show");
+        else
         holder.tvTime.setText(recomendedShiftList.get(position).getCheckInTime()+"-"+
                 recomendedShiftList.get(position).getCheckOutTime());
     }

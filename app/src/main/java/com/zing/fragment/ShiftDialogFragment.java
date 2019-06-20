@@ -778,40 +778,54 @@ public class ShiftDialogFragment extends BaseFragment {
         if (isWithin24hrs) {
             btnReleaseShift.setVisibility(View.GONE);
         } else {
+            btnReleaseShift.setText("RELEASE SHIFT");
             btnReleaseShift.setVisibility(View.VISIBLE);
         }
-        if (from.equalsIgnoreCase("home")) {
-//            if (release.equalsIgnoreCase("0")) {
-//                btnReleaseShift.setText("RELEASE SHIFT");
-//            } else if (release.equalsIgnoreCase("1")) {
-//                btnReleaseShift.setText("UNDO RELEASE");
-//                btnReleaseShift.setBackgroundColor(getResources().getColor(R.color.blue));
-//            } else {
+
+
+        if ((from.equalsIgnoreCase("home")
+             || from.equalsIgnoreCase("upcoming")||from.equalsIgnoreCase("calendarWeek")
+        ) && isWithin24hrs && response.getShiftId().equalsIgnoreCase(nextShiftId)) {
+
             btnReleaseShift.setVisibility(View.VISIBLE);
             btnReleaseShift.setText(getResources().getString(R.string.check_in));
             btnReleaseShift.setBackgroundColor(getResources().getColor(R.color.blue));
-//            }
+            textviewshiftType.setText("Next Shift");
+
         } else if (from.equalsIgnoreCase("calendar")) {
             btnReleaseShift.setVisibility(View.GONE);
             btnCallManager.setVisibility(View.GONE);
         } else {
-            if (response.getRelease()==0) {
+
+            if(response.getRelease()==0 && isWithin24hrs){
+                btnReleaseShift.setVisibility(View.GONE);
+            }
+            else if (response.getRelease()==0) {
 
                 btnReleaseShift.setText("RELEASE SHIFT");
+                btnReleaseShift.setVisibility(View.VISIBLE);
             } else if (response.getRelease()==1) {
 
                 btnReleaseShift.setText("UNDO RELEASE");
+                btnReleaseShift.setVisibility(View.VISIBLE);
                 btnReleaseShift.setBackgroundColor(getResources().getColor(R.color.blue));
-            } else {
-
+            }else{
                 btnReleaseShift.setText(getResources().getString(R.string.check_in));
+                btnReleaseShift.setVisibility(View.VISIBLE);
                 btnReleaseShift.setBackgroundColor(getResources().getColor(R.color.blue));
             }
         }
-        if(autoCheckin){
+        if(btnReleaseShift.getText().toString().equalsIgnoreCase(getResources().getString(R.string.check_in))
+                && autoCheckin){
             btnReleaseShift.setVisibility(View.GONE);
         }
+        /*if (response.getShiftId().equalsIgnoreCase(nextShiftId)) {
 
+            btnReleaseShift.setVisibility(View.VISIBLE);
+            textviewshiftType.setText("Next Shift");
+            btnReleaseShift.setText(getResources().getString(R.string.check_in));
+            btnReleaseShift.setBackgroundColor(getResources().getColor(R.color.blue));
+        }*/
         switch (response.getShift_status()) {
 
             case "NOSHOW":
@@ -828,17 +842,13 @@ public class ShiftDialogFragment extends BaseFragment {
                 textviewshiftType.setText("Completed Shift");
                 break;
             case "UPCOMING":
+                if(from.equalsIgnoreCase("home")){
+                    textviewshiftType.setText("Next Shift");
+                }else
                 textviewshiftType.setText("Upcoming Shift");
                 break;
         }
 
-        if (response.getShiftId().equalsIgnoreCase(nextShiftId) && response.getShift_status()!="NOSHOW") {
-
-            btnReleaseShift.setVisibility(View.VISIBLE);
-            textviewshiftType.setText("Next Shift");
-            btnReleaseShift.setText(getResources().getString(R.string.check_in));
-            btnReleaseShift.setBackgroundColor(getResources().getColor(R.color.blue));
-        }
     }
 
 

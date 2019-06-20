@@ -91,6 +91,16 @@ public class CompleteShiftFragment extends BaseFragment {
     @BindView(R.id.tvRoleDetail)
     TextView tvRoleDetail;
 
+
+    @BindView(R.id.lay01)
+    ViewGroup lay01;
+    @BindView(R.id.lay02)
+    ViewGroup lay02;
+    @BindView(R.id.lay03)
+    ViewGroup lay03;
+    @BindView(R.id.lay04)
+    ViewGroup lay04;
+
     private String shift_id, location;
     private String mParam2,shiftType,checkInTime,checkOutTime,earningAmount;
     float rating = 0;
@@ -260,11 +270,32 @@ public class CompleteShiftFragment extends BaseFragment {
                 rating = bar.getRating();
             }
         });*/
-        if(shiftType.equalsIgnoreCase("COMPLETED"))
+
+        switch (shiftType) {
+
+            case "NOSHOW":
+                textviewshiftType.setText("No Show");
+                //btnReleaseShift.setVisibility(View.GONE);
+                rlDialog.setBackgroundColor(getResources().getColor(R.color.now_show_bg));
+                lay01.setBackgroundColor(getResources().getColor(R.color.now_show_bg_dark));
+                lay02.setBackgroundColor(getResources().getColor(R.color.now_show_bg_dark));
+                lay03.setBackgroundColor(getResources().getColor(R.color.now_show_bg_dark));
+                lay04.setBackgroundColor(getResources().getColor(R.color.now_show_bg_dark));
+                tvcheckinTime.setVisibility(View.VISIBLE);
+                tvcheckoutTime.setVisibility(View.VISIBLE);
+                break;
+
+            case "COMPLETED":
+                textviewshiftType.setText("Completed Shift");
+                tvcheckinTime.setText(checkInTime);
+                tvcheckoutTime.setText(checkOutTime);
+                tvLocationDetail.setText(mParam2);
+        }
+        /*if(shiftType.equalsIgnoreCase("COMPLETED"))
         textviewshiftType.setText("Completed Shift");
         tvcheckinTime.setText(checkInTime);
         tvcheckoutTime.setText(checkOutTime);
-        tvLocationDetail.setText(mParam2);
+        tvLocationDetail.setText(mParam2);*/
     }
 
     @Override

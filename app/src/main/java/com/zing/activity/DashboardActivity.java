@@ -158,6 +158,13 @@ public class DashboardActivity extends BaseActivity implements FragmentInterface
                 }
                 break;
 
+                case "home":{
+                    fragment = HomeFragment.newInstance("", "");
+                    addFragment(fragment, "+");
+                    footerList.get(0).setSelected(true);
+                    pos=0;
+                }break;
+
                 default:{
                     fragment = HomeFragment.newInstance("", "");
                     addFragment(fragment, "+");
@@ -467,6 +474,10 @@ public class DashboardActivity extends BaseActivity implements FragmentInterface
                 itemClicked(getCurrentFocus(),1);
                 /*fragment = CalenderFragment.newInstance("", "");
                 addFragment(fragment, "+");*/
+                break;
+
+            case "home":
+                itemClicked(getCurrentFocus(),0);
                 break;
         }
     }

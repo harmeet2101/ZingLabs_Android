@@ -12,12 +12,14 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zing.R;
 import com.zing.activity.PreferenceCalenderActivity;
@@ -25,6 +27,8 @@ import com.zing.activity.ShiftActivity;
 import com.zing.adapter.UpcomingShiftAdapter;
 import com.zing.model.CalendarDataModel;
 import com.zing.model.request.HomeRequest;
+import com.zing.model.request.UpcomingShiftRequest;
+import com.zing.model.response.CalendarScheduledShiftResponse.CalendarScheduledShiftResponse;
 import com.zing.model.response.HomeResponse.HomeResponse;
 import com.zing.model.response.HomeResponse.UpcomingShift;
 import com.zing.util.AppTypeface;
@@ -34,9 +38,12 @@ import com.zing.util.SessionManagement;
 import com.zing.util.restClient.ApiClient;
 import com.zing.util.restClient.ZinglabsApi;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.StringTokenizer;
@@ -78,8 +85,9 @@ public class HomeFragment extends BaseFragment {
     TextView tvDollar;
     @BindView(R.id.tvPayoutAmount)
     TextView tvPayoutAmount;
-    @BindView(R.id.tvPayoutDescription)
-    TextView tvPayoutDescription;
+
+    @BindView(R.id.tvPayoutAmount1)
+    TextView tvPayoutAmount1;
     @BindView(R.id.tvViewEarning)
     TextView tvViewEarning;
     @BindView(R.id.tvPreferenceHeading)
@@ -96,8 +104,6 @@ public class HomeFragment extends BaseFragment {
     TextView tvInstantPay;
     @BindView(R.id.tvDay)
     TextView tvDay;
-    @BindView(R.id.tvPayoutDecimal)
-    TextView tvPayoutDecimal;
     @BindView(R.id.llShift)
     LinearLayout llShift;
     Unbinder unbinder;
@@ -202,6 +208,7 @@ public class HomeFragment extends BaseFragment {
         tvUpcomingShift.setTypeface(AppTypeface.avenieNext_demibold);
         tvMyPay.setTypeface(AppTypeface.avenieNext_demibold);
         tvPayoutAmount.setTypeface(AppTypeface.avenieNext_regular);
+        tvPayoutAmount1.setTypeface(AppTypeface.avenieNext_regular);
         tvViewCalendar.setTypeface(AppTypeface.avenieNext_demibold);
         tvViewEarning.setTypeface(AppTypeface.avenieNext_demibold);
         tvSetPreference.setTypeface(AppTypeface.avenieNext_demibold);
@@ -219,10 +226,8 @@ public class HomeFragment extends BaseFragment {
         tvShiftCashierName.setTypeface(AppTypeface.avenieNext_regular);
         tvShiftEarningAmount.setTypeface(AppTypeface.avenieNext_regular);
         tvShiftAmount.setTypeface(AppTypeface.avenieNext_regular);
-        tvPayoutDescription.setTypeface(AppTypeface.avenieNext_regular);
         tvWelcome.setTypeface(AppTypeface.avenieNext_regular);
         tvTime.setTypeface(AppTypeface.avenieNext_regular);
-        tvPayoutDecimal.setTypeface(AppTypeface.avenieNext_regular);
         tvPreferenceDescription.setTypeface(AppTypeface.avenieNext_regular);
         tvPayCardDescription.setTypeface(AppTypeface.avenieNext_regular);
 
@@ -244,9 +249,32 @@ public class HomeFragment extends BaseFragment {
         System.out.println("TimeZone " + tz.getDisplayName(false, TimeZone.SHORT) + " Timezone id :: " + tz.getID());
         // to fetch the current date and time
         date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-        if (NetworkUtils.isNetworkConnected(getActivity()))
+        if (NetworkUtils.isNetworkConnected(getActivity())){
             getShiftsAndEarnings(date, tz.getID());
+
+            getEarningWeek();
+        }
     }
+
+
+    private void getEarningWeek(){
+        Calendar c1 = Calendar.getInstance();
+        //first day of week
+        c1.set(Calendar.DAY_OF_WEEK, 1);
+        int year1 = c1.get(Calendar.YEAR);
+        int month1 = c1.get(Calendar.MONTH) + 1;
+        int day1 = c1.get(Calendar.DAY_OF_MONTH)+1;
+        startDate = year1+"-"+month1+"-"+day1;
+        //last day of week
+        c1.set(Calendar.DAY_OF_WEEK, 7);
+        int year7 = c1.get(Calendar.YEAR);
+        int month7 = c1.get(Calendar.MONTH) + 1;
+        int day7 = c1.get(Calendar.DAY_OF_MONTH)+1;
+        endDate = year7+"-"+month7+"-"+day7;
+
+        fetchCalenderDetails(startDate,endDate);
+    }
+
 
 
 
@@ -288,12 +316,11 @@ public class HomeFragment extends BaseFragment {
 
                                 starts_at = homeResponse.getResponse().getStarts_at();
                                 location = homeResponse.getResponse().getStoreName();
-                                StringTokenizer tokens = new StringTokenizer(homeResponse.getResponse().getTotalEarnings(), ".");
+                                /*StringTokenizer tokens = new StringTokenizer(homeResponse.getResponse().getTotalEarnings(), ".");
                                 String first = tokens.nextToken();
                                 String second = tokens.nextToken();
 
-                                tvPayoutAmount.setText(first);
-                                tvPayoutDecimal.setText("." + second);
+                                tvPayoutAmount.setText(first);*/
 
                                 checkInTime = homeResponse.getResponse().getCheckInTime();
                                 checkOutTime = homeResponse.getResponse().getCheckOutTime();
@@ -451,5 +478,139 @@ public class HomeFragment extends BaseFragment {
 
     public interface IHomFragListner{
         void  onHomeCallback(String type);
+    }
+
+
+    private double expAmount=0.0,prjAmount=0.0;
+    private String startDate="",endDate="";
+    private void fetchCalenderDetails(String start_date, String end_date) {
+
+        prjAmount = 0.00;
+        expAmount = 0.00;
+        //progressDialog = CommonUtils.getProgressBar(getActivity());
+        ZinglabsApi api = ApiClient.getClient().create(ZinglabsApi.class);
+        try {
+            UpcomingShiftRequest upcomingShiftRequest = new UpcomingShiftRequest();
+            upcomingShiftRequest.setStartDate(start_date);
+            upcomingShiftRequest.setEndDate(end_date);
+
+            Call<CalendarScheduledShiftResponse> call = api.calendarDetailApi("Bearer " +
+                    session.getUserToken(), upcomingShiftRequest);
+            call.enqueue(new Callback<CalendarScheduledShiftResponse>() {
+                @Override
+                public void onResponse(@NonNull Call<CalendarScheduledShiftResponse> call,
+                                       @NonNull Response<CalendarScheduledShiftResponse> response) {
+                   // progressDialog.dismiss();
+                    if (response.code() == 200) {
+                        try {
+                            CalendarScheduledShiftResponse calendarSheduledShiftResponse = response.body();
+                            if (calendarSheduledShiftResponse != null && calendarSheduledShiftResponse.
+                                    getResponse().getCode() == 200) {
+                                DecimalFormat df2 = new DecimalFormat("#0.00");
+                                df2.setRoundingMode(RoundingMode.DOWN);
+
+
+                                for (int i = 0; i < calendarSheduledShiftResponse.getResponse().
+                                        getScheduledShifts().size(); i++) {
+
+                                    if(calendarSheduledShiftResponse.getResponse().getScheduledShifts().get(i).getShiftStatus().equals("UPCOMING")) {
+                                        StringTokenizer tokenizer = new StringTokenizer(calendarSheduledShiftResponse.getResponse().
+                                                getScheduledShifts().get(i).getExpectedEarning(), "$");
+                                        prjAmount = prjAmount + Double.parseDouble(tokenizer.nextToken());
+                                    }
+
+                                }
+
+                                //llLayout.setVisibility(View.VISIBLE);
+                                for (int i = 0; i < calendarSheduledShiftResponse.getResponse().
+                                        getCompletedShiftList().size(); i++) {
+
+                                    StringTokenizer tokenizer = new StringTokenizer(calendarSheduledShiftResponse.getResponse().
+                                            getCompletedShiftList().get(i).getExpectedEarning(),"$");
+                                    StringTokenizer tokenizer_1 = new StringTokenizer(calendarSheduledShiftResponse.getResponse().
+                                            getCompletedShiftList().get(i).getEarningAmount(),"$");
+                                    prjAmount = prjAmount + Double.parseDouble(tokenizer.nextToken());
+
+                                    expAmount = expAmount + Double.parseDouble(tokenizer_1.nextToken());
+                                }
+
+                                Log.d("EA",expAmount+"");
+                                Log.d("PA",prjAmount+"");
+
+                                tvPayoutAmount.setText("$"+df2.format(expAmount));
+                                tvPayoutAmount1.setText("$"+df2.format(prjAmount));
+
+
+                            }
+                            else {
+                                Toast.makeText(getContext(),calendarSheduledShiftResponse.getResponse().getMessage(),Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }finally {
+                            //progressDialog.dismiss();
+                            expAmount = 0.0;
+                            prjAmount = 0.0;
+                        }
+                    } else {
+                        Toast.makeText(getContext(),response.message(),Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<CalendarScheduledShiftResponse> call, @NonNull Throwable t) {
+                    //progressDialog.dismiss();
+                    Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (Exception e) {
+            progressDialog.dismiss();
+            e.printStackTrace();
+        }
+    }
+
+
+
+    private String getMonth(int month1) {
+        String startMonth = "";
+        switch (month1) {
+            case 1:
+                startMonth = "Jan";
+                break;
+            case 2:
+                startMonth = "Feb";
+                break;
+            case 3:
+                startMonth = "Mar";
+                break;
+            case 4:
+                startMonth = "Apr";
+                break;
+            case 5:
+                startMonth = "May";
+                break;
+            case 6:
+                startMonth = "Jun";
+                break;
+            case 7:
+                startMonth = "Jul";
+                break;
+            case 8:
+                startMonth = "Aug";
+                break;
+            case 9:
+                startMonth = "Sep";
+                break;
+            case 10:
+                startMonth = "Oct";
+                break;
+            case 11:
+                startMonth = "Nov";
+                break;
+            case 12:
+                startMonth = "Dec";
+                break;
+        }
+        return startMonth;
     }
 }

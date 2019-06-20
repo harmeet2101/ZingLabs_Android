@@ -34,7 +34,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$ 0.0"
+                android:text="$ 0.00"
                 android:id="@+id/earningAmount"
                 android:layout_gravity="center_horizontal"
                 android:textSize="22sp"
@@ -64,7 +64,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$ 0.0"
+                android:text="$ 0.00"
                 android:id="@+id/projectedAmount"
                 android:layout_gravity="center_horizontal"
                 android:textSize="22sp"
@@ -131,6 +131,7 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
                     android:orientation="vertical"
+                    android:layout_marginTop="5dp"
                     android:padding="@dimen/default_margin_large">
 
                     <TextView
@@ -138,7 +139,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="@dimen/default_margin"
+                        android:layout_marginBottom="10dp"
                         android:text="@string/completed_shift"
                         android:textColor="@color/dark_grey"
                         android:textSize="@dimen/normal_text_minus" />

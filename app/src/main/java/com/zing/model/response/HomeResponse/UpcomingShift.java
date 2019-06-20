@@ -130,7 +130,16 @@ public class UpcomingShift implements Serializable {
     private String shiftStatus;
 
 
+    public Long getShift_start_timestamp() {
+        return shift_start_timestamp;
+    }
 
+    public void setShift_start_timestamp(Long shift_start_timestamp) {
+        this.shift_start_timestamp = shift_start_timestamp;
+    }
+
+    @SerializedName("shift_start_timestamp")
+    private Long shift_start_timestamp;
     public String getRelease() {
         return release;
     }

@@ -295,7 +295,12 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
             } else {
                 btnReleaseShift.setVisibility(View.VISIBLE);
             }
-            if (shift.getRelease().toString().equalsIgnoreCase("0")) {
+
+
+            if(shift.getRelease()==0 && isWithin24hrs){
+                btnReleaseShift.setVisibility(View.GONE);
+            }
+            else if (shift.getRelease().toString().equalsIgnoreCase("0")) {
 
                 btnReleaseShift.setText("RELEASE SHIFT");
             } else if (shift.getRelease().toString().equalsIgnoreCase("1")) {
@@ -307,27 +312,37 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
                 btnReleaseShift.setText(context.getResources().getString(R.string.check_in));
                 btnReleaseShift.setBackgroundColor(context.getResources().getColor(R.color.blue));
             }
-            if (shift.getShiftId().equalsIgnoreCase(nextShiftId)) {
+            if (shift.getShiftId().equalsIgnoreCase(nextShiftId) && isWithin24hrs) {
 
                 btnReleaseShift.setVisibility(View.VISIBLE);
                 textviewshiftType.setText("Next Shift");
                 btnReleaseShift.setText(context.getResources().getString(R.string.check_in));
                 btnReleaseShift.setBackgroundColor(context.getResources().getColor(R.color.blue));
+            }else if(!shift.getShiftId().equalsIgnoreCase(nextShiftId) && isWithin24hrs){
+
+                btnReleaseShift.setVisibility(View.GONE);
+            }else{
+                btnReleaseShift.setVisibility(View.VISIBLE);
+                textviewshiftType.setText("Upcoming Shift");
+                btnReleaseShift.setText("RELEASE SHIFT");
+                btnReleaseShift.setBackgroundColor(context.getResources().getColor(R.color.black_btn));
             }
 
             textviewshiftType.setText("Upcoming Shift");
 
-            if(shf.getAuto_checkin()){
+            if(btnReleaseShift.getText().toString().equalsIgnoreCase(context.getResources().
+                    getString(R.string.check_in) )
+                    &&shf.getAuto_checkin()){
                 btnReleaseShift.setVisibility(View.GONE);
             }
 
-            if (shf.getShiftId().equalsIgnoreCase(nextShiftId)) {
+            /*if (shf.getShiftId().equalsIgnoreCase(nextShiftId)) {
 
                 btnReleaseShift.setVisibility(View.VISIBLE);
                 textviewshiftType.setText("Next Shift");
                 btnReleaseShift.setText(context.getResources().getString(R.string.check_in));
                 btnReleaseShift.setBackgroundColor(context.getResources().getColor(R.color.blue));
-            }
+            }*/
 
         }
         @Override

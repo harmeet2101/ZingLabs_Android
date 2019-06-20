@@ -55,7 +55,8 @@
             android:id="@+id/tvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/default_margin"
+
+            android:layout_centerVertical="true"
             android:text="3 pm-4 pm"
             android:layout_marginLeft="@dimen/default_margin"
             android:textColor="@color/black"
@@ -67,9 +68,9 @@
             android:layout_height="wrap_content"
             android:src="@drawable/right_arrow_dark"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:id="@+id/arrowimgview"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="18dp"
             android:layout_marginRight="5dp"/>
 
     </RelativeLayout>

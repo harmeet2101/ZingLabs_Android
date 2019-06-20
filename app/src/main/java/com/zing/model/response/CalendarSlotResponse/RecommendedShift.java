@@ -51,6 +51,17 @@ public class RecommendedShift implements Serializable {
     @Expose
     private String release;
 
+    public Long getShift_start_timestamp() {
+        return shift_start_timestamp;
+    }
+
+    public void setShift_start_timestamp(Long shift_start_timestamp) {
+        this.shift_start_timestamp = shift_start_timestamp;
+    }
+
+    @SerializedName("shift_start_timestamp")
+    private Long shift_start_timestamp;
+
 
     @SerializedName("store_name")
     @Expose
@@ -194,4 +205,28 @@ public class RecommendedShift implements Serializable {
         this.shiftId = shiftId;
     }
 
+
+    public RecommendedShift() {
+    }
+
+    public RecommendedShift(String shiftId, String day, String date, String timeSlot, String expectedEarning, String role, String location, String release, String storeName, String earningAmount, String totalBreakTime, String lastBreakInDate, String lastBreakInTime, String checkInTime, String checkOutTime, Integer isOnBreak, String shiftStatus,Long shift_start_timestamp) {
+        this.shiftId = shiftId;
+        this.day = day;
+        this.date = date;
+        this.timeSlot = timeSlot;
+        this.expectedEarning = expectedEarning;
+        this.role = role;
+        this.location = location;
+        this.release = release;
+        this.storeName = storeName;
+        this.earningAmount = earningAmount;
+        this.totalBreakTime = totalBreakTime;
+        this.lastBreakInDate = lastBreakInDate;
+        this.lastBreakInTime = lastBreakInTime;
+        this.checkInTime = checkInTime;
+        this.checkOutTime = checkOutTime;
+        this.isOnBreak = isOnBreak;
+        this.shiftStatus = shiftStatus;
+        this.shift_start_timestamp = shift_start_timestamp;
+    }
 }

@@ -220,8 +220,10 @@ public class VerifyOtpFragment extends BaseFragment {
                             CommonUtils.showSnackbar(tvCheckinClose, message);
 
                             if (code.equalsIgnoreCase("200")) {
-                                Fragment fragment = HomeFragment.newInstance("", "");
-                               fragmentInterface.fragmentResult(fragment,"");
+                               /* Fragment fragment = HomeFragment.newInstance("", "");
+
+                               fragmentInterface.fragmentResult(fragment,"");*/
+                                iHomFragListner.onHomeCallback("home");
                             }
 
                         } catch (Exception e) {

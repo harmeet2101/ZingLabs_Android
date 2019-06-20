@@ -44,6 +44,9 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.tvDay.setText(scheduledShiftList.get(position).getDay());
+        if(scheduledShiftList.get(position).getShiftStatus().equalsIgnoreCase("NOSHOW"))
+            holder.tvTime.setText("No Show");
+        else
         holder.tvTime.setText(scheduledShiftList.get(position).getTimeSlot());
     }
 

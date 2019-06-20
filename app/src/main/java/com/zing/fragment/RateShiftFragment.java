@@ -218,9 +218,11 @@ public class RateShiftFragment extends BaseFragment {
                                 String mBreak = String.valueOf(shiftDetailResponse.getResponse().getData().getIs_on_break());
                                 if(mBreak.equalsIgnoreCase("0")){
                                     btnbreakShift.setText("Take a break");
+                                    breakStatus="0";
                                 }else if(mBreak.equalsIgnoreCase("1")){
 
                                     btnbreakShift.setText("End break");
+                                    breakStatus="1";
                                 }
 
                                 boolean isMobileCheckedin = shiftDetailResponse.getResponse().getData().getAuto_checkin();
@@ -419,8 +421,9 @@ public class RateShiftFragment extends BaseFragment {
                             //CommonUtils.showSnackbar(btnCompleted, message);
 
                             if (code.equalsIgnoreCase("200")) {
-                                Fragment fragment = HomeFragment.newInstance(shift_id, "");
-                                fragmentInterface.fragmentResult(fragment, "");
+                                /*Fragment fragment = HomeFragment.newInstance(shift_id, "");
+                                fragmentInterface.fragmentResult(fragment, "");*/
+                                iHomFragListner.onHomeCallback("home");
                             }
 
                         } catch (Exception e) {

@@ -23,6 +23,7 @@ import com.zing.model.response.CalendarSlotResponse.RecommendedShift;
 import com.zing.util.CommonUtils;
 import com.zing.util.NetworkUtils;
 import com.zing.util.SessionManagement;
+import com.zing.util.SortByTimeComparator;
 import com.zing.util.restClient.ApiClient;
 import com.zing.util.restClient.ZinglabsApi;
 
@@ -30,6 +31,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.StringTokenizer;
 
 import butterknife.BindView;
@@ -213,8 +215,8 @@ public class PaymentFragment extends BaseFragment {
 
     private void fetchCalenderDetails(String start_date, String end_date) {
 
-        prjAmount = 0.0;
-        expAmount = 0.0;
+        prjAmount = 0.00;
+        expAmount = 0.00;
         progressDialog = CommonUtils.getProgressBar(getActivity());
         ZinglabsApi api = ApiClient.getClient().create(ZinglabsApi.class);
         try {
@@ -234,10 +236,68 @@ public class PaymentFragment extends BaseFragment {
                             CalendarScheduledShiftResponse calendarSheduledShiftResponse = response.body();
                             if (calendarSheduledShiftResponse != null && calendarSheduledShiftResponse.
                                     getResponse().getCode() == 200) {
-                                DecimalFormat df2 = new DecimalFormat("#.##");
+                                DecimalFormat df2 = new DecimalFormat("#0.00");
                                 df2.setRoundingMode(RoundingMode.DOWN);
                                 completedShiftList.clear();
                                 //llLayout.setVisibility(View.VISIBLE);
+
+
+                                for (int i = 0; i < calendarSheduledShiftResponse.getResponse().
+                                        getScheduledShifts().size(); i++) {
+
+                                    if(calendarSheduledShiftResponse.getResponse().getScheduledShifts().get(i).getShiftStatus().equals("NOSHOW")) {
+                                        completedShiftList.add(
+
+                                                new RecommendedShift(
+                                                        calendarSheduledShiftResponse.getResponse().
+                                                                getScheduledShifts().get(i).getShiftId(),
+                                                        calendarSheduledShiftResponse.getResponse().
+                                                                getScheduledShifts().get(i).getDay(),
+                                                        calendarSheduledShiftResponse.getResponse().
+                                                                getScheduledShifts().get(i).getDate(),
+                                                        calendarSheduledShiftResponse.getResponse().
+                                                                getScheduledShifts().get(i).getTimeSlot(),
+                                                        calendarSheduledShiftResponse.getResponse().
+                                                                getScheduledShifts().get(i).getExpectedEarning(),
+                                                        calendarSheduledShiftResponse.getResponse().
+                                                                getScheduledShifts().get(i).getRole(),
+                                                        calendarSheduledShiftResponse.getResponse().
+                                                                getScheduledShifts().get(i).getLocation(),
+                                                        calendarSheduledShiftResponse.getResponse().
+                                                                getScheduledShifts().get(i).getRelease(),
+                                                        calendarSheduledShiftResponse.getResponse().
+                                                                getScheduledShifts().get(i).getStoreName(),
+                                                        calendarSheduledShiftResponse.getResponse().
+                                                                getScheduledShifts().get(i).getEarningAmount(),
+                                                        calendarSheduledShiftResponse.getResponse().
+                                                                getScheduledShifts().get(i).getTotalBreakTime(),
+                                                        calendarSheduledShiftResponse.getResponse().
+                                                                getScheduledShifts().get(i).getLastBreakInDate(),
+                                                        calendarSheduledShiftResponse.getResponse().
+                                                                getScheduledShifts().get(i).getLastBreakInTime(),
+                                                        calendarSheduledShiftResponse.getResponse().
+                                                                getScheduledShifts().get(i).getCheckInTime(),
+                                                        calendarSheduledShiftResponse.getResponse().
+                                                                getScheduledShifts().get(i).getCheckOutTime(),
+                                                        calendarSheduledShiftResponse.getResponse().
+                                                                getScheduledShifts().get(i).isOnBreak(),
+                                                        calendarSheduledShiftResponse.getResponse().
+                                                                getScheduledShifts().get(i).getShiftStatus(),
+                                                        calendarSheduledShiftResponse.getResponse().
+                                                                getScheduledShifts().get(i).getShift_start_timestamp()
+
+                                                )
+
+                                        );
+                                    }
+                                    if(calendarSheduledShiftResponse.getResponse().getScheduledShifts().get(i).getShiftStatus().equals("UPCOMING")) {
+                                        StringTokenizer tokenizer = new StringTokenizer(calendarSheduledShiftResponse.getResponse().
+                                                getScheduledShifts().get(i).getExpectedEarning(), "$");
+                                        prjAmount = prjAmount + Double.parseDouble(tokenizer.nextToken());
+                                    }
+
+                                }
+
                                 for (int i = 0; i < calendarSheduledShiftResponse.getResponse().
                                         getCompletedShiftList().size(); i++) {
                                     completedShiftList.add(calendarSheduledShiftResponse.getResponse().
@@ -275,6 +335,7 @@ public class PaymentFragment extends BaseFragment {
                             e.printStackTrace();
                         }finally {
 
+                            Collections.sort(completedShiftList,new SortByTimeComparator());
                             completedAdapter.notifyDataSetChanged();
                         }
                     } else {

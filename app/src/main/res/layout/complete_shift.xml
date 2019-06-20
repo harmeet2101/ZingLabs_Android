@@ -235,6 +235,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                android:id="@+id/lay01"
                 android:layout_marginTop="20dp"
                 android:background="@color/dark_green"
                 android:orientation="horizontal">
@@ -264,6 +265,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
+                android:id="@+id/lay02"
                 android:background="@color/dark_green"
                 android:layout_marginLeft="10dp"
                 android:orientation="horizontal">
@@ -297,6 +299,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:background="@color/dark_green"
+            android:id="@+id/lay03"
             android:orientation="horizontal">
 
             <ImageView
@@ -326,6 +329,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:gravity="right"
+            android:id="@+id/lay04"
             android:background="@color/dark_green"
             android:layout_marginTop="6dp"
             android:orientation="horizontal"

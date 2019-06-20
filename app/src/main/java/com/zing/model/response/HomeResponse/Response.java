@@ -107,6 +107,18 @@ public class Response implements Serializable {
     @Expose
     private ArrayList<UpcomingShift> upcomingShifts = null;
 
+
+    public Long getShift_start_timestamp() {
+        return shift_start_timestamp;
+    }
+
+    public void setShift_start_timestamp(Long shift_start_timestamp) {
+        this.shift_start_timestamp = shift_start_timestamp;
+    }
+
+    @SerializedName("shift_start_timestamp")
+    private Long shift_start_timestamp;
+
     public String getLocation() {
         return location;
     }

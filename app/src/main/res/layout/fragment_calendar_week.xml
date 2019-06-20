@@ -21,7 +21,7 @@
             android:layout_marginLeft="@dimen/default_margin_extra_large"
             android:layout_marginRight="@dimen/default_margin_extra_large"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cvShift"
@@ -37,7 +37,7 @@
                 android:translationX="2dp"
                 android:translationY="2dp"
                 android:translationZ="2dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:cardCornerRadius="@dimen/default_margin_3"
                 app:cardElevation="@dimen/default_margin_1"
                 app:cardPreventCornerOverlap="false">
@@ -55,7 +55,7 @@
                         android:layout_marginLeft="@dimen/default_margin_large"
                         android:layout_marginRight="@dimen/default_margin_large"
                         android:layout_marginTop="@dimen/default_margin_large"
-                        android:gravity="center"
+
                         android:padding="@dimen/default_margin"
                         android:text="@string/scheduled_shifts"
                         android:textColor="@color/dark_grey"
@@ -153,6 +153,7 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
                     android:orientation="vertical"
+                    android:layout_marginTop="5dp"
                     android:padding="@dimen/default_margin_large">
 
                     <TextView
@@ -160,8 +161,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="@dimen/default_margin"
                         android:text="@string/scheduled_shifts"
+                        android:layout_marginBottom="10dp"
                         android:textColor="@color/dark_grey"
                         android:textSize="@dimen/normal_text_minus" />
 
@@ -197,6 +198,7 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
                     android:orientation="vertical"
+                    android:layout_marginTop="5dp"
                     android:padding="@dimen/default_margin_large">
 
                     <TextView
@@ -204,7 +206,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="@dimen/default_margin"
+                        android:layout_marginBottom="10dp"
                         android:text="@string/recommended_shifts"
                         android:textColor="@color/dark_grey"
                         android:textSize="@dimen/normal_text_minus" />
@@ -241,6 +243,7 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
                     android:orientation="vertical"
+                    android:layout_marginTop="5dp"
                     android:padding="@dimen/default_margin_large">
 
                     <TextView
@@ -248,7 +251,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="@dimen/default_margin"
+                        android:layout_marginBottom="10dp"
                         android:text="@string/completed_shift"
                         android:textColor="@color/dark_grey"
                         android:textSize="@dimen/normal_text_minus" />
