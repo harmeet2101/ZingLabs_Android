@@ -407,8 +407,9 @@ public class ClaimShiftFragment extends BaseFragment {
                             CommonUtils.showSnackbar(tvClose, message);
 
                             if (code.equalsIgnoreCase("200")) {
-                                Fragment fragment = CalenderFragment.newInstance("", "");
-                                fragmentInterface.fragmentResult(fragment, "");
+                                /*Fragment fragment = CalenderFragment.newInstance("", "");
+                                fragmentInterface.fragmentResult(fragment, "");*/
+                                iHomFragListner.onHomeCallback("home");
                             }
 
                         } catch (Exception e) {

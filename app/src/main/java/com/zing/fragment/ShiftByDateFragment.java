@@ -45,7 +45,8 @@ public class ShiftByDateFragment extends BaseFragment {
     private SessionManagement session;
     private Activity mActivity;
     private List<Shift> shiftsList;
-
+    private String date;
+    ShiftCalendarAdapter recomendedAdapter;
     public ShiftByDateFragment() {
     }
 
@@ -64,7 +65,7 @@ public class ShiftByDateFragment extends BaseFragment {
       Getting bundle data
      */
     private void getBundleData() {
-        String date = getArguments().getString("date");
+         date = getArguments().getString("date");
         getShiftDetailByDate(date);
     }
 
@@ -75,7 +76,7 @@ public class ShiftByDateFragment extends BaseFragment {
 
     private void settingUpAdapter() {
         rvShiftView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        ShiftCalendarAdapter recomendedAdapter = new ShiftCalendarAdapter(mActivity, shiftsList,fragmentInterface);
+        recomendedAdapter = new ShiftCalendarAdapter(mActivity, shiftsList,fragmentInterface,ShiftByDateFragment.this);
         rvShiftView.setAdapter(recomendedAdapter);
     }
 

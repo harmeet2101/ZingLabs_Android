@@ -77,7 +77,7 @@ public class PaymentFragment extends BaseFragment {
     SessionManagement session;
     ArrayList<RecommendedShift> completedShiftList = new ArrayList<>();
 
-    private double expAmount=0.0,prjAmount=0.0;
+    private double expAmount=0.0,prjAmount=0.0,upComingAmount=0.0;
     public static PaymentFragment newInstance(String param1, String param2) {
         PaymentFragment fragment = new PaymentFragment();
         Bundle args = new Bundle();
@@ -217,6 +217,7 @@ public class PaymentFragment extends BaseFragment {
 
         prjAmount = 0.00;
         expAmount = 0.00;
+        upComingAmount = 0.0;
         progressDialog = CommonUtils.getProgressBar(getActivity());
         ZinglabsApi api = ApiClient.getClient().create(ZinglabsApi.class);
         try {
@@ -293,7 +294,7 @@ public class PaymentFragment extends BaseFragment {
                                     if(calendarSheduledShiftResponse.getResponse().getScheduledShifts().get(i).getShiftStatus().equals("UPCOMING")) {
                                         StringTokenizer tokenizer = new StringTokenizer(calendarSheduledShiftResponse.getResponse().
                                                 getScheduledShifts().get(i).getExpectedEarning(), "$");
-                                        prjAmount = prjAmount + Double.parseDouble(tokenizer.nextToken());
+                                        upComingAmount = upComingAmount + Double.parseDouble(tokenizer.nextToken());
                                     }
 
                                 }
@@ -317,7 +318,7 @@ public class PaymentFragment extends BaseFragment {
                                 Log.d("PA",prjAmount+"");
 
                                 earningAmount.setText("$ "+df2.format(expAmount));
-                                projectedAmount.setText("$ "+df2.format(prjAmount));
+                                projectedAmount.setText("$ "+df2.format(prjAmount + upComingAmount));
                                 if (completedShiftList.size() != 0) {
                                     tvCompletedShift.setText(getActivity().getResources().getText(R.string.completed_shift));
                                     cvCompletedShiftList.setVisibility(View.VISIBLE);
@@ -337,6 +338,9 @@ public class PaymentFragment extends BaseFragment {
 
                             Collections.sort(completedShiftList,new SortByTimeComparator());
                             completedAdapter.notifyDataSetChanged();
+                            expAmount = 0.0;
+                            prjAmount = 0.0;
+                            upComingAmount = 0.0;
                         }
                     } else {
                         Toast.makeText(getContext(),response.message(),Toast.LENGTH_SHORT).show();

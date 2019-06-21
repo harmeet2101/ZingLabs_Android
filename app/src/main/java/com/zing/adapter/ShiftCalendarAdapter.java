@@ -31,6 +31,7 @@ import android.widget.TextView;
 import com.google.gson.JsonElement;
 import com.zing.R;
 import com.zing.fragment.HomeFragment;
+import com.zing.fragment.ShiftByDateFragment;
 import com.zing.fragment.VerifyOtpFragment;
 import com.zing.interfaces.FragmentInterface;
 import com.zing.model.request.RateShiftRequest;
@@ -67,17 +68,24 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
     private Context context;
     private List<Shift> shiftsList;
     SessionManagement session;
+    ShiftByDateFragment shiftByDateFragment;
     public FragmentInterface fragmentInterface;
     private static final int VIEW_TYPE_COMPLETED = 0;
     private static final int VIEW_TYPE_ONGOING = 1;
     private static final int VIEW_TYPE_NO_SHOW = 2;
     private static final int VIEW_TYPE_UPCOMING = 3;
-    public ShiftCalendarAdapter(Context context, List<Shift> shiftsList,FragmentInterface fragmentInterface) {
+    public ShiftCalendarAdapter(Context context, List<Shift> shiftsList,FragmentInterface fragmentInterface,ShiftByDateFragment shiftByDateFragment) {
         this.context = context;
         this.shiftsList = shiftsList;
         this.session = new SessionManagement(context);
         this.fragmentInterface = fragmentInterface;
+        this.shiftByDateFragment = shiftByDateFragment;
+    }
 
+
+    public void updateDataSource(List<Shift> shiftsList){
+        this.shiftsList =shiftsList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -297,6 +305,7 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
             }
 
 
+
             if(shift.getRelease()==0 && isWithin24hrs){
                 btnReleaseShift.setVisibility(View.GONE);
             }
@@ -321,6 +330,13 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
             }else if(!shift.getShiftId().equalsIgnoreCase(nextShiftId) && isWithin24hrs){
 
                 btnReleaseShift.setVisibility(View.GONE);
+            } else if (shift.getRelease().toString().equalsIgnoreCase("0")) {
+                btnReleaseShift.setVisibility(View.VISIBLE);
+                btnReleaseShift.setText("RELEASE SHIFT");
+            } else if (shift.getRelease().toString().equalsIgnoreCase("1")) {
+                btnReleaseShift.setVisibility(View.VISIBLE);
+                btnReleaseShift.setText("UNDO RELEASE");
+                btnReleaseShift.setBackgroundColor(context.getResources().getColor(R.color.blue));
             }else{
                 btnReleaseShift.setVisibility(View.VISIBLE);
                 textviewshiftType.setText("Upcoming Shift");
@@ -495,6 +511,7 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
                                     }
                                 }
 
+                                //shiftByDateFragment.iHomFragListner.onHomeCallback("Cal");
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -726,8 +743,9 @@ public class ShiftCalendarAdapter extends RecyclerView.Adapter<RecyclerView.View
                                 //CommonUtils.showSnackbar(btnCompleted, message);
 
                                 if (code.equalsIgnoreCase("200")) {
-                                    Fragment fragment = HomeFragment.newInstance(shf.getShiftId(), "");
-                                    fragmentInterface.fragmentResult(fragment, "");
+                                   /* Fragment fragment = HomeFragment.newInstance(shf.getShiftId(), "");
+                                    fragmentInterface.fragmentResult(fragment, "");*/
+                                    shiftByDateFragment.iHomFragListner.onHomeCallback("home");
                                 }
 
                             } catch (Exception e) {

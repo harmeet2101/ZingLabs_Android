@@ -481,12 +481,14 @@ public class HomeFragment extends BaseFragment {
     }
 
 
-    private double expAmount=0.0,prjAmount=0.0;
+    private double expAmount=0.0,prjAmount=0.0,upComingAmount=0.0;
     private String startDate="",endDate="";
     private void fetchCalenderDetails(String start_date, String end_date) {
 
         prjAmount = 0.00;
         expAmount = 0.00;
+        upComingAmount = 0.0;
+
         //progressDialog = CommonUtils.getProgressBar(getActivity());
         ZinglabsApi api = ApiClient.getClient().create(ZinglabsApi.class);
         try {
@@ -516,7 +518,8 @@ public class HomeFragment extends BaseFragment {
                                     if(calendarSheduledShiftResponse.getResponse().getScheduledShifts().get(i).getShiftStatus().equals("UPCOMING")) {
                                         StringTokenizer tokenizer = new StringTokenizer(calendarSheduledShiftResponse.getResponse().
                                                 getScheduledShifts().get(i).getExpectedEarning(), "$");
-                                        prjAmount = prjAmount + Double.parseDouble(tokenizer.nextToken());
+                                        upComingAmount = upComingAmount + Double.parseDouble(tokenizer.nextToken());
+
                                     }
 
                                 }
@@ -538,7 +541,7 @@ public class HomeFragment extends BaseFragment {
                                 Log.d("PA",prjAmount+"");
 
                                 tvPayoutAmount.setText("$"+df2.format(expAmount));
-                                tvPayoutAmount1.setText("$"+df2.format(prjAmount));
+                                tvPayoutAmount1.setText("$"+df2.format(prjAmount + upComingAmount));
 
 
                             }
@@ -551,6 +554,7 @@ public class HomeFragment extends BaseFragment {
                             //progressDialog.dismiss();
                             expAmount = 0.0;
                             prjAmount = 0.0;
+                            upComingAmount = 0.0;
                         }
                     } else {
                         Toast.makeText(getContext(),response.message(),Toast.LENGTH_SHORT).show();
