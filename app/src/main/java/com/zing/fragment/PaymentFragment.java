@@ -291,7 +291,9 @@ public class PaymentFragment extends BaseFragment {
 
                                         );
                                     }
-                                    if(calendarSheduledShiftResponse.getResponse().getScheduledShifts().get(i).getShiftStatus().equals("UPCOMING")) {
+                                    if(calendarSheduledShiftResponse.getResponse().getScheduledShifts().get(i).getShiftStatus().equals("UPCOMING")||
+                                            calendarSheduledShiftResponse.getResponse().getScheduledShifts().get(i).getShiftStatus().equals("ONGOING")
+                                    ) {
                                         StringTokenizer tokenizer = new StringTokenizer(calendarSheduledShiftResponse.getResponse().
                                                 getScheduledShifts().get(i).getExpectedEarning(), "$");
                                         upComingAmount = upComingAmount + Double.parseDouble(tokenizer.nextToken());

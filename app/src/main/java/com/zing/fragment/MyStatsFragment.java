@@ -378,19 +378,25 @@ public class MyStatsFragment extends BaseFragment implements View.OnClickListene
                             e.printStackTrace();
                         }
                     } else {
+                        if( progressDialog!=null && progressDialog.isShowing())
                         CommonUtils.showSnackbar(tvRate, response.message());
                     }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<StatsResponse> call, @NonNull Throwable t) {
+                    if( progressDialog!=null && progressDialog.isShowing())
                     progressDialog.dismiss();
                     CommonUtils.showSnakBar(tvRate, t.getMessage());
                 }
             });
         } catch (Exception e) {
+            if( progressDialog!=null && progressDialog.isShowing())
             progressDialog.dismiss();
             e.printStackTrace();
+        }finally {
+            if( progressDialog!=null && progressDialog.isShowing())
+                progressDialog.dismiss();
         }
     }
 
